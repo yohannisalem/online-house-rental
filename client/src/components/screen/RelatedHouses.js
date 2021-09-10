@@ -33,7 +33,6 @@ const RelatedHouses = ({ sefer }) => {
               <Swiper
                 slidesPerView={1}
                 navigation
-                pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
               >
                 {element.files.map((url, index) =>

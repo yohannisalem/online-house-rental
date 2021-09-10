@@ -6,7 +6,8 @@ import {
   Button,
   Container, Grid, Header, Icon, List, Menu,
   Segment,
-  Sidebar
+  Sidebar,
+  Sticky
 } from 'semantic-ui-react';
 import Navigator from "./components/Navigator";
 import Home from "./components/pages/Home";
@@ -137,10 +138,13 @@ ResponsiveContainer.propTypes = {
 }
 
 function App() {
+ 
   return (
-    <div>
+    <div >
 
       <ResponsiveContainer/>
+      <Sticky bottomOffset={0} >
+
       <Segment inverted vertical style={{ padding: '5em 0em' }}>
         <Container>
           <Grid divided inverted stackable>
@@ -175,6 +179,7 @@ function App() {
           </Grid>
         </Container>
       </Segment>
+      </Sticky>
     </div>
       
     

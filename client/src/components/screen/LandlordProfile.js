@@ -1,8 +1,11 @@
 import axios from 'axios'
 import React, { createRef, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link,BrowserRouter as Router, Route} from 'react-router-dom'
 import { Button, Divider, Form, Grid, Header, Icon, Input, Label, Menu, Modal, Popup, Segment, Table, TextArea, Progress } from 'semantic-ui-react'
 import storage from "../../firebase"
+import Login from './Login';
+import ContractForm from './ContractForm';
+import LandlordLogin from './LandlordLogin'
 const LandlordProfile = () => {
   const contextRef = createRef()
   const [multipleFiles, setMultipleFiles] = useState([]);
@@ -189,6 +192,13 @@ const LandlordProfile = () => {
     getMultipleFilesList()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const [activeItem,setActiveItem] = useState({
+    name:'listing'
+})
+
+const handleItemClick =(e,{name})=>{
+    setActiveItem(name)
+}
 
   return (
     <div ref={contextRef}>
@@ -199,53 +209,61 @@ const LandlordProfile = () => {
             style={{ height: "100vh", backgroundColor: "#f0f2f2" }}
             raised
           >
-            <Menu vertical secondary>
-              <Menu.Item
-                name='spam'  >
-                <Label>51</Label>
-                My Listing
-              </Menu.Item>
-              <Menu.Item
-                name='inbox'
-                as={Link}
-                to='/listpropterty'
-
-              >
-                <Icon name='plus' aria-label="add listing" />
-                Add Listing
-              </Menu.Item>
-
-
-              <Menu.Item
-                name='updates'
-
-              >
-                <Label>1</Label>
-                My Account
-              </Menu.Item>
-              <Menu.Item
-                name='updates'
-
-              >
-                <Label>1</Label>
-                My Account
-              </Menu.Item>
-              <Menu.Item
-                name='updates'
-
-              >
-                <Label>1</Label>
-                My Account
-              </Menu.Item>
-
-            </Menu>
+           
+            <Menu color='teal' vertical secondary fluid>
+            
+            <Menu.Item
+              active={activeItem ==='listing'}
+              onClick={handleItemClick}
+              as={Link}
+              to={'/managelisting'}
+            >
+              Manage Listing
+            </Menu.Item>
+            <Menu.Item
+              color='red'
+              active={activeItem === 'profile'}
+              onClick={handleItemClick}
+              as={Link}
+              to={'/profile'}
+            >
+             My Account
+            </Menu.Item>
+            <Menu.Item
+              name='contractdetail'
+              active={activeItem === 'contractdetail'}
+              onClick={handleItemClick}
+              as={Link}
+              to={'/reviewcontract'}
+            >
+            Review Contract
+            </Menu.Item>
+            <Menu.Item
+              name='feedback'
+              active={activeItem === 'feedback'}
+              onClick={handleItemClick}
+              as={Link}
+              to={'/feedback'}
+            >
+            FeedBack
+            </Menu.Item>
+        </Menu>
+               
+            
+            
 
           </Segment>
         </Grid.Column>
 
 
         <Grid.Column width='13'>
-
+        <Router>
+        <Route path="/managelisting"><LandlordLogin/></Route>
+                <Route path="/profile"><Login/></Route>
+                <Route path="/reviewcontract"><ContractForm/></Route>
+                <Route exact path="/feedback" ><Login/></Route>
+                
+            </Router>
           <Grid style={{ marginTop: "20px" }} verticalAlign='middle'>
             <Grid.Column floated='left' width={13}>
               My Listing
@@ -304,7 +322,7 @@ const LandlordProfile = () => {
                     </Table.Cell>
 
                     <Table.Cell>
-                      <Icon name='plus' onClick={()=>setOpen(true)}/>
+                      <Icon name='plus' onClick={() => setOpen(true)} />
                       <Modal
                         open={open}
                         onClose={() => setOpen(false)}
@@ -312,7 +330,7 @@ const LandlordProfile = () => {
                         content={house.housename}
                         style={{ maxWidth: "400px", textAlign: "center" }}
                       >
-                        
+
                       </Modal>
                       <Popup trigger={<Icon name='edit' />} flowing hoverable position='right center'>
                         <Grid>

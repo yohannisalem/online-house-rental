@@ -65,7 +65,7 @@ const NavBar = (props) => {
               as={Link}
               to={'/managelisting'}
             >
-            Manage Listing
+            Landlord Screen
             </Menu.Item>
             <Menu.Menu position='right'>
             <Menu.Item >
@@ -84,7 +84,6 @@ const NavBar = (props) => {
                     >LandLords Login</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item
-                    onClick={history.push('/login')}
                     as={Link}
                     to={'/login'}
                     >Tenants Login</Dropdown.Item>

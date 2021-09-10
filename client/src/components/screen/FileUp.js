@@ -9,26 +9,26 @@ import useGeoLocation from "../maps/useGeoLocation";
 const publicVapidKey = 'BMffGk0gRxLPOSi-eOlXoR1ahY9Ce7uBY3010C06TeMoRYS_6n1A4ItVeOeNYutDlhPK27WW5UMrdyjBEj_-Pxo';
 //register the service worker, register our push api, sedn the notifation
 
-async function send(){
+async function send() {
   //register service worker
   const register = await navigator.serviceWorker.register('/sw.js', {
-      scope: '/'
+    scope: '/'
   });
 
   //register push
   console.log('Registering push...')
   const subscription = await register.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
   });
- 
+
   //Send push notification
   await fetch("http://localhost:5000/api/subscribe", {
-      method: "POST",
-      body: JSON.stringify(subscription),
-      headers: {
-          "content-type": "application/json"
-      }
+    method: "POST",
+    body: JSON.stringify(subscription),
+    headers: {
+      "content-type": "application/json"
+    }
   });
 }
 
@@ -48,11 +48,12 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 const FileUp = () => {
+
   let history = useHistory()
   const [error, setError] = useState("");
 
   const location = useGeoLocation()
-
+  const [disable, setDisable] = useState(true);
   const [housename, setHousename] = useState('')
   const [description, setDescription] = useState('')
   const [numberofbeds, setNumberOfBeds] = useState(0)
@@ -201,7 +202,11 @@ const FileUp = () => {
     });
     Promise.all(promises)
       .then(
-        () => alert("All images uploaded")
+        () =>{
+         alert("All images uploaded")
+         setDisable(false)
+        }
+          
       ).then()
       .catch((err) => console.log(err));
 
@@ -257,128 +262,128 @@ const FileUp = () => {
   } */
   /* handling notification ======================================================================*/
   return (
-      <div>
-        <button onClick={logoutHandler}>logout</button>
-        <Container>
+    <div>
+      <button onClick={logoutHandler}>logout</button>
+      <Container>
 
-          Build your listing to find the perfect renter — listings with a lot of detail and photos tend to attract the most leads, so don’t be shy! Not sure what to include? Check out our tips and tricks here.
-          <Form>
-            <Segment raised >
-              <Progress percent={progress} success progress />
-              <Form.Field
-                required
-                id='form-input-control-last-name'
-                control={Input}
-                name='housename'
-                type='text'
-                label='House Name'
-                placeholder='house name'
-                onChange={handleNameChange}
-              />
-              <Form.Field
-                required
-                id='property type'
-                control={Input}
-                label='Property Type'
-                name='propertytype'
-                placeholder='property type'
-                onChange={handleTypeChange}
-              />
+        Build your listing to find the perfect renter — listings with a lot of detail and photos tend to attract the most leads, so don’t be shy! Not sure what to include? Check out our tips and tricks here.
+        <Form>
+          <Segment raised >
+            <Progress percent={progress} success progress />
+            <Form.Field
+              required
+              id='form-input-control-last-name'
+              control={Input}
+              name='housename'
+              type='text'
+              label='House Name'
+              placeholder='house name'
+              onChange={handleNameChange}
+            />
+            <Form.Field
+              required
+              id='property type'
+              control={Input}
+              label='Property Type'
+              name='propertytype'
+              placeholder='property type'
+              onChange={handleTypeChange}
+            />
 
-              <Form.Field
-                required
-                id='district'
-                control={Input}
-                label='District'
-                name='district'
-                placeholder='District or Sub City'
-                onChange={handleDestrictChange}
-              />
-              <Form.Field
-                required
-                id='form-input-control-last-name'
-                control={Input}
-                label='Sefer'
-                name='sefer'
-                placeholder='Sefer or Village'
-                onChange={handleSeferChange}
-              />
-              <Form.Field
-                required
-                id='form-input-control-last-name'
-                control={TextArea}
-                label='Description'
-                name='description'
-                placeholder='House description'
-                onChange={handleDescrptionChange}
+            <Form.Field
+              required
+              id='district'
+              control={Input}
+              label='District'
+              name='district'
+              placeholder='District or Sub City'
+              onChange={handleDestrictChange}
+            />
+            <Form.Field
+              required
+              id='form-input-control-last-name'
+              control={Input}
+              label='Sefer'
+              name='sefer'
+              placeholder='Sefer or Village'
+              onChange={handleSeferChange}
+            />
+            <Form.Field
+              required
+              id='form-input-control-last-name'
+              control={TextArea}
+              label='Description'
+              name='description'
+              placeholder='House description'
+              onChange={handleDescrptionChange}
 
-              />
-              <Form.Field
-                required
-                id='form-input-control-last-name'
-                control={Input}
-                type="number"
-                name='size'
-                label='Square Footage'
-                placeholder='Size of a house'
-                onChange={handleSizeChange}
-                value={size}
-              />
-              <Form.Field
-                required
-                id='form-input-control-last-name'
-                control={Input}
-                type="number"
-                name='feepermonth'
-                label='Lease Fee'
-                placeholder='Fee'
-                onChange={handleFeeChange}
-              />
-              <Form.Field
-                required
-                id='form-input-control-last-name'
-                control={Input}
-                type="number"
-                name='numberofbeds'
-                label='Number of Beds'
-                placeholder='beds'
-                onChange={handleBedChange}
-              />
-              <Form.Field
-                required
-                control={Input}
-                type="file"
-                name="files"
-                multiple
-                label='Photos of the House'
-                icon='upload'
-                onChange={handleChange}
-              />
-              <Form.Field
-                required
-                id='form-input-control-last-name'
-                control={Input}
-                type="file"
-                name="video"
-                label='Videos about the house'
-                onChange={handleVideoChange}
+            />
+            <Form.Field
+              required
+              id='form-input-control-last-name'
+              control={Input}
+              type="number"
+              name='size'
+              label='Square Footage'
+              placeholder='Size of a house'
+              onChange={handleSizeChange}
+              value={size}
+            />
+            <Form.Field
+              required
+              id='form-input-control-last-name'
+              control={Input}
+              type="number"
+              name='feepermonth'
+              label='Lease Fee'
+              placeholder='Fee'
+              onChange={handleFeeChange}
+            />
+            <Form.Field
+              required
+              id='form-input-control-last-name'
+              control={Input}
+              type="number"
+              name='numberofbeds'
+              label='Number of Beds'
+              placeholder='beds'
+              onChange={handleBedChange}
+            />
+            <Form.Field
+              required
+              control={Input}
+              type="file"
+              name="files"
+              multiple
+              label='Photos of the House'
+              icon='upload'
+              onChange={handleChange}
+            />
+            <Form.Field
+              required
+              id='form-input-control-last-name'
+              control={Input}
+              type="file"
+              name="video"
+              label='Videos about the house'
+              onChange={handleVideoChange}
 
-              />
+            />
 
-              <select name="available" id="available" onChange={handleAvailableChange}>
-                <option value="false">No</option>
-                <option value="true">Yes</option>
-              </select>
-              <button onClick={handleUpload}>create upload</button>
-              <button onClick={handleMultipleFileSubmit}>final Upload</button>
+            <select name="available" id="available" onChange={handleAvailableChange}>
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+            <button onClick={handleUpload}>create upload</button>
+            <button onClick={handleMultipleFileSubmit} disabled={disable}>final Upload</button>
 
-            </Segment>
-          </Form>
-          {location.loaded ? JSON.stringify(location) : "not loaded correctly"}
-
-        </Container>
-      </div>
-    );
+          </Segment>
+        </Form>
+        {/*           {location.loaded ? JSON.stringify(location) : "not loaded correctly"}
+ */}
+      </Container>
+    </div>
+  );
 }
 
 export default FileUp

@@ -4,7 +4,7 @@ import axios from 'axios'
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import { Breadcrumb, Image, Ref, Segment, Container, Input, Checkbox, Divider, Header, Form, Button, Message, Grid, Modal, Icon, Sticky } from 'semantic-ui-react'
+import { Breadcrumb, Image,Item, Ref, Segment, Container, Input, Checkbox, Divider, Header, Form, Button, Message, Grid, Modal, Icon, Sticky } from 'semantic-ui-react'
 import { useParams, Link } from 'react-router-dom';
 import RelatedHouses from './RelatedHouses';
 
@@ -231,7 +231,73 @@ const HouseDetails = ({ match }) => {
                 {/* </Sticky> */}
               </Grid.Column>
               <Grid.Column width={11}>
-                <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+              <Item.Group>
+    <Item>
+      <Item.Content>
+        <Item.Header as='a'>Header</Item.Header>
+        <Item.Meta>Description</Item.Meta>
+        <Item.Description>
+          <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+        </Item.Description>
+        <Item.Extra>Additional Details</Item.Extra>
+      </Item.Content>
+    </Item>
+
+    <Item>
+      <Item.Content>
+        <Item.Header as='a'>Quick Facts</Item.Header>
+        <Item.Meta>Description</Item.Meta>
+        <Item.Description>
+        some description
+        </Item.Description>
+        <Item.Extra>Additional Details</Item.Extra>
+      </Item.Content>
+    </Item>
+    <Item>
+      <Item.Content>
+        <Item.Header as='a'>Description</Item.Header>
+        <Item.Meta>Description</Item.Meta>
+        <Item.Description>
+        some description
+        </Item.Description>
+        <Item.Extra>Additional Details</Item.Extra>
+      </Item.Content>
+    </Item>
+    <Item>
+      <Item.Content>
+        <Item.Header as='a'>Landlord Info</Item.Header>
+        <Item.Meta>Description</Item.Meta>
+        <Item.Description>
+          some description
+        </Item.Description>
+        <Item.Extra>Additional Details</Item.Extra>
+      </Item.Content>
+    </Item>
+    <Item>
+      <Item.Content>
+        <Item.Header as='a'>Features</Item.Header>
+        <Item.Meta>Description</Item.Meta>
+        <Item.Description>
+        some description
+        </Item.Description>
+        <Item.Extra>Additional Details</Item.Extra>
+      </Item.Content>
+    </Item>
+    <Item>
+      <Item.Content>
+        <Item.Header as='a'>Header</Item.Header>
+        <Item.Meta>Description</Item.Meta>
+        <Item.Description>
+        some description
+        </Item.Description>
+        <Item.Extra>Additional Details</Item.Extra>
+      </Item.Content>
+    </Item>
+  </Item.Group>
+  <Divider hidden/>
+  We take fraud seriously. If something looks fishy, let us know.
+  <Link to='/reportissue'>Report This Listing</Link>
+
               </Grid.Column>
 
             </Grid>

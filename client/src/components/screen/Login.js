@@ -9,12 +9,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [user,setUser] =useState({})
-
  useEffect(() => {
     if (localStorage.getItem("authToken")) {
       history.push("/");
     }
-  }, [history]); 
+  }, [history]);
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -34,8 +33,6 @@ const Login = () => {
       setUser(data)
 
      localStorage.setItem("authToken", data.token);
-     localStorage.setItem("username",data.username)
-     localStorage.setItem("userid",data.id)
      history.push("/");
     } catch (error) {
       
