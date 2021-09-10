@@ -1,6 +1,6 @@
 
 const Report = require('../models/ReportedIssue')
-
+const FeedBack = require('../models/FeedBack')
 const reportIssue = async (req,res)=>{
    try {
        const issueReported = Report({
@@ -12,6 +12,19 @@ const reportIssue = async (req,res)=>{
        res.status(400).send(error.message)
    }
 }
+const writeFeedBack = async (req,res)=>{
+    try {
+        const feedBack = FeedBack({
+            feedback:req.body.feedback,
+            usertype:req.body.usertype,
+            username:req.body.username
+        })
+        await feedBack.save({})
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+}
 module.exports={
-    reportIssue
+    reportIssue,
+    writeFeedBack
 }
