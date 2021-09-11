@@ -33,6 +33,7 @@ app.use(function (req, res, next) {
 app.use("/api/auth",require('./routes/auth'))
 app.use("/api/private",require('./routes/private'))
 app.use("/api/",houseRoute.routes)
+app.use("/report/",require('./routes/report'))
 const PORT = 5000;
 
 const server = app.listen(PORT, () =>

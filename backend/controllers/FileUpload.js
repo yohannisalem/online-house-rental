@@ -127,7 +127,6 @@ const updateHousesInfo = async (req, res) => {
             description: req.body.description,
             district: req.body.district,
             sefer: req.body.sefer,
-            location: req.body.location,
             numberofbeds: req.body.numberofbeds,
             feepermonth: req.body.feepermonth,
             size: req.body.size,

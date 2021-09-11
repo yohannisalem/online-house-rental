@@ -16,9 +16,10 @@ import Register from './screen/Register'
 import SwiperSlider from './screen/SwiperSlider'
 import ContractForm from './screen/ContractForm'
 import AdminPanel from './admin/AdminPanel';
-import Notification from './screen/Notification'
 import LandlordAccountReview from './screen/LandlordAccountReview';
 import ReportIssue from './screen/ReportIssue';
+import EditHouse from './screen/EditHouse';
+import FeedBack from './screen/FeedBack';
 
 const Navigator = () => {
     return (
@@ -36,16 +37,15 @@ const Navigator = () => {
                 <Route path="/profile"><LandlordAccountReview/></Route>
                 <Route path="/managelisting"><LandlordProfile/></Route>
                 <Route path="/admin"><AdminPanel/></Route>
+                <Route path="/edithouse/:houseId"><EditHouse/></Route>
                 <Route path="/reportissue"><ReportIssue/></Route>
+                <Route path="/feedback"><FeedBack/></Route>
                 <PrivateRoute path="/listproperty"><FileUp/></PrivateRoute>
                 <Route path="/tenantscreen"><SwiperSlider/></Route>
                 <Route path="/contract"><ContractForm/></Route>
                 <Route path="/houseDetails/:productId"><HouseDetails/></Route>
                 <Route path="/houseDistrict/:district"><HousesInTheSameDistrict/></Route>
 
-                
-
-                
             </Router>
         </div>
     )

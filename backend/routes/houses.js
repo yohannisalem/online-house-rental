@@ -11,14 +11,10 @@ router.get('/getFilesByDistrict/:district', findFilesByDistrict);
 router.get('/getFilesBySefer/:sefer', findFilesBySefer);
 router.get('/getHouses/:search', searchHouses);
 router.get('/autocompleteSearch',autoCompleteSearch)
-router.post('/updateHouse/:id',updateHousesInfo)
+router.put('/updateHouse/:id',updateHousesInfo)
 router.post('/sendContractForm',contractSigning)
 router.delete('/deleteHouse/:id',deleteHouse)
 router.post('/subscribe',notify)
-
-
-
-
 
 module.exports = {
     routes: router
