@@ -6,6 +6,7 @@ import storage from "../../firebase"
 import Login from './Login';
 import ContractForm from './ContractForm';
 import LandlordLogin from './LandlordLogin'
+import FeedBack from './FeedBack';
 const LandlordProfile = () => {
   const contextRef = createRef()
   const [multipleFiles, setMultipleFiles] = useState([]);
@@ -258,10 +259,10 @@ const handleItemClick =(e,{name})=>{
 
         <Grid.Column width='13'>
         <Router>
-        <Route path="/managelisting"><LandlordLogin/></Route>
+        
                 <Route path="/profile"><Login/></Route>
                 <Route path="/reviewcontract"><ContractForm/></Route>
-                <Route exact path="/feedback" ><Login/></Route>
+                <Route path="/feedback" ><FeedBack/></Route>
                 
             </Router>
           <Grid style={{ marginTop: "20px" }} verticalAlign='middle'>

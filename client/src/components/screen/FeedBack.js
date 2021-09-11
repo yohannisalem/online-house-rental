@@ -3,7 +3,7 @@ import {Grid,Input, Segment,Divider, Header,Form,Item,Image,Button } from 'seman
 import { Link } from 'react-router-dom';
 const FeedBack = () => {
     return (
-        <div>
+        <div style={{height:"100vh"}}>
             <Grid>
               <Grid.Column width={5}>
                 {/* <Sticky active pushing context={contextRef}> */}
