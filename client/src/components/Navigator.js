@@ -20,7 +20,7 @@ import LandlordAccountReview from './screen/LandlordAccountReview';
 import ReportIssue from './screen/ReportIssue';
 import EditHouse from './screen/EditHouse';
 import FeedBack from './screen/FeedBack';
-import SidebarExampleTransitions from './screen/SidebarExampleTransitions';
+
 
 const Navigator = () => {
     return (
