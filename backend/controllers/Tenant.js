@@ -26,7 +26,27 @@ const writeFeedBack = async (req,res)=>{
         res.status(400).send(error.message)
     }
 }
+const getFeedBack = async (req,res)=>{
+    try {
+        const feedback = await FeedBack.find();
+    
+        res.status(200).send(feedback);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+const getReport = async (req,res)=>{
+    try {
+        const report = await Report.find();
+    
+        res.status(200).send(report);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 module.exports={
     reportIssue,
-    writeFeedBack
+    writeFeedBack,
+    getFeedBack,
+    getReport
 }

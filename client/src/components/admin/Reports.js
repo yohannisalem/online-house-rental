@@ -1,16 +1,14 @@
 import React,{useState,useEffect}from 'react'
 import { Feed } from 'semantic-ui-react'
 import axios from 'axios'
-
-
 const date = '3 days ago'
 const summary = 'Laura Faucet created a post'
 const extraText = "Have you seen what's going on in Israel? Can you believe it."
-const FeedBacks = () => {
+const Reports = () => {
     const [multipleFiles, setMultipleFiles] = useState([]);
     const getMultipleFiles = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/report/getfeedback');
+            const { data } = await axios.get('http://localhost:5000/report/getreport');
             return data;
         } catch (error) {
             throw error;
@@ -29,14 +27,14 @@ const FeedBacks = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <div >
+        <div>
             {
                 multipleFiles.map((house, index) =>
 <Feed>
                 <Feed.Event
                     date={house.createdAt}
-                    summary={house.feedback}
-                    extraText={house.username}
+                    summary={house.description}
+                    extraText={extraText}
                 />
 
             </Feed>
@@ -46,4 +44,4 @@ const FeedBacks = () => {
     )
 }
 
-export default FeedBacks
+export default Reports

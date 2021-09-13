@@ -11,6 +11,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import FeedBacks from './FeedBacks';
 import Home from '../pages/Home';
 import HouseList from './HouseList';
+import Reports from './Reports';
 
 const AdminPanel = () => {
   const history = useHistory()
@@ -126,7 +127,8 @@ useEffect(() => {
 </SideNav>
 <main>
                 <Route path="/houses" component={props => <HouseList/>} />
-                <Route path="/home" component={props => <Home />} />
+                <Route path="/feedback" component={props => <FeedBacks />} />
+                <Route path="/report" component={props => <Reports />} />
                 
             </main>
         </React.Fragment>
