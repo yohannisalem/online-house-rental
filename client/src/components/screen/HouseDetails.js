@@ -66,7 +66,7 @@ const HouseDetails = ({ match }) => {
             <Grid textAlign='justified' style={{ marginBottom: "1px" }}>
               <Grid.Column width={11} verticalAlign='middle'>
                 <Breadcrumb style={{ color: "teal" }}>
-                  <Breadcrumb.Section link >Home</Breadcrumb.Section>
+                  <Breadcrumb.Section as={Link} to={'/'}>Home</Breadcrumb.Section>
                   <Breadcrumb.Divider icon='right chevron' />
                   <Breadcrumb.Section as={Link} to={`/houseDistrict/${element.district}`}>{element.district}</Breadcrumb.Section>
                   <Breadcrumb.Divider icon='right chevron' />
@@ -76,7 +76,7 @@ const HouseDetails = ({ match }) => {
                 </Breadcrumb>
               </Grid.Column>
               <Grid.Column width={5} textAlign='right'>
-                <Modal
+                {/* <Modal
                   closeIcon
                   centered
                   open={open}
@@ -89,31 +89,32 @@ const HouseDetails = ({ match }) => {
                   style={{ maxWidth: "400px", textAlign: "center" }}
                 >
                   <Modal.Content>
-                    <Form size='large' >
+                  <Form size='large' >
                       <Header as='h2' color='teal' textAlign='center'>
                         Request this house
                       </Header>
                       <Divider hidden />
-                      {element.sefer, element.housename}
+                      {element.sefer, element._id}
+                      
                       <Form.Field
-                        required
-                        id='form-input-control-last-name'
+                       disabled
                         control={Input}
                         name='houseId'
                         type='text'
                         label='House ID'
                         placeholder='Id'
                         value={element._id}
-                        onChange={(e)=>setHouseId(element._id)}
+                        
+                        
                       />
                       <Form.Field
                         required
-                        id='form-input-control-last-name'
                         control={Input}
                         name='tenantId'
                         type='text'
                         label='Tenant Id'
                         placeholder='tenant Id'
+                        value={tenantId}
                         onChange={(e)=>setTenantId(e.target.value)}
                       />
                       <Form.Field
@@ -121,7 +122,7 @@ const HouseDetails = ({ match }) => {
                         id='form-input-control-last-name'
                         control={Input}
                         name='tenantPhone'
-                        type='number'
+                        type='Number'
                         label='Phone Number'
                         onChange={(e)=>setTenantPhone(e.target.value)}
                       />
@@ -133,10 +134,11 @@ const HouseDetails = ({ match }) => {
                         type='text'
                         label='Tenant Email'
                         placeholder='email'
+                        value={tenantEmail}
                         onChange={(e)=>setTenantEmail(e.target.value)}
                       />
                       <Divider hidden />
-                      <Button color="twitter" onClick={requestHouse}>Request House</Button>
+                      <Button color="twitter" onClick={(e)=>requestHouse(e,element._id)}>Request House</Button>
                       <Divider hidden />
                       <Checkbox label={<label>In sending this message, you agree to KirayBet.com's Privacy Policy and Terms</label>} />
 
@@ -144,7 +146,7 @@ const HouseDetails = ({ match }) => {
                     </Form>
                   </Modal.Content>
 
-                </Modal>
+                </Modal> */}
 
                 <Button >
                   <Icon name='phone' />0941454140

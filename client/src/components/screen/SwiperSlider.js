@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { createRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { createRef, useEffect, useState,useRef} from 'react';
+import { Link,useHistory} from 'react-router-dom';
 import { Card, CardContent, Container, Form, Grid, GridColumn, Image, Ref, Segment, Sticky } from 'semantic-ui-react';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,6 +12,16 @@ const SwiperSlider = () => {
   const contextRef = createRef()
 
   const [multipleFiles, setMultipleFiles] = useState([]);
+  const [display, setDisplay] = useState(false);
+  const [options, setOptions] = useState([]);
+  const [search, setSearch] = useState("");
+  
+  const [clicked,setClicked]= useState("")
+  const wrapperRef = useRef(null);
+  const history = useHistory()
+ const handleSearch =(term)=>{
+  history.push(`/houseDistrict/${term}`)
+ }
   const getMultipleFiles = async () => {
     try {
       const { data } = await axios.get('http://localhost:5000/api/getMultipleFiles');
@@ -28,6 +38,42 @@ const SwiperSlider = () => {
       console.log(error);
     }
   }
+  const searchHouse = async (text) => {
+    try {
+      const pokemon = [];
+      const searchedHouse = await axios.get(`http://localhost:5000/api/autoCompleteSearch?term=${text}`)
+      searchedHouse.data.map(house => {
+        pokemon.push(house)
+        
+      })
+      
+      setOptions(pokemon);
+    } catch (error) {
+
+
+      console.log(error.message)
+    }
+  }
+  useEffect(() => {
+    window.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = event => {
+    const { current: wrap } = wrapperRef;
+    if (wrap && !wrap.contains(event.target)) {
+      setDisplay(false);
+    }
+  };
+
+  const updatePokeDex = poke => {
+    setSearch(poke);
+    setClicked(poke)
+    setDisplay(false);
+
+  };
   useEffect(() => {
     getMultipleFilesList()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,43 +83,42 @@ const SwiperSlider = () => {
       <Ref innerRef={contextRef}>
 
         <Container fluid >
-          <Segment style={{padding:"0px"}}>
+          <Grid columns='2' style={{ padding: "0px", margin: "0px" }}>
+            <GridColumn style={{ padding: "0px", margin: "0px" }}>
             <Form>
               <Form.Group widths='equal'>
                 
-                  <Form.Input
+              <Form.Input
                     type='search' placeholder='Search...'
                     action={{
-                      icon: 'search',
-                      
+                      content: 'Search',
+                      style: { backgroundColor: "#20c1c9", width: "55px", padding: "7px" },
+                      onClick:()=>handleSearch(clicked) 
                     }}
-                  /* defaultValue={this.state.value}
-                  onChange={this.handleInputChange} 
-                 */
+                    onChange={(e) => searchHouse(e.target.value)}
+                    onClick={() => setDisplay(!display)}
+                    value={clicked}
                   />
                 
-                <Form.Input placeholder='First name' />
-                <Form.Input placeholder='Last name' />
-                <Form.Select
-                  placeholder='Gender'
-                />
               </Form.Group>
             </Form>
-          </Segment>
+            {display && (
+                  <div className="autoContainer">
+                    {options
+                      .map((value) => {
+                        return (
+                          <div
+                            onClick={() => updatePokeDex(value)}
+                            className="option"
+                            tabIndex="0"
+                          >
+                            <span>{value}</span>
 
-          <Grid columns='2' style={{ padding: "0px", margin: "0px" }}>
-            <GridColumn style={{ padding: "0px", margin: "0px" }}>
-              <Form>
-                <Form.Group widths='equal'>
-                  <Form.Input fluid label='First name' placeholder='First name' />
-                  <Form.Input fluid label='Last name' placeholder='Last name' />
-                  <Form.Select
-                    fluid
-                    label='Gender'
-                    placeholder='Gender'
-                  />
-                </Form.Group>
-              </Form>
+                          </div>
+                        );
+                      })}
+                  </div>
+                )}
               <Grid columns={2} style={{ padding: "0px", margin: "0px", width: "70vw" }}>
                 {multipleFiles.map((element, index) =>
 

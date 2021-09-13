@@ -1,7 +1,25 @@
-import React from 'react'
-import {Grid,Input, Segment,Divider, Header,Form,Item,Image,Button } from 'semantic-ui-react';
+import {useState} from 'react'
+import {Grid,Input, Segment,Divider, Header,Form,Item,Image,Button, TextArea } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 const ReportIssue = () => {
+  const [description, setDescription] = useState('')
+  const [reportedBy, setReportedBy] = useState('')
+  const reportIssue = async (e) => {
+    e.preventDefault();
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post("http://localhost:5000/report/reportissue", {description,reportedBy}, config);
+      console.log(res)
+     
+    } catch (err) {
+      console.log(err)
+    }
+  };
     return (
         <div>
             <Grid>
@@ -14,47 +32,30 @@ const ReportIssue = () => {
                         Request this house
                       </Header>
                      
-                      
-                      <Form.Field
-                       disabled
-                        control={Input}
-                        name='houseId'
-                        type='text'
-                        label='House ID'
-                      
-                        
-                        
-                      />
+                     
                       <Form.Field
                         required
-                        control={Input}
-                        name='tenantId'
+                        id='form-input-control-last-name'
+                        control={TextArea}
+                        name='description'
                         type='text'
-                        label='Tenant Id'
-                        placeholder='tenant Id'
+                        label='report details'
+                        placeholder='enter what you wanted to report here'
+                        onChange={e=>setDescription(e.target.value)}
                        
                       />
                       <Form.Field
                         required
                         id='form-input-control-last-name'
                         control={Input}
-                        name='tenantPhone'
-                        type='Number'
-                        label='Phone Number'
-                        
-                      />
-                      <Form.Field
-                        required
-                        id='form-input-control-last-name'
-                        control={Input}
-                        name='tenantEmail'
+                        name='reportedBy'
                         type='text'
-                        label='Tenant Email'
-                        placeholder='email'
-                       
+                        label='Name'
+                        placeholder='enter your name'
+                        onChange={e=>setReportedBy(e.target.value)}
                       />
                       <Divider hidden />
-                      <Button color="twitter" >Request House</Button>
+                      <Button color="twitter" onClick={reportIssue}>Report Issue</Button>
                       <Divider hidden />
                       
                     </Form>

@@ -1,6 +1,7 @@
 
 import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
+import {Link,useHistory} from 'react-router-dom'
 import {
   Button,
   Container, Divider, Form, Grid,
@@ -87,9 +88,14 @@ const Home = () => {
   const [display, setDisplay] = useState(false);
   const [options, setOptions] = useState([]);
   const [search, setSearch] = useState("");
+  
+  const [clicked,setClicked]= useState("")
   const wrapperRef = useRef(null);
   const [multipleFiles, setMultipleFiles] = useState([])
-
+  const history = useHistory()
+ const handleSearch =(term)=>{
+  history.push(`/houseDistrict/${term}`)
+ }
   const getHousesIntheSameDistrict = async (houseDistrict) => {
     try {
       const { data } = await axios.get(`http://localhost:5000/api/getFilesByDistrict/${houseDistrict}`);
@@ -122,7 +128,9 @@ const Home = () => {
       const searchedHouse = await axios.get(`http://localhost:5000/api/autoCompleteSearch?term=${text}`)
       searchedHouse.data.map(house => {
         pokemon.push(house)
+        
       })
+      
       setOptions(pokemon);
     } catch (error) {
 
@@ -146,6 +154,7 @@ const Home = () => {
 
   const updatePokeDex = poke => {
     setSearch(poke);
+    setClicked(poke)
     setDisplay(false);
 
   };
@@ -185,11 +194,12 @@ const Home = () => {
                     size='big' fluid type='search' placeholder='Search...'
                     action={{
                       content: 'Search',
-                      style: { backgroundColor: "#20c1c9", width: "55px", padding: "7px" }
-
+                      style: { backgroundColor: "#20c1c9", width: "55px", padding: "7px" },
+                      onClick:()=>handleSearch(clicked)
                     }}
                     onChange={(e) => searchHouse(e.target.value)}
                     onClick={() => setDisplay(!display)}
+                    value={clicked}
 
                   />
                 </Form>
@@ -229,7 +239,8 @@ const Home = () => {
               </Header>
               <p style={{ fontSize: '1.33em' }}>
                 Search thousands of up-to-date property listings on our easy-to-use website. Narrow down your options by choosing what's most important to you, such as number of bedrooms and bathrooms, price range, location, pet policy and more.
-                Parents can also search for rentals that fall within a particular school district.
+                Parents can also search for rentals that fall within a particular school district.import { useHistory } from 'react-router-dom';
+
               </p>
               <Header as='h1' style={{ fontSize: '2em' }}>
                 Simple and streamlined rental management all under a single roof

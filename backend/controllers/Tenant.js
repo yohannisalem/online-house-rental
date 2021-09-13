@@ -8,6 +8,7 @@ const reportIssue = async (req,res)=>{
            reportedBy:req.body.reportedBy
        })
        await issueReported.save({})
+       res.status(201).send('Report submitted successfully');
    } catch (error) {
        res.status(400).send(error.message)
    }
@@ -20,6 +21,7 @@ const writeFeedBack = async (req,res)=>{
             username:req.body.username
         })
         await feedBack.save({})
+        res.status(201).send('Feedback submitted successfully');
     } catch (error) {
         res.status(400).send(error.message)
     }

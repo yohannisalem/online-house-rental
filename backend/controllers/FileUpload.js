@@ -1,7 +1,7 @@
 const MultipleFile = require('../models/Houses')
 const express = require('express');
 const webpush = require('web-push');
-
+const ErrorResponse = require("../utils/errorResponse");
 
 const publicVapidKey = 'BMffGk0gRxLPOSi-eOlXoR1ahY9Ce7uBY3010C06TeMoRYS_6n1A4ItVeOeNYutDlhPK27WW5UMrdyjBEj_-Pxo';
 const privateVapidKey = 'QCipepmgJm_noa9A4-0Q-Wjbwm1GL02DSDpX6-ynFwU';
@@ -63,7 +63,7 @@ const multipleFileUpload = async (req, res, next) => {
                 })
             ) */
         res.status(201).send('Files Uploaded Successfully');
-        console.log(req)
+        
     } catch (error) {
         res.status(400).send(error.message);
     }

@@ -71,7 +71,7 @@ const EditHouse = ({house}) => {
             },
         };
         try {
-            const res = await axios.post(`http://localhost:5000/api/updateHouse/${houseId}`, housedata, config);
+            const res = await axios.put(`http://localhost:5000/api/updateHouse/613a46b3075a6bf2db49cfee`, housedata, config);
             console.log(res)
         } catch (err) {
             console.log(err)
@@ -92,7 +92,6 @@ const EditHouse = ({house}) => {
         for (let i = 0; i < imageUrls.length; i++) {
             formData.append('files', imageUrls[i]);
         }
-
         await updateHouse(formData);
         console.log(formData)
         history.push('/managelisting')
@@ -218,7 +217,7 @@ const EditHouse = ({house}) => {
                                 label='Square Footage'
                                 placeholder='Size of a house'
                                 onChange={handleSizeChange}
-                                value={size}
+                                
                             />
                             <Form.Field
                                 required
