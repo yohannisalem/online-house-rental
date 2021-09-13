@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const FeedBack = () => {
     return (
         <div style={{height:"100vh"}}>
-            <Grid>
+            <Grid textAlign='center'>
               <Grid.Column width={5}>
                 {/* <Sticky active pushing context={contextRef}> */}
 
@@ -51,75 +51,7 @@ const FeedBack = () => {
                 </Segment>
                 {/* </Sticky> */}
               </Grid.Column>
-              <Grid.Column width={11}>
-              <Item.Group>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Header</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-          <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Quick Facts</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-        some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Description</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-        some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Landlord Info</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-          some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Features</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-        some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Header</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-        some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-  </Item.Group>
-  <Divider hidden/>
-  We take fraud seriously. If something looks fishy, let us know.
-  <Link>Report This Listing</Link>
-
-              </Grid.Column>
+              
 
             </Grid>
         </div>
