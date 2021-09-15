@@ -48,7 +48,9 @@ const multipleFileUpload = async (req, res, next) => {
             available: req.body.available,
             propertytype: req.body.propertytype,
             video: req.body.video,
-            files: filesArray
+            files: filesArray,
+            owneremail:req.body.owneremail,
+            ownerusername:req.body.ownerusername
         });
         await multipleFiles.save();
         /* const subscription = req.body;

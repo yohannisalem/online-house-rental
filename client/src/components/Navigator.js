@@ -36,7 +36,7 @@ const Navigator = () => {
                 <Route path="/landlordLogin"><LandlordLogin/></Route>
                 <Route path="/landlordRegister"><LandlordRegister/></Route>
                 <Route path="/profile"><LandlordAccountReview/></Route>
-                <Route path="/managelisting"><LandlordProfile/></Route>
+                <PrivateRoute path="/managelisting"><LandlordProfile/></PrivateRoute>
                 <Route path="/admin"><AdminPanel/></Route>
                 <Route path="/edithouse/:houseId"><EditHouse/></Route>
                 <Route path="/reportissue"><ReportIssue/></Route>

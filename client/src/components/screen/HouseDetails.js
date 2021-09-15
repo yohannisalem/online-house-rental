@@ -4,12 +4,13 @@ import axios from 'axios'
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import { Breadcrumb, Image,Item, Ref, Segment, Container, Input, Checkbox, Divider, Header, Form, Button, Message, Grid, Modal, Icon, Sticky } from 'semantic-ui-react'
-import { useParams, Link } from 'react-router-dom';
+import { Breadcrumb, Image, Item, Ref, Segment, Container, Input, Checkbox, Divider, Header, Form, Button, Message, Grid, Modal, Icon, Sticky } from 'semantic-ui-react'
+import { useParams, Link, useHistory } from 'react-router-dom';
 import RelatedHouses from './RelatedHouses';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 const HouseDetails = ({ match }) => {
+  const history = useHistory()
   const [open, setOpen] = useState(false)
   let params = useParams()
   const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
@@ -24,24 +25,30 @@ const HouseDetails = ({ match }) => {
   const [multipleFiles, setMultipleFiles] = useState([])
   const [tenantId, setTenantId] = useState("")
   const [houseId, setHouseId] = useState("")
-  const [tenantPhone, setTenantPhone] = useState(0)
+  const [tenantPhone, setTenantPhone] = useState("")
   const [tenantEmail, setTenantEmail] = useState("")
+  const [landlordemail, setLandlordemail] = useState("")
+  const [landlordusername, setLandlordusername] = useState("")
   const productId = params.productId
   const apiUrl = `http://localhost:5000/api/getFilesById/${productId}`;
 
-  const requestHouse = async (e,houseId) => {
-    e.preventDefault();
+  const requestHouse = async (e) => {
+
     const config = {
       header: {
         "Content-Type": "application/json",
       },
     };
     try {
-      const res = await axios.post("http://localhost:5000/api/requestHouses", {tenantId,houseId,tenantPhone,tenantEmail}, config);
+      if (!localStorage.getItem("authToken")) {
+        history.push('/login')
+      }
+
+      const res = await axios.post("http://localhost:5000/api/requestHouses", { tenantId, houseId, tenantPhone, tenantEmail,landlordemail,landlordusername}, config);
       console.log(res)
-      setTenantId('')
-      setTenantPhone(0)
-      setTenantEmail('')
+      setTenantId("")
+      setTenantPhone("")
+      setTenantEmail("")
     } catch (err) {
       console.log(err)
     }
@@ -61,9 +68,11 @@ const HouseDetails = ({ match }) => {
   return (
     <div >
       {multipleFiles.map((element, index) =>
-        <Ref innerRef={contextRef}>
-          <Container>
-            <Grid textAlign='justified' style={{ marginBottom: "1px" }}>
+        <Ref innerRef={contextRef} key={index}>
+          {/*  */}
+          <Container key={index}>
+
+            <Grid textAlign='justified' style={{ marginBottom: "1px" }} key={index}>
               <Grid.Column width={11} verticalAlign='middle'>
                 <Breadcrumb style={{ color: "teal" }}>
                   <Breadcrumb.Section as={Link} to={'/'}>Home</Breadcrumb.Section>
@@ -173,132 +182,134 @@ const HouseDetails = ({ match }) => {
               <Grid.Column width={5}>
                 {/* <Sticky active pushing context={contextRef}> */}
 
-                <Segment stacked style={{ backgroundColor: "lightGray" }} textAlign='center'>
-                <Form size='large' >
-                      <Header as='h2' color='teal' textAlign='center'>
-                        Request this house
-                      </Header>
-                      <Divider hidden />
-                      {element.sefer, element._id}
+                <Segment stacked style={{ backgroundColor: "lightGray" }} textAlign='center' key={index}>
+                  <Form size='large' key={index} >
+                    <Header as='h2' color='teal' textAlign='center'>
+                      Request this house
+                    </Header>
+                    <Divider hidden />
+                    <select required name="houseId" onChange={e => setLandlordemail(e.target.value)}>
+                      <option value={element.owneremail}>landlordEmail</option>
+                      <option value={element.owneremail}>Email</option>
+                  
+                    </select>
+                    <select required name="houseId" onChange={e => setLandlordusername(e.target.value)}>
+                      <option value={element.ownerusername}>landlordusername</option>
+                      <option value={element.ownerusername}>username</option>
                       
-                      <Form.Field
-                       disabled
-                        control={Input}
-                        name='houseId'
-                        type='text'
-                        label='House ID'
-                        placeholder='Id'
-                        value={element._id}
-                        
-                        
-                      />
-                      <Form.Field
-                        required
-                        control={Input}
-                        name='tenantId'
-                        type='text'
-                        label='Tenant Id'
-                        placeholder='tenant Id'
-                        value={tenantId}
-                        onChange={(e)=>setTenantId(e.target.value)}
-                      />
-                      <Form.Field
-                        required
-                        id='form-input-control-last-name'
-                        control={Input}
-                        name='tenantPhone'
-                        type='Number'
-                        label='Phone Number'
-                        onChange={(e)=>setTenantPhone(e.target.value)}
-                      />
-                      <Form.Field
-                        required
-                        id='form-input-control-last-name'
-                        control={Input}
-                        name='tenantEmail'
-                        type='text'
-                        label='Tenant Email'
-                        placeholder='email'
-                        value={tenantEmail}
-                        onChange={(e)=>setTenantEmail(e.target.value)}
-                      />
-                      <Divider hidden />
-                      <Button color="twitter" onClick={(e)=>requestHouse(e,element._id)}>Request House</Button>
-                      <Divider hidden />
-                      <Checkbox label={<label>In sending this message, you agree to KirayBet.com's Privacy Policy and Terms</label>} />
+                    </select>
+                    <select required name="houseId" onChange={e => setHouseId(e.target.value)}>
+                      <option value={element._id}>houseid</option>
+                      <option value={element._id}>id</option>
+                    </select>
+                    <Form.Field
+                      required
+                      control={Input}
+                      name='tenantId'
+                      type='text'
+                      label='Tenant Id'
+                      placeholder='tenant Id'
+                      value={tenantId}
+                      onChange={(e) => setTenantId(e.target.value)}
+                    />
+                    <Form.Field
+                      required
+                      id='form-input-control-last-name'
+                      control={Input}
+                      name='tenantPhone'
+                      type='text'
+                      label='Phone Number'
+                      value={tenantPhone}
+                      onChange={(e) => setTenantPhone(e.target.value)}
+                    />
+                    <Form.Field
+                      required
+                      id='form-input-control-last-name'
+                      control={Input}
+                      name='tenantEmail'
+                      type='text'
+                      label='Tenant Email'
+                      placeholder='email'
+                      value={tenantEmail}
+                      onChange={(e) => setTenantEmail(e.target.value)}
+                    />
+                    <Divider hidden />
+                    <Button color="twitter" onClick={requestHouse}>Request House</Button>
+                    <Divider hidden />
+                    <Checkbox label={<label>In sending this message, you agree to KirayBet.com's Privacy Policy and Terms</label>} />
 
 
-                    </Form>
+                  </Form>
                 </Segment>
                 {/* </Sticky> */}
               </Grid.Column>
               <Grid.Column width={11}>
-              <Item.Group>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Header</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-          <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
+                <Item.Group>
+                  <Item>
+                    <Item.Content>
+                      <Item.Header as='a'>Description</Item.Header>
 
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Quick Facts</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-        some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Description</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-        some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Landlord Info</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-          some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Features</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-        some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-    <Item>
-      <Item.Content>
-        <Item.Header as='a'>Header</Item.Header>
-        <Item.Meta>Description</Item.Meta>
-        <Item.Description>
-        some description
-        </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
-      </Item.Content>
-    </Item>
-  </Item.Group>
-  <Divider hidden/>
-  We take fraud seriously. If something looks fishy, let us know.
-  <Link to='/reportissue'>Report This Listing</Link>
+                      <Item.Description>
+                        {element.description}
+                      </Item.Description>
+                      <Item.Extra>Additional Details</Item.Extra>
+                    </Item.Content>
+                  </Item>
+
+                  <Item>
+                    <Item.Content>
+                      <Item.Header as='a'>Quick Facts</Item.Header>
+
+                      <Item.Description>
+                        {element.propertytype},{element.numberofbeds}
+                      </Item.Description>
+                      <Item.Extra>Additional Details</Item.Extra>
+                    </Item.Content>
+                  </Item>
+                  <Item>
+                    <Item.Content>
+                      <Item.Header as='a'>Description</Item.Header>
+                      <Item.Meta>Description</Item.Meta>
+                      <Item.Description>
+                        {element.owneremail}
+                      </Item.Description>
+                      <Item.Extra>Additional Details</Item.Extra>
+                    </Item.Content>
+                  </Item>
+                  <Item>
+                    <Item.Content>
+                      <Item.Header as='a'>Landlord Info</Item.Header>
+                      <Item.Meta>Description</Item.Meta>
+                      <Item.Description>
+                        some description
+                      </Item.Description>
+                      <Item.Extra>Additional Details</Item.Extra>
+                    </Item.Content>
+                  </Item>
+                  <Item>
+                    <Item.Content>
+                      <Item.Header as='a'>Features</Item.Header>
+                      <Item.Meta>Description</Item.Meta>
+                      <Item.Description>
+                        some description
+                      </Item.Description>
+                      <Item.Extra>Additional Details</Item.Extra>
+                    </Item.Content>
+                  </Item>
+                  <Item>
+                    <Item.Content>
+                      <Item.Header as='a'>Header</Item.Header>
+                      <Item.Meta>Description</Item.Meta>
+                      <Item.Description>
+                        some description
+                      </Item.Description>
+                      <Item.Extra>Additional Details</Item.Extra>
+                    </Item.Content>
+                  </Item>
+                </Item.Group>
+                <Divider hidden />
+                We take fraud seriously. If something looks fishy, let us know.
+                <Link to='/reportissue'>Report This Listing</Link>
 
               </Grid.Column>
 

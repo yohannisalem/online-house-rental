@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import axios from "axios";
 import { Link,Redirect,useHistory} from "react-router-dom";
-import { Button,Form } from 'semantic-ui-react'
+import { Button,Form,Grid,Segment} from 'semantic-ui-react'
 
 const Register = () => {
   let history = useHistory()
@@ -45,8 +45,16 @@ const Register = () => {
   };
 
   return (
-    <div style={{marginTop:"100px"}}>
-      {error && <span className="error-message">{error}</span>}
+    <div style={{height:"100vh",backgroundColor:"#edeff2"}}>
+      <Grid textAlign="center" verticalAlign='middle' style={{ paddingTop: "70px" }}>
+          <Grid.Column width={8} style={{ padding: "0px" }}>
+          {error && <span className="error-message">{error}</span>}
+          <span >
+          Already have an account? <Link to="/login">Login</Link>
+    </span>
+    <span>
+    Ooops <Link to="/landlordRegister">I'm Landlord</Link>
+    </span>
       <Form>
         <Form.Field>
           <label>First Name</label>
@@ -95,9 +103,24 @@ const Register = () => {
         </Form.Field>
         <Button onClick={registerHandler}>Submit</Button>
     </Form>
-    <span className="register-screen__subtext">
-          Already have an account? <Link to="/login">Login</Link>
-    </span>
+   
+      
+          </Grid.Column>
+  
+          <Grid.Column width={4} style={{ padding: "0px" }}>
+          <Segment
+              textAlign='center'
+              style={{
+                height: "65vh",
+                backgroundImage: "url(/log.jpeg)"
+              }}
+            >
+            </Segment>
+                </Grid.Column>
+                
+  
+        </Grid>
+  
       
     </div>
   );

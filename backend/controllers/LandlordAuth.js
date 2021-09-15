@@ -125,5 +125,5 @@ exports.landlordResetPassword = async (req,res,next)=>{
 }
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();
-    res.status(statusCode).json({ sucess: true, token,id:user._id,username:user.username,phone:user.phone });
+    res.status(statusCode).json({ sucess: true, token,id:user._id,username:user.username,phone:user.phone,email:user.email});
   };

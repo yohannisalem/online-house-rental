@@ -46,11 +46,8 @@ const SwiperSlider = () => {
         pokemon.push(house)
         
       })
-      
       setOptions(pokemon);
     } catch (error) {
-
-
       console.log(error.message)
     }
   }
@@ -84,7 +81,7 @@ const SwiperSlider = () => {
 
         <Container fluid >
           <Grid columns='2' style={{ padding: "0px", margin: "0px" }}>
-            <GridColumn style={{ padding: "0px", margin: "0px" }}>
+            <Grid.Column style={{ padding: "0px", margin: "0px" }}>
             <Form>
               <Form.Group widths='equal'>
                 
@@ -134,8 +131,6 @@ const SwiperSlider = () => {
                         <Swiper
                           slidesPerView={1}
                           navigation
-                          pagination={{ clickable: true }}
-                          scrollbar={{ draggable: true }}
                         >
                           {element.files.map((url, index) =>
 
@@ -175,13 +170,13 @@ const SwiperSlider = () => {
                 )}
 
               </Grid>
-            </GridColumn>
-            <GridColumn>
+            </Grid.Column>
+            <Grid.Column style={{ padding: "0px" }}>
               <Sticky context={contextRef} offset={60}>
                 <HousesLocation />
               </Sticky>
 
-            </GridColumn>
+            </Grid.Column>
           </Grid>
         </Container>
       </Ref>

@@ -3,6 +3,8 @@ const {model,Schema} = require('mongoose')
 const RequestSchema = Schema({
     tenantId:{type:String,required:true},
     houseId:{type:String,required:true},
+    landlordusername:{type:String},
+    landlordemail:{type:String},
     tenantPhone: {
         type: String,
         required: [true, "Please provide a phone number"],

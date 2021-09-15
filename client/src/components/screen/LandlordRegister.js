@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { Link,Redirect,useHistory} from "react-router-dom";
-import { Button,Form,Grid,Segment,Header} from 'semantic-ui-react'
+import { Button,Form,Grid,Segment,Header, Container} from 'semantic-ui-react'
 import axios from 'axios';
 const LandlordRegister = () => {
     let history = useHistory()
@@ -50,7 +50,8 @@ const LandlordRegister = () => {
     }
   };
     return (
-        <div>
+        <div style={{backgroundColor:"#edeff2"}}>
+          <Container>
           <Grid>
     <Grid.Column width={7}>
     <Segment
@@ -76,8 +77,13 @@ const LandlordRegister = () => {
       </Segment>
     </Grid.Column>
     <Grid.Column width={9}>
+      <Header content='Create account'/>
     {error && <span className="error-message">{error}</span>}
       <Form>
+      <Form.Group widths={2}>
+      <Form.Input label='First name' placeholder='First name' />
+      <Form.Input label='Last name' placeholder='Last name' />
+    </Form.Group>
         <Form.Field>
           <label>User name</label>
           <input
@@ -141,8 +147,9 @@ const LandlordRegister = () => {
     </span>
     </Grid.Column>
    
+       
   </Grid>
-            
+           </Container>  
         </div>
     )
 }

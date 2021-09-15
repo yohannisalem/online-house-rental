@@ -133,6 +133,8 @@ const FileUp = () => {
   };
   const handleMultipleFileSubmit = async () => {
     const formData = new FormData();
+    formData.append('ownerusername', localStorage.getItem("username"));
+    formData.append('owneremail', localStorage.getItem("email"));
     formData.append('housename', housename);
     formData.append('description', description);
     formData.append('district', district);
@@ -264,6 +266,11 @@ const FileUp = () => {
   return (
     <div>
       <button onClick={logoutHandler}>logout</button>
+      
+        <h1>{localStorage.getItem("email")}</h1>
+        <h1>{localStorage.getItem("username")}</h1>
+        
+      
       <Container>
 
         Build your listing to find the perfect renter — listings with a lot of detail and photos tend to attract the most leads, so don’t be shy! Not sure what to include? Check out our tips and tricks here.

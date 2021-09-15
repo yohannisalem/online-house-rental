@@ -1,4 +1,4 @@
-const {Schema,model}= require('mongoose')
+const {Schema,model, Types}= require('mongoose')
 const geocoder = require('../utils/geocoder');
 const HouseSchema = Schema({
     housename:{type:String},
@@ -23,11 +23,13 @@ const HouseSchema = Schema({
     available:{type: Boolean },
     propertytype:{type:String},
     files:[Object],
-    video:{ type: String }
+    video:{ type: String },
+    owneremail:{type:String},
+    ownerusername:{type:String}
 },{timestamps:true})
 HouseSchema.index({housename:'text',district:'text',sefer:'text',propertytype:'text'})
 HouseSchema.pre('save', async function(next) {
-  const loc = await geocoder.geocode(this.district);
+  const loc = await geocoder.geocode({address:this.district,country:"Ethiopia",city:"Addis Ababa",countryCode:"ET"});
   this.location = {
     type: 'Point',
     coordinates: [loc[0].longitude, loc[0].latitude],
@@ -38,15 +40,7 @@ HouseSchema.pre('save', async function(next) {
   this.address = undefined;
   next();
 });
-HouseSchema.method('transform', function() {
-    var obj = this.toObject();
 
-    //Rename fields
-    obj.id = obj._id;
-    delete obj._id;
-
-    return obj;
-});
 module.exports = model('house',HouseSchema)
 
   

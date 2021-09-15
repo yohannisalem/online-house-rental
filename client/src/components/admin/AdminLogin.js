@@ -2,50 +2,41 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import { Button, Divider, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
-
-const Login = () => {
-  let history = useHistory()
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [user, setUser] = useState({})
-  /*  useEffect(() => {
-      if (localStorage.getItem("authToken")) {
-        history.push("/tenantscreen");
+const AdminLogin = () => {
+    let history = useHistory()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [user, setUser] = useState({})
+  
+    const loginHandler = async (e) => {
+      e.preventDefault();
+  
+      const config = {
+        header: {
+          "Content-Type": "application/json",
+        },
+      };
+  
+      try {
+        const { data } = await axios.post(
+          "http://localhost:5000/admin/login",
+          { email, password },
+          config
+        );
+        setUser(data)
+  
+        localStorage.setItem("adminToken", data.token);
+        history.goBack();
+      } catch (error) {
+  
+        setTimeout(() => {
+          setError("");
+        }, 5000);
       }
-    }, [history]); */
-
-  const loginHandler = async (e) => {
-    e.preventDefault();
-
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
     };
-
-    try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        { email, password },
-        config
-      );
-      setUser(data)
-
-      localStorage.setItem("authToken", data.token);
-      localStorage.setItem("tenantId", data.id);
-      localStorage.setItem("tenantEmail", data.email);
-      history.goBack();
-    } catch (error) {
-
-      setTimeout(() => {
-        setError("");
-      }, 5000);
-    }
-  };
-
-  return (
-    <div style={{ minHeight: "98vh", backgroundColor: "lightgray" }}>
+    return (
+        <div style={{ minHeight: "99vh", backgroundImage:"url(/admin.jpeg)"}}>
       <Grid textAlign="center" verticalAlign='middle' style={{ paddingTop: "70px" }}>
         <Grid.Column width={4} style={{ padding: "0px" }}>
           <Segment
@@ -113,12 +104,7 @@ const Login = () => {
 
 
     </div>
-  );
+    )
 }
 
-export default Login
-
-
-
-
-
+export default AdminLogin

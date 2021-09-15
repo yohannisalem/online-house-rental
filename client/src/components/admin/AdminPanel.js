@@ -12,6 +12,7 @@ import FeedBacks from './FeedBacks';
 import Home from '../pages/Home';
 import HouseList from './HouseList';
 import Reports from './Reports';
+import SendAppointment from './SendAppointment';
 
 const AdminPanel = () => {
   const history = useHistory()
@@ -89,6 +90,14 @@ useEffect(() => {
                 Home
             </NavText>
         </NavItem>
+        <NavItem eventKey="appointment">
+            <NavIcon>
+            <Icon name='home'/>
+            </NavIcon>
+            <NavText>
+                Appointment
+            </NavText>
+        </NavItem>
         <NavItem eventKey="rent">
             <NavIcon>
             <Icon name='home'/>
@@ -129,6 +138,7 @@ useEffect(() => {
                 <Route path="/houses" component={props => <HouseList/>} />
                 <Route path="/feedback" component={props => <FeedBacks />} />
                 <Route path="/report" component={props => <Reports />} />
+                <Route path="/appointment" component={props => <SendAppointment />} />
                 
             </main>
         </React.Fragment>

@@ -35,6 +35,7 @@ const LandlordLogin = () => {
             localStorage.setItem("landlordToken", data.token);
             localStorage.setItem("username", data.username)
             localStorage.setItem("userid", data.id)
+            localStorage.setItem("email", data.email)
             history.push("/listproperty");
         } catch (error) {
 
@@ -44,15 +45,31 @@ const LandlordLogin = () => {
         }
     };
     return (
-        <div>
-            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-                <Grid.Column style={{ maxWidth: 450 }}>
+        
+        <div style={{ minHeight: "98vh", backgroundColor: "lightgray" }}>
+        <Grid textAlign="center" verticalAlign='middle' style={{ paddingTop: "70px" }}>
+          <Grid.Column width={4} style={{ padding: "0px" }}>
+            <Segment
+              textAlign='center'
+              style={{
+                height: "65vh",
+                backgroundImage: "url(/lff.jpeg)"
+              }}
+            >
+            </Segment>
+          </Grid.Column>
+  
+          <Grid.Column width={4} style={{ padding: "0px" }}>
+          <Segment
+            stacked style={{ backgroundColor: "#9fb5d6", height: "65vh" }}
+            
+          >
                     <Header as='h2' color='teal' textAlign='center'>
                         Landlord Log-in
                     </Header>
                     {error && <span className="error-message">{error}</span>}
                     <Form size='large'>
-                        <Segment stacked>
+                       
                             <Form.Input fluid icon='user' iconPosition='left' type="email"
                                 required
                                 id="email"
@@ -82,14 +99,20 @@ const LandlordLogin = () => {
                             />
 
                             <Button onClick={loginHandler}>Login</Button>
-                        </Segment>
+                        
                     </Form>
                     <Message>
                         Don't have an account? <Link to="/landlordRegister">Register</Link>
                     </Message>
+                    </Segment>
                 </Grid.Column>
-            </Grid>
-        </div>
+                
+  
+        </Grid>
+  
+  
+  
+      </div>
     )
 }
 

@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
-import {Link,useHistory} from 'react-router-dom'
+import {Link,useHistory,BrowserRouter as Router} from 'react-router-dom'
 import {
   Button,
   Container, Divider, Form, Grid,
@@ -191,7 +191,7 @@ const Home = () => {
               <Segment style={{ borderColor: "#20c1c9", borderWidth: "3px", padding: "0px" }} >
                 <Form size='large'>
                   <Input
-                    size='big' fluid type='search' placeholder='Search...'
+                    size='big' fluid type='search' placeholder='Search by district...'
                     action={{
                       content: 'Search',
                       style: { backgroundColor: "#20c1c9", width: "55px", padding: "7px" },
@@ -230,7 +230,7 @@ const Home = () => {
       <Divider horizontal>
         FOR RENTERS
       </Divider>
-      <Segment style={{ padding: '8em 0em' }} vertical>
+      <Segment style={{ padding: '8em 0em',borderWidth:"0px"}} vertical>
         <Grid container stackable verticalAlign='middle'>
           <Grid.Row>
             <Grid.Column width={8}>
@@ -242,6 +242,24 @@ const Home = () => {
                 Parents can also search for rentals that fall within a particular school district.import { useHistory } from 'react-router-dom';
 
               </p>
+              
+             <Button>Start My Search</Button>
+            </Grid.Column>
+            <Grid.Column floated='right' width={6}>
+              <Image bordered rounded size='large' src='/log2.jpeg' />
+            </Grid.Column>
+          </Grid.Row>
+          
+        </Grid>
+      </Segment>
+      <Divider horizontal>
+        FOR LANDLORDS
+      </Divider>
+      <Segment style={{ padding: '8em 0em',borderWidth:"0px" }} vertical>
+        <Grid container stackable verticalAlign='middle'>
+          <Grid.Row>
+            <Grid.Column width={8}>
+             
               <Header as='h1' style={{ fontSize: '2em' }}>
                 Simple and streamlined rental management all under a single roof
               </Header>
@@ -253,19 +271,17 @@ const Home = () => {
                 Post your rental property in minutes to reach millions of potential renters.
               </p>
             </Grid.Column>
-            <Grid.Column floated='right' width={6}>
-              <Image bordered rounded size='large' src='/' />
-            </Grid.Column>
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign='center'>
-              <Button size='huge'>Check Them Out</Button>
+              <Button>
+              <Link to='/listproperty'>Check Them Out</Link></Button>
+             
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Segment>
-
-      <Segment style={{ padding: '0em' }} vertical>
+      {/* <Segment style={{ padding: '0em',borderWidth:"0px"}} vertical>
         <Grid celled='internally' columns='equal' stackable>
           <Grid.Row textAlign='center'>
             <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
@@ -279,14 +295,14 @@ const Home = () => {
                 "I shouldn't have gone with their competitor."
               </Header>
               <p style={{ fontSize: '1.33em' }}>
-                <Image avatar src='' />
+                <Image avatar src='/log.jpeg' />
                 <b>Nan</b> Chief Fun Officer Acme Toys
               </p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Segment>
-
+ */}
       <Segment style={{ padding: '8em 0em' }} vertical>
         <Container text>
           <Header as='h3' style={{ fontSize: '2em' }}>
@@ -307,7 +323,7 @@ const Home = () => {
             horizontal
             style={{ margin: '3em 0em', textTransform: 'uppercase' }}
           >
-            <a href='#'>Case Studies</a>
+            <a href='#'>Houses</a>
           </Divider>
 
           <Header as='h3' style={{ fontSize: '2em' }}>
@@ -317,9 +333,13 @@ const Home = () => {
             {multipleFiles.map((element, index) =>
               <div key={element._id}>
                 <List>
+                
                   <List.Item
-                    content={<a href='mailto:jack@semantic-ui.com'>{element.sefer}</a>}
-                  />
+                    as={Link} to={`/houseDistrict/${element.district}`}
+                  >
+                    {element.district}
+                  </List.Item>
+                 
                 </List>
               </div>
             )}

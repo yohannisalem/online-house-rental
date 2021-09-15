@@ -5,7 +5,9 @@ const RequestHousesForRent = async (req,res)=>{
             tenantId:req.body.tenantId,
             houseId:req.body.houseId,
             tenantPhone:req.body.tenantPhone,
-            tenantEmail:req.body.tenantEmail
+            tenantEmail:req.body.tenantEmail,
+            landlordusername:req.body.landlordusername,
+            landlordemail:req.body.landlordemail
 
         })
         await requestedHouse.save()
