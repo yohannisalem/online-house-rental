@@ -1,4 +1,4 @@
 # dependencies
-/node_modules
-/config/db.js
-/.env
+node_modules/
+config/db.js/
+.env/
