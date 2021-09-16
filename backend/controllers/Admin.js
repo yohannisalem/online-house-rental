@@ -1,7 +1,9 @@
 const webpush = require('web-push');
 const Appointment = require('../models/Appointment');
 const Contract = require("../models/Contract")
-const User = require("../models/RequestedHouses");
+const HouseRequest = require("../models/RequestedHouses");
+const Landlord = require("../models/Landlord")
+const Tenant = require("../models/User")
 const ErrorResponse = require("../utils/errorResponse");
 const sendEmail = require('../utils/sendEmail')
 
@@ -52,7 +54,7 @@ exports.login = async (req,res,next)=>{
 exports.contractSigning = async (req, res, next) => {
   const { tenantEmail } = req.body;
   try {
-    const user = await User.findOne({ tenantEmail });
+    const user = await HouseRequest.findOne({ tenantEmail });
 
     if (!user) {
       return next(new ErrorResponse("No email could not be sent", 404));
@@ -106,7 +108,7 @@ exports.sendAppointment= async (req,res)=>{
 
   const { tenantEmail,appointmentletter,date} = req.body;
   try {
-    const user = await User.findOne({ tenantEmail });
+    const user = await HouseRequest.findOne({ tenantEmail });
     if (!user) {
       return next(new ErrorResponse("No email could not be sent", 404));
     }
@@ -137,6 +139,48 @@ exports.sendAppointment= async (req,res)=>{
     res.status(500).send("appointment is not sent to user")
   }
   
+}
+exports.getHouseRequests = async (req,res)=>{
+  try {
+    const requests = await HouseRequest.find({})
+    res.status(200).send(requests)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+}
+exports.getTenants = async (req,res)=>{
+  try {
+    const tenants = await Tenant.find({})
+    res.status(200).send(tenants)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+}
+exports.getLandlords = async (req,res)=>{
+  try {
+    const landlords = await Landlord.find({})
+    res.status(200).send(landlords)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+}
+exports.deleteTenant = async (req,res)=>{
+  try {
+    const tenantId = req.params.id
+        const deletedUser = await Tenant.findByIdAndDelete(tenantId)
+        res.send(deletedUser)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+}
+exports.deleteLandlord = async (req,res)=>{
+  try {
+    const landlordId = req.params.id
+        const deletedLandlord = await Landlord.findByIdAndDelete(landlordId)
+        res.send(deletedLandlord)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
 }
 
 

@@ -1,5 +1,5 @@
-import React,{useState,useEffect}from 'react'
-import { Feed } from 'semantic-ui-react'
+import React, { useState, useEffect } from 'react'
+import { Feed,Grid} from 'semantic-ui-react'
 import axios from 'axios'
 
 
@@ -29,17 +29,24 @@ const FeedBacks = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <div >
+        <div style={{ height: "100vh"}}>
             {
                 multipleFiles.map((house, index) =>
-<Feed>
-                <Feed.Event
-                    date={house.createdAt}
-                    summary={house.feedback}
-                    extraText={house.username}
-                />
 
-            </Feed>
+                    <Grid>
+                        <Grid.Column width="5"></Grid.Column>
+                        <Grid.Column width="11" textAlign="right" verticalAlign="middle">
+                            <Feed>
+                                <Feed.Event
+                                    date={house.createdAt}
+                                    summary={house.feedback}
+                                    extraText={house.username}
+                                />
+
+                            </Feed>
+                        </Grid.Column>
+
+                    </Grid>
 
                 )}
         </div>
