@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { Breadcrumb, Image, Item, Ref, Segment, Container, Input, Checkbox, Divider, Header, Form, Button, Message, Grid, Modal, Icon, Sticky } from 'semantic-ui-react'
 import { useParams, Link, useHistory } from 'react-router-dom';
+import ReactPlayer from 'react-player'
 import RelatedHouses from './RelatedHouses';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
@@ -85,7 +86,7 @@ const HouseDetails = ({ match }) => {
                 </Breadcrumb>
               </Grid.Column>
               <Grid.Column width={5} textAlign='right'>
-                {/* <Modal
+                <Modal
                   closeIcon
                   centered
                   open={open}
@@ -95,67 +96,14 @@ const HouseDetails = ({ match }) => {
                     Request House
 
                   </Button>}
-                  style={{ maxWidth: "400px", textAlign: "center" }}
+                  style={{ maxWidth: "680px", textAlign: "center" }}
+                  key={index}
                 >
                   <Modal.Content>
-                  <Form size='large' >
-                      <Header as='h2' color='teal' textAlign='center'>
-                        Request this house
-                      </Header>
-                      <Divider hidden />
-                      {element.sefer, element._id}
-                      
-                      <Form.Field
-                       disabled
-                        control={Input}
-                        name='houseId'
-                        type='text'
-                        label='House ID'
-                        placeholder='Id'
-                        value={element._id}
-                        
-                        
-                      />
-                      <Form.Field
-                        required
-                        control={Input}
-                        name='tenantId'
-                        type='text'
-                        label='Tenant Id'
-                        placeholder='tenant Id'
-                        value={tenantId}
-                        onChange={(e)=>setTenantId(e.target.value)}
-                      />
-                      <Form.Field
-                        required
-                        id='form-input-control-last-name'
-                        control={Input}
-                        name='tenantPhone'
-                        type='Number'
-                        label='Phone Number'
-                        onChange={(e)=>setTenantPhone(e.target.value)}
-                      />
-                      <Form.Field
-                        required
-                        id='form-input-control-last-name'
-                        control={Input}
-                        name='tenantEmail'
-                        type='text'
-                        label='Tenant Email'
-                        placeholder='email'
-                        value={tenantEmail}
-                        onChange={(e)=>setTenantEmail(e.target.value)}
-                      />
-                      <Divider hidden />
-                      <Button color="twitter" onClick={(e)=>requestHouse(e,element._id)}>Request House</Button>
-                      <Divider hidden />
-                      <Checkbox label={<label>In sending this message, you agree to KirayBet.com's Privacy Policy and Terms</label>} />
-
-
-                    </Form>
+                  <ReactPlayer url={element.video} controls/>
                   </Modal.Content>
 
-                </Modal> */}
+                </Modal> 
 
                 <Button >
                   <Icon name='phone' />0941454140
@@ -280,8 +228,9 @@ const HouseDetails = ({ match }) => {
                     <Item.Content>
                       <Item.Header as='a'>Landlord Info</Item.Header>
                       <Item.Meta>Description</Item.Meta>
+                      
                       <Item.Description>
-                        some description
+                      
                       </Item.Description>
                       <Item.Extra>Additional Details</Item.Extra>
                     </Item.Content>

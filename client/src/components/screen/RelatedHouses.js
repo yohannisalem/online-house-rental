@@ -38,7 +38,7 @@ const RelatedHouses = ({ sefer }) => {
                 {element.files.map((url, index) =>
                   <div className="col-6">
                     <SwiperSlide key={index} style={{ height: "40vh" }}>
-                      <Image src={url} wrapped alt="img" style={{objectFit:"fill"}}/>
+                      <Image src={url} wrapped alt="img" style={{objectFit:"contain"}}/>
                     </SwiperSlide>
                   </div>
                 )}
