@@ -46,7 +46,11 @@ const HouseDetails = ({ match }) => {
       }
 
       const res = await axios.post("http://localhost:5000/api/requestHouses", { tenantId, houseId, tenantPhone, tenantEmail,landlordemail,landlordusername}, config);
-      console.log(res)
+   
+      console.log(houseId)
+      console.log(landlordusername)
+      console.log(landlordemail)
+      console.log(tenantPhone)
       setTenantId("")
       setTenantPhone("")
       setTenantEmail("")
@@ -137,29 +141,25 @@ const HouseDetails = ({ match }) => {
                     </Header>
                     <Divider hidden />
                     <select required name="houseId" onChange={e => setLandlordemail(e.target.value)}>
-                      <option value={element.owneremail}>landlordEmail</option>
+                      <option>---Select Email</option>
+                      
                       <option value={element.owneremail}>Email</option>
                   
                     </select>
                     <select required name="houseId" onChange={e => setLandlordusername(e.target.value)}>
-                      <option value={element.ownerusername}>landlordusername</option>
+                    <option>---Select User Name</option>
                       <option value={element.ownerusername}>username</option>
                       
                     </select>
                     <select required name="houseId" onChange={e => setHouseId(e.target.value)}>
-                      <option value={element._id}>houseid</option>
+                    <option>---Select Id</option>
                       <option value={element._id}>id</option>
                     </select>
-                    <Form.Field
-                      required
-                      control={Input}
-                      name='tenantId'
-                      type='text'
-                      label='Tenant Id'
-                      placeholder='tenant Id'
-                      value={tenantId}
-                      onChange={(e) => setTenantId(e.target.value)}
-                    />
+                    <select required name="houseId" onChange={(e) => setTenantId(e.target.value)}>
+                    <option>---Your Id</option>
+                      <option value={localStorage.getItem("tenantId")}>id</option>
+                    </select>
+                   
                     <Form.Field
                       required
                       id='form-input-control-last-name'

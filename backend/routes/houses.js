@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const {upload} = require('../helpers/filehelper');
 const {multipleFileUpload,getallMultipleFiles, findFilesById, findFilesByDistrict, deleteHouse,findFilesBySefer, searchHouses,updateHousesInfo,autoCompleteSearch, notify} = require("../controllers/FileUpload");
-const {RequestHousesForRent} = require('../controllers/HouseRequest')
+const {RequestHousesForRent, getRequestedHouse} = require('../controllers/HouseRequest')
 const {contractSigning} = require('../controllers/Admin')
 router.post('/multipleFiles', upload.array('files'), multipleFileUpload);
 router.post('/requestHouses',RequestHousesForRent)
+router.get('/getrequestedHouse/:id', getRequestedHouse);
 router.get('/getMultipleFiles', getallMultipleFiles);
 router.get('/getFilesById/:id', findFilesById);
 router.get('/getFilesByDistrict/:district', findFilesByDistrict);

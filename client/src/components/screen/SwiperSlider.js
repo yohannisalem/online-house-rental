@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { createRef, useEffect, useState,useRef} from 'react';
 import { Link,useHistory} from 'react-router-dom';
-import { Card, CardContent, Container, Form, Grid, GridColumn, Image, Ref, Segment, Sticky } from 'semantic-ui-react';
+import { Card, CardContent, Container, Form, Grid, Button, Image, Ref, Divider, Sticky } from 'semantic-ui-react';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
@@ -116,13 +116,13 @@ const SwiperSlider = () => {
                       })}
                   </div>
                 )}
-              <Grid columns={2} style={{ padding: "0px", margin: "0px", width: "70vw" }}>
+              <Grid  columns={2} style={{ padding: "0px", margin: "0px", width: "70vw" }}>
                 {multipleFiles.map((element, index) =>
 
                   <div key={element._id} >
                     <Card
                       style={{
-                        height: "350px",
+                        height: "305px",
                         width: "308px",
                         margin: "5px 0px",
                       }}
@@ -131,16 +131,17 @@ const SwiperSlider = () => {
                         <Swiper
                           slidesPerView={1}
                           navigation
+                         
                         >
                           {element.files.map((url, index) =>
 
                             <SwiperSlide key={index}
-                              style={{ height: "250px" }}
+                              style={{ height: "200px"}}
                             >
                               <Link to={`/houseDetails/${element._id}`}>
                                 <Image src={url} alt="img"
                                   style={{
-
+                                    height:"200px",
                                     objectFit: "cover"
                                   }}
                                 />
@@ -151,17 +152,29 @@ const SwiperSlider = () => {
                         </Swiper>
                       </Grid.Column>
                       <CardContent>
-                        <Card.Header>Matthew</Card.Header>
-                        <Card.Meta>
-                          {element.housename}
-                        </Card.Meta>
+                        
+                        <Card.Description>
+                          {element.feepermonth} Br
+                        </Card.Description>
                         <Card.Description>
 
                           {
-                            element.district
-                          },
-                          {element.sefer}
+                            element.numberofbeds
+                          }bd,
+                          {element.size}sq.ft
                         </Card.Description>
+                        <Card.Description>
+
+                          {
+                            element.sefer
+                          },{element.district}
+                        </Card.Description>
+                        <Card.Description>
+
+                        <Button size='mini' color="teal">Request Property</Button>
+                        <Button size='mini' floated='right'>(094)-145-4140</Button>
+                        </Card.Description>
+
                       </CardContent>
 
                     </Card>
@@ -180,7 +193,7 @@ const SwiperSlider = () => {
           </Grid>
         </Container>
       </Ref>
-
+      <Divider hidden/>
 
     </div>
   )

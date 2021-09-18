@@ -1,5 +1,5 @@
 const Request = require('../models/RequestedHouses')
-const RequestHousesForRent = async (req,res)=>{
+exports.RequestHousesForRent = async (req,res)=>{
     try {
         const requestedHouse = Request({
             tenantId:req.body.tenantId,
@@ -17,6 +17,13 @@ const RequestHousesForRent = async (req,res)=>{
         res.status(400).send(error.message);
     }
 }
-module.exports={
-    RequestHousesForRent
+exports.getRequestedHouse = async (req,res)=>{
+    const userId = req.params.id
+    try {
+        const house = await Request.find({ 'tenantId': userId })
+        res.send(house)
+
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
 }

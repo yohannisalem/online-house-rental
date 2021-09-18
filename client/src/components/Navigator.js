@@ -20,6 +20,7 @@ import LandlordAccountReview from './screen/LandlordAccountReview';
 import ReportIssue from './screen/ReportIssue';
 import EditHouse from './screen/EditHouse';
 import FeedBack from './screen/FeedBack';
+import TenantDashboard from './screen/TenantDashboard';
 
 
 const Navigator = () => {
@@ -37,7 +38,7 @@ const Navigator = () => {
                 <Route path="/landlordRegister"><LandlordRegister/></Route>
                 <Route path="/profile"><LandlordAccountReview/></Route>
                 <PrivateRoute path="/managelisting"><LandlordProfile/></PrivateRoute>
-                <Route path="/admin"><AdminPanel/></Route>
+                <Route path="/admin"><TenantDashboard/></Route>
                 <Route path="/edithouse/:houseId"><EditHouse/></Route>
                 <Route path="/reportissue"><ReportIssue/></Route>
                 <Route path="/feedback"><FeedBack/></Route>

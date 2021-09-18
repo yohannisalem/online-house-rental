@@ -5,7 +5,7 @@ import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import HousesLocation from '../maps/HousesLocation';
-import { GridColumn,Grid,Image, Card, Form, Container,CardContent,Sticky} from 'semantic-ui-react'
+import { GridColumn,Grid,Image, Card, Form, Container,CardContent,Sticky,Button,Ref, Divider} from 'semantic-ui-react'
 import { useParams,Link,useHistory} from 'react-router-dom';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
@@ -78,7 +78,7 @@ const HousesInTheSameDistrict = ({ match }) => {
   }, [housesDistrict])
   return (
     <div >
-
+<Ref innerRef={contextRef}>
 <Container fluid >
           <Grid columns='2' style={{ padding: "0px", margin: "0px" }}>
             <GridColumn style={{ padding: "0px", margin: "0px" }}>
@@ -122,7 +122,7 @@ const HousesInTheSameDistrict = ({ match }) => {
                   <div key={element._id} >
                     <Card
                       style={{
-                        height: "350px",
+                        height: "305px",
                         width: "308px",
                         margin: "5px 0px",
                       }}
@@ -137,12 +137,12 @@ const HousesInTheSameDistrict = ({ match }) => {
                           {element.files.map((url, index) =>
 
                             <SwiperSlide key={index}
-                              style={{ height: "250px" }}
+                              style={{ height: "200px" }}
                             >
                               <Link to={`/houseDetails/${element._id}`}>
                                 <Image src={url} alt="img"
                                   style={{
-
+                                    height:"200px",
                                     objectFit: "cover"
                                   }}
                                 />
@@ -153,17 +153,29 @@ const HousesInTheSameDistrict = ({ match }) => {
                         </Swiper>
                       </Grid.Column>
                       <CardContent>
-                        <Card.Header>Matthew</Card.Header>
-                        <Card.Meta>
-                          {element.housename}
-                        </Card.Meta>
+                        
+                        <Card.Description>
+                          {element.feepermonth} Br
+                        </Card.Description>
                         <Card.Description>
 
                           {
-                            element.district
-                          },
-                          {element.sefer}
+                            element.numberofbeds
+                          }bd,
+                          {element.size}sq.ft
                         </Card.Description>
+                        <Card.Description>
+
+                          {
+                            element.sefer
+                          },{element.district}
+                        </Card.Description>
+                        <Card.Description>
+
+                        <Button size='mini' color="teal">Request Property</Button>
+                        <Button size='mini' floated='right'>0941454140</Button>
+                        </Card.Description>
+
                       </CardContent>
 
                     </Card>
@@ -173,14 +185,16 @@ const HousesInTheSameDistrict = ({ match }) => {
 
               </Grid>
             </GridColumn>
-            <GridColumn>
-              <Sticky context={contextRef} offset={60}>
+            <GridColumn style={{ padding: "0px" }}>
+            <Sticky context={contextRef} offset={60}>
                 <HousesLocation />
               </Sticky>
 
             </GridColumn>
           </Grid>
         </Container>
+        </Ref>
+        <Divider hidden/>
     </div>
   )
 }
