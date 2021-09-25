@@ -83,7 +83,7 @@ const SwiperSlider = () => {
           <Grid columns='2' style={{ padding: "0px", margin: "0px" }}>
             <Grid.Column style={{ padding: "0px", margin: "0px" }}>
             <Form>
-              <Form.Group widths='equal'>
+              
                 
               <Form.Input
                     type='search' placeholder='Search...'
@@ -97,7 +97,7 @@ const SwiperSlider = () => {
                     value={clicked}
                   />
                 
-              </Form.Group>
+            
             </Form>
             {display && (
                   <div className="autoContainer">
@@ -119,13 +119,15 @@ const SwiperSlider = () => {
               <Grid  columns={2} style={{ padding: "0px", margin: "0px", width: "70vw" }}>
                 {multipleFiles.map((element, index) =>
 
-                  <div key={element._id} >
+                  <div key={element._id} style={{padding:"10px"}}>
                     <Card
                       style={{
                         height: "305px",
-                        width: "308px",
-                        margin: "5px 0px",
+                        width: "315px",
+                        
+                        padding:"0px"
                       }}
+                      key={index}
                     >
                       <Grid.Column style={{ padding: "0px", margin: "0px" }}>
                         <Swiper

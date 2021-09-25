@@ -1,6 +1,6 @@
 import React, { useState,useEffect} from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Dropdown, Menu } from 'semantic-ui-react'
+import { Button, Dropdown, Menu } from 'semantic-ui-react'
 
 const NavBar = (props) => {
   /* this is a handler for a navbar link item */
@@ -12,7 +12,10 @@ const NavBar = (props) => {
   const handleItemClick = (e, { name }) => {
     setActiveItem(name)
   }
-  
+  const logoutHandler = () => {
+    localStorage.removeItem("landlordToken")
+    history.push("/landlordLogin")
+  }
   useEffect(() => {
       setInterval(() => {
           const userString = localStorage.getItem("landlordToken");
@@ -64,6 +67,9 @@ const NavBar = (props) => {
           >
             Landlord Screen
           </Menu.Item>
+          <Menu.Menu position='right'>
+            <Button content="Logout" onClick={logoutHandler}/>
+          </Menu.Menu>
         </Menu>
 
 

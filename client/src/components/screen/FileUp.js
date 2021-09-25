@@ -112,10 +112,7 @@ const FileUp = () => {
     setNumberOfBeds(e.target.value)
   }
 
-  const logoutHandler = () => {
-    localStorage.removeItem("landlordToken")
-    history.push("/landlordLogin")
-  }
+  
 
   const createHouse = async (housedata) => {
     const config = {
@@ -265,12 +262,6 @@ const FileUp = () => {
   /* handling notification ======================================================================*/
   return (
     <div>
-      <button onClick={logoutHandler}>logout</button>
-      
-        <h1>{localStorage.getItem("email")}</h1>
-        <h1>{localStorage.getItem("username")}</h1>
-        
-      
       <Container>
 
         Build your listing to find the perfect renter — listings with a lot of detail and photos tend to attract the most leads, so don’t be shy! Not sure what to include? Check out our tips and tricks here.

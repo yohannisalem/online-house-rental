@@ -25,9 +25,11 @@
     "react-scripts": "^4.0.3",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
+    "signature_pad": "^3.0.0-beta.4",
     "styled-components": "^5.3.0",
     "swiper": "^6.8.2",
     "swr": "^0.5.6",
+    "trim-canvas": "^0.1.2",
     "use-supercluster": "^0.3.0",
     "web-vitals": "^1.1.2"
   },

@@ -1,10 +1,12 @@
 import React from 'react'
-import { Grid, Icon, Segment,Image, Form,Input, Divider, Label, Button, } from 'semantic-ui-react'
+import { Grid, Icon, Segment, Image, Form, Input, Divider, Label, Button, Container, } from 'semantic-ui-react'
 const LandlordAccountReview = () => {
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <Grid style={{ marginTop: "20px" }} verticalAlign='middle'>
-        <Grid.Column floated='left' width={16}>
+    <div style={{ minHeight: "100vh"}}>
+      
+      <Grid style={{ marginTop: "5px"}} >
+        <Grid.Column width="3"></Grid.Column>
+        <Grid.Column  width={13}>
           <Segment
             textAlign='bottom'
             style={{
@@ -12,12 +14,12 @@ const LandlordAccountReview = () => {
               height: "20vh"
             }}
           >
-<Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular />
+            <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular />
           </Segment>
-          <Divider hidden/>
-          <Divider hidden/>
+          <Divider hidden />
+          <Divider hidden />
           <Grid textAlign='center'>
-          <Grid.Column floated='left' width={13}>
+            <Grid.Column floated='left' width={13}>
               <Label size='big'>
                 My Account
               </Label>
@@ -29,46 +31,47 @@ const LandlordAccountReview = () => {
               </Button>
             </Grid.Column>
           </Grid>
-          <Divider/>
-          <Grid textAlign='center'>
-       
+          <Divider />
+          <Grid textAlign='left'>
 
-          <Form>
-    <Form.Field inline>
-      <label>First name</label>
-      <Input placeholder='First name' />
-    </Form.Field>
-    <Form.Field inline>
-      <label>First name</label>
-      <Input placeholder='First name' />
-    </Form.Field>
-    <Form.Field inline>
-      <label>First name</label>
-      <Input placeholder='First name' />
-    </Form.Field>
-    <Form.Field inline>
-      <label>First name</label>
-      <Input placeholder='First name' />
-    </Form.Field>
-    <Form.Field inline>
-      <label>First name</label>
-      <Input placeholder='First name' />
-    </Form.Field>
-    <Form.Field inline>
-      <label>First name</label>
-      <Input placeholder='First name' />
-    </Form.Field>
-    <Form.Field inline>
-      <label>First name</label>
-      <Input placeholder='First name' />
-    </Form.Field>
-  </Form>
+
+            <Form>
+              <Form.Field inline>
+                <label>First name</label>
+                <Input placeholder='First name' />
+              </Form.Field>
+              <Form.Field inline>
+                <label>First name</label>
+                <Input placeholder='First name' />
+              </Form.Field>
+              <Form.Field inline>
+                <label>First name</label>
+                <Input placeholder='First name' />
+              </Form.Field>
+              <Form.Field inline>
+                <label>First name</label>
+                <Input placeholder='First name' />
+              </Form.Field>
+              <Form.Field inline>
+                <label>First name</label>
+                <Input placeholder='First name' />
+              </Form.Field>
+              <Form.Field inline>
+                <label>First name</label>
+                <Input placeholder='First name' />
+              </Form.Field>
+              <Form.Field inline>
+                <label>First name</label>
+                <Input placeholder='First name' />
+              </Form.Field>
+            </Form>
 
           </Grid>
-          
+
         </Grid.Column>
-        
+
       </Grid>
+      
     </div>
   )
 }

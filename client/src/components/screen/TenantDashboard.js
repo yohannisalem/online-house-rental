@@ -6,6 +6,7 @@ import ContractForm from './ContractForm';
 import FeedBack from './FeedBack';
 import LandlordAccountReview from './LandlordAccountReview';
 import ReportIssue from './ReportIssue';
+import RequestedHouse from './RequestedHouse';
 const TenantDashboard = () => {
     const [error, setError] = useState("")
     const history = useHistory()
@@ -92,6 +93,7 @@ const TenantDashboard = () => {
             </SideNav>
             <main>
               <Route path="/managelisting" component={props => <HouseList />} />
+              <Route path="/requestedhouse" component={props => <RequestedHouse />} />
               <Route path="/profile" component={props => <LandlordAccountReview />} />
               <Route path="/reviewcontract" component={props => <ContractForm />} />
               <Route path="/feedback" component={props => <FeedBack />} />

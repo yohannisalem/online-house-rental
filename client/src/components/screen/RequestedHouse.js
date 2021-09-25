@@ -23,7 +23,7 @@ const RequestedHouse = () => {
   
     const getMultipleFiles = async () => {
       try {
-          const { data } = await axios.get('http://localhost:5000/admin/gettenants');
+          const { data } = await axios.get('http://localhost:5000/api/getrequestedHouse/1234');
           return data;
       } catch (error) {
           throw error;

@@ -16,7 +16,7 @@ import SendAppointment from './SendAppointment';
 import TenantList from './TenantList';
 import LandlordList from './LandlordList';
 import DashBoard from './DashBoard';
-
+import Terms from './Terms'
 const AdminPanel = () => {
     const history = useHistory()
     const contextRef = createRef()
@@ -154,6 +154,15 @@ const AdminPanel = () => {
                                     </NavText>
 
                                 </NavItem>
+                                <NavItem eventKey="contract">
+                                    <NavIcon>
+                                        <Icon name='home' />
+                                    </NavIcon>
+                                    <NavText>
+                                        Contract
+                                    </NavText>
+
+                                </NavItem>
                             </SideNav.Nav>
                         </SideNav>
                         <main>
@@ -165,6 +174,7 @@ const AdminPanel = () => {
                             <Route path="/appointment" component={props => <SendAppointment />} />
                             <Route path="/tenants" component={props => <TenantList />} />
                             <Route path="/landlords" component={props => <LandlordList />} />
+                            <Route path="/contract" component={props => < Terms/>} />
 
                         </main>
                     </React.Fragment>
