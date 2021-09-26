@@ -17,6 +17,7 @@ import TenantList from './TenantList';
 import LandlordList from './LandlordList';
 import DashBoard from './DashBoard';
 import Terms from './Terms'
+import HouseRequests from './HouseRequests';
 const AdminPanel = () => {
     const history = useHistory()
     const contextRef = createRef()
@@ -167,7 +168,7 @@ const AdminPanel = () => {
                         </SideNav>
                         <main>
 
-                            <Route path="/dashboard" component={props => <DashBoard />} />
+                            <Route path="/dashboard" component={props => <HouseRequests />} />
                             <Route path="/houses" component={props => <HouseList />} />
                             <Route path="/feedback" component={props => <FeedBacks />} />
                             <Route path="/report" component={props => <Reports />} />
