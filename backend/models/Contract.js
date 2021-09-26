@@ -6,7 +6,8 @@ const ContractSchema = Schema({
     houseid:{type:String},
     feepermonth:{type:Number},
     contractduration:{type:Date},
-    termsandcondition:{type:String}
+    termsandcondition:{type:String},
+    signature:{type:String}
 },{timestamps:true})
 
 module.exports = model("contract",ContractSchema)

@@ -61,7 +61,7 @@ exports.contractSigning = async (req, res, next) => {
     }
 
     // Create reset url to email to provided email
-    const contractForm = `http://localhost:3000/contract/`;
+    const contractForm = `http://localhost:3000/contract`;
 
     // HTML Message
    
@@ -96,7 +96,8 @@ exports.registerContract = async (req, res) => {
       houseid: req.body.houseid,
       feepermonth: req.body.feepermonth,
       contractduration: req.body.contractduration,
-      termsandcondition: req.body.termsandcondition
+      termsandcondition: req.body.termsandcondition,
+      signature:req.body.signature
     })
     await contract.save()
     res.status(200).send("contract signed successfully")
