@@ -24,6 +24,7 @@ const RequestSchema = Schema({
           "Please provide a valid email",
         ],
       },
+    termsandcondition:{type:String}
 },{timestamps:true})
 
 module.exports= model("requestedHouse",RequestSchema)

@@ -44,6 +44,8 @@ const multipleFileUpload = async (req, res, next) => {
             location: req.body.location,
             numberofbeds: req.body.numberofbeds,
             feepermonth: req.body.feepermonth,
+            termsandcondition:req.body.termsandcondition,
+            leaseperiod:req.body.leaseperiod,
             size: req.body.size,
             available: req.body.available,
             propertytype: req.body.propertytype,

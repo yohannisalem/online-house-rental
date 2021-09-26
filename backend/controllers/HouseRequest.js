@@ -7,7 +7,8 @@ exports.RequestHousesForRent = async (req,res)=>{
             tenantPhone:req.body.tenantPhone,
             tenantEmail:req.body.tenantEmail,
             landlordusername:req.body.landlordusername,
-            landlordemail:req.body.landlordemail
+            landlordemail:req.body.landlordemail,
+            termsandcondition:req.body.termsandcondition
 
         })
         await requestedHouse.save()

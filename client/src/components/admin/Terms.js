@@ -23,30 +23,28 @@ const TermsAndConditions = () => {
           <Divider />
           <Grid textAlign='left'>
             <Grid.Column width="8"><Form size='large' style={{ verticalAlign: "center" }}>
-
+              <Header> Tenant Contract Fill Form</Header>
+              <Form.Input fluid icon='user' iconPosition='left' type="text"
+                required
+                placeholder="Email address"
+                tabIndex={1}
+              />
               <Form.Input fluid icon='user' iconPosition='left' type="email"
                 required
                 id="email"
                 placeholder="Email address"
-              
+                tabIndex={1}
+              />
+              <Form.Input fluid icon='user' iconPosition='left' type="email"
+                required
+                id="email"
+                placeholder="Email address"
                 tabIndex={1}
               />
 
-              <Form.Input
-                fluid
-                icon='lock'
-                iconPosition='left'
-                type="password"
-                required
-                id="password"
-                autoComplete="true"
-                placeholder="Enter password"
-              
-                tabIndex={2}
-              />
              
               <Divider hidden />
-              <Button >Login</Button>
+              
 
             </Form></Grid.Column>
 

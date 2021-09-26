@@ -13,7 +13,6 @@ router.get('/getFilesBySefer/:sefer', findFilesBySefer);
 router.get('/getHouses/:search', searchHouses);
 router.get('/autocompleteSearch',autoCompleteSearch)
 router.put('/updateHouse/:id',updateHousesInfo)
-router.post('/sendContractForm',contractSigning)
 router.delete('/deleteHouse/:id',deleteHouse)
 router.post('/subscribe',notify)
 

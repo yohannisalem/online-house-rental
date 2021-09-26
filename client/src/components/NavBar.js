@@ -8,7 +8,7 @@ const NavBar = (props) => {
   const [activeItem, setActiveItem] = useState({
     name: 'home'
   })
-  const [user, setUser] = useState({});
+ 
   const handleItemClick = (e, { name }) => {
     setActiveItem(name)
   }
@@ -16,13 +16,8 @@ const NavBar = (props) => {
     localStorage.removeItem("landlordToken")
     history.push("/landlordLogin")
   }
-  useEffect(() => {
-      setInterval(() => {
-          const userString = localStorage.getItem("landlordToken");
-          const user = JSON.parse(userString);
-          setUser(user);
-          }, 100)
-  },[user]);
+  
+  const user =localStorage.getItem("landlordToken");
   if (user) {
     return (
       <div>

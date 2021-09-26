@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button, Divider, Grid, Header, Icon, Table } from 'semantic-ui-react'
 
 
+
 const HouseRequests = () => {
     const contextRef = createRef()
     const [multipleFiles, setMultipleFiles] = useState([]);
@@ -20,7 +21,7 @@ const HouseRequests = () => {
   
   
     }
-  
+   
     const getMultipleFiles = async () => {
       try {
           const { data } = await axios.get('http://localhost:5000/admin/gethouserequest');
@@ -113,7 +114,7 @@ const HouseRequests = () => {
 
                     </Table.Cell>
                     <Table.Cell>
-                      <Link >
+                      <Link to={`/sendcontract/${house._id}`}>
                         <Icon name='wpforms' />
                       </Link>
 

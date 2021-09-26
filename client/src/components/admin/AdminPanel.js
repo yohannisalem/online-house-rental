@@ -15,9 +15,9 @@ import Reports from './Reports';
 import SendAppointment from './SendAppointment';
 import TenantList from './TenantList';
 import LandlordList from './LandlordList';
-import DashBoard from './DashBoard';
-import Terms from './Terms'
+
 import HouseRequests from './HouseRequests';
+import SendContract from './SendContract';
 const AdminPanel = () => {
     const history = useHistory()
     const contextRef = createRef()
@@ -175,7 +175,8 @@ const AdminPanel = () => {
                             <Route path="/appointment" component={props => <SendAppointment />} />
                             <Route path="/tenants" component={props => <TenantList />} />
                             <Route path="/landlords" component={props => <LandlordList />} />
-                            <Route path="/contract" component={props => < Terms/>} />
+                            <Route path="/sendcontract" component={props => <SendContract />} />
+                            
 
                         </main>
                     </React.Fragment>

@@ -4,6 +4,7 @@ const Contract = require("../models/Contract")
 const HouseRequest = require("../models/RequestedHouses");
 const Landlord = require("../models/Landlord")
 const Tenant = require("../models/User")
+const Request = require('../models/RequestedHouses')
 const ErrorResponse = require("../utils/errorResponse");
 const sendEmail = require('../utils/sendEmail')
 
@@ -91,6 +92,7 @@ exports.registerContract = async (req, res) => {
   try {
     const contract = new Contract({
       tenantname: req.body.tenantname,
+      tenantemail:req.body.tenantemail,
       landlordname: req.body.landlordname,
       landlordemail: req.body.landlordemail,
       houseid: req.body.houseid,
@@ -147,6 +149,15 @@ exports.getHouseRequests = async (req,res)=>{
     res.status(200).send(requests)
   } catch (error) {
     res.status(400).send(error.message)
+  }
+}
+exports.getSingleRequestedHouse = async (req,res)=>{
+  const id = req.params.id
+  try {
+      const house = await Request.find({'_id':id})
+      res.send(house)
+  } catch (error) {
+      res.status(400).send(error.message)
   }
 }
 exports.getTenants = async (req,res)=>{

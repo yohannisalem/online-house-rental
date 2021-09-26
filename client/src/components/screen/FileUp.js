@@ -59,6 +59,8 @@ const FileUp = () => {
   const [numberofbeds, setNumberOfBeds] = useState(0)
   const [district, setDistrict] = useState('')
   const [sefer, setSefer] = useState('')
+  const [termsandcondition, setTermsandcondition] = useState('')
+  const [leaseperiod, setLeaseperiod] = useState('')
   const [feepermonth, setFeeperMonth] = useState(0)
   const [size, setSize] = useState(0)
   const [available, setAvailable] = useState(false)
@@ -95,6 +97,12 @@ const FileUp = () => {
   }
   const handleSeferChange = (e) => {
     setSefer(e.target.value)
+  }
+  const handleTermandConditionChange=(e)=>{
+    setTermsandcondition(e.target.value)
+  }
+  const handleLeaseperiodChange =(e)=>{
+    setLeaseperiod(e.target.value)
   }
   const handleTypeChange = (e) => {
     setPropertytype(e.target.value)
@@ -136,6 +144,8 @@ const FileUp = () => {
     formData.append('description', description);
     formData.append('district', district);
     formData.append('sefer', sefer);
+    formData.append('termsandcondition',termsandcondition)
+    formData.append('leaseperiod',leaseperiod)
     formData.append('numberofbeds', numberofbeds);
     formData.append('size', size);
     formData.append('feepermonth', feepermonth);
@@ -305,6 +315,25 @@ const FileUp = () => {
               name='sefer'
               placeholder='Sefer or Village'
               onChange={handleSeferChange}
+            />
+            <Form.Field
+              required
+              id='form-input-control-last-name'
+              control={Input}
+              label='leaseperiod'
+              name='leaseperiod'
+              placeholder='leaseperiod'
+              onChange={handleLeaseperiodChange}
+            />
+            <Form.Field
+              required
+              id='form-input-control-last-name'
+              control={TextArea}
+              label='Terms'
+              name='termsandcondition'
+              placeholder='Termsandcondition'
+              onChange={handleTermandConditionChange}
+
             />
             <Form.Field
               required
