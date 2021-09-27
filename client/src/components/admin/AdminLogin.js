@@ -24,15 +24,13 @@ const AdminLogin = () => {
           { email, password },
           config
         );
-        setUser(data)
+        
   
         localStorage.setItem("adminToken", data.token);
-        history.goBack();
+        history.push('/admin');
       } catch (error) {
-  
-        setTimeout(() => {
-          setError("");
-        }, 5000);
+         console.log(error)
+        
       }
     };
     return (
@@ -66,7 +64,7 @@ const AdminLogin = () => {
                 id="email"
                 placeholder="Email address"
                 onChange={(e) => setEmail(e.target.value)}
-                value={email}
+                name="email"
                 tabIndex={1}
               />
 
@@ -77,25 +75,19 @@ const AdminLogin = () => {
                 type="password"
                 required
                 id="password"
+                name="password"
                 autoComplete="true"
                 placeholder="Enter password"
                 onChange={(e) => setPassword(e.target.value)}
-                value={password}
+              
                 tabIndex={2}
               />
-              <label htmlFor="password">
-                Password:{" "}
-                <Link to="/forgotpassword">
-                  Forgot Password?
-                </Link>
-              </label>
+              
               <Divider hidden/>
               <Button onClick={loginHandler}>Login</Button>
 
             </Form>
-            <Message>
-              Don't have an account? <Link to="/register">Register</Link>
-            </Message>
+            
           </Segment>
         </Grid.Column>
 

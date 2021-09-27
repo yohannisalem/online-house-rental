@@ -51,7 +51,7 @@ const HouseList = () => {
           
           <Grid style={{ marginTop: "20px" }} verticalAlign='middle'>
             <Grid.Column floated='left' width={13}>
-              My Listing
+            
             </Grid.Column>
             <Grid.Column floated='right' width={3}>
               <Button>
@@ -61,7 +61,7 @@ const HouseList = () => {
             </Grid.Column>
           </Grid>
           <Divider />
-          <Table basic='very' celled collapsing>
+          <Table striped collapsing padded>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Employee</Table.HeaderCell>
@@ -106,13 +106,13 @@ const HouseList = () => {
                       </Header>
                     </Table.Cell>
 
-                    <Table.Cell>
+                    <Table.Cell textAlign='center'>
                       <Link to={`/edithouse/${house._id}`}>
                         <Icon name='edit' />
                       </Link>
 
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell textAlign='center'>
                       <Button onClick={() => hideConfirm(house._id)}><Icon name='trash' /></Button>
 
 

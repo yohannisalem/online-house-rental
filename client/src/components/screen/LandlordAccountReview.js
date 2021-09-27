@@ -1,6 +1,23 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Grid, Icon, Segment, Image, Form, Input, Divider, Label, Button, Container, } from 'semantic-ui-react'
+import axios  from 'axios';
+import { useParams } from 'react-router';
 const LandlordAccountReview = () => {
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [account, setAccount] = useState({})
+  const params = useParams()
+  const landlordid = params.id
+  const updateAccount = async ()=>{
+    try {
+      const account = await axios.put(`http://localhost:5000/api/auth/updateaccount/${landlordid}`)
+
+    } catch (error) {
+      
+    }
+  }
+
   return (
     <div style={{ minHeight: "100vh"}}>
       
@@ -14,7 +31,7 @@ const LandlordAccountReview = () => {
               height: "20vh"
             }}
           >
-            <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular />
+            <Image src='https://react.semantic-ui.com/images/avatar/small/matthew.png' circular size='small' />
           </Segment>
           <Divider hidden />
           <Divider hidden />
@@ -37,33 +54,19 @@ const LandlordAccountReview = () => {
 
             <Form>
               <Form.Field inline>
-                <label>First name</label>
+                <label>User Name</label>
                 <Input placeholder='First name' />
               </Form.Field>
               <Form.Field inline>
-                <label>First name</label>
+                <label>Email</label>
                 <Input placeholder='First name' />
               </Form.Field>
               <Form.Field inline>
-                <label>First name</label>
+                <label>Phone</label>
                 <Input placeholder='First name' />
               </Form.Field>
-              <Form.Field inline>
-                <label>First name</label>
-                <Input placeholder='First name' />
-              </Form.Field>
-              <Form.Field inline>
-                <label>First name</label>
-                <Input placeholder='First name' />
-              </Form.Field>
-              <Form.Field inline>
-                <label>First name</label>
-                <Input placeholder='First name' />
-              </Form.Field>
-              <Form.Field inline>
-                <label>First name</label>
-                <Input placeholder='First name' />
-              </Form.Field>
+              
+              
             </Form>
 
           </Grid>

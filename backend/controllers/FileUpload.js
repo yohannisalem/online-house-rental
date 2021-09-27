@@ -1,21 +1,23 @@
+const jsonwebtoken = require("jsonwebtoken");
 const MultipleFile = require('../models/Houses')
 const express = require('express');
 const webpush = require('web-push');
+
 const ErrorResponse = require("../utils/errorResponse");
 
 const publicVapidKey = 'BMffGk0gRxLPOSi-eOlXoR1ahY9Ce7uBY3010C06TeMoRYS_6n1A4ItVeOeNYutDlhPK27WW5UMrdyjBEj_-Pxo';
 const privateVapidKey = 'QCipepmgJm_noa9A4-0Q-Wjbwm1GL02DSDpX6-ynFwU';
 
-webpush.setVapidDetails('mailto:test@test.com', publicVapidKey,privateVapidKey);
+webpush.setVapidDetails('mailto:test@test.com', publicVapidKey, privateVapidKey);
 
 //subscribe route
-const notify= async (req,res)=>{
+const notify = async (req, res) => {
     const subscription = req.body;
     //send status 201
     res.status(201).json({})
 
     //create paylod
-    
+
 
     //pass the object into sendNotification
     webpush.sendNotification(subscription,
@@ -25,8 +27,8 @@ const notify= async (req,res)=>{
             image: "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg",
             tag: "new-product",
             url: "/new-product-jason-leung-HM6TMmevbZQ-unsplash.html"
-          })
-          ).catch(err=> console.error(err));
+        })
+    ).catch(err => console.error(err));
 }
 
 const multipleFileUpload = async (req, res, next) => {
@@ -44,42 +46,41 @@ const multipleFileUpload = async (req, res, next) => {
             location: req.body.location,
             numberofbeds: req.body.numberofbeds,
             feepermonth: req.body.feepermonth,
-            termsandcondition:req.body.termsandcondition,
-            leaseperiod:req.body.leaseperiod,
+            termsandcondition: req.body.termsandcondition,
+            leaseperiod: req.body.leaseperiod,
             size: req.body.size,
             available: req.body.available,
             propertytype: req.body.propertytype,
             video: req.body.video,
             files: filesArray,
-            owneremail:req.body.owneremail,
-            ownerusername:req.body.ownerusername
+            owneremail: req.body.owneremail,
+            ownerusername: req.body.ownerusername
         });
         await multipleFiles.save();
-        /* const subscription = req.body;
-        webpush
-            .sendNotification(subscription,
-                JSON.stringify({
-                    title: "New Product Available from john ",
-                    text: "HEY! Take a look at this brand new t-shirt!",
-                    image: "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg",
-                    tag: "new-product",
-                    url: "/new-product-jason-leung-HM6TMmevbZQ-unsplash.html"
-                })
-            ) */
         res.status(201).send('Files Uploaded Successfully');
-        
+
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
 const getallMultipleFiles = async (req, res, next) => {
+    
     try {
-        const files = await MultipleFile.find();
-        res.header('Content-Range','0-20/20')
+
+        const files = await MultipleFile.find()
+        res.header('Content-Range', '0-20/20')
         res.status(200).send(files);
     } catch (error) {
         res.status(400).send(error.message);
+    }
+}
+const getDistrict = async (req,res)=>{
+    try {
+        const files = await MultipleFile.find().distinct('district')
+        res.status(200).send(files);
+    } catch (error) {
+        res.status(400).send(error.message); 
     }
 }
 const findFilesById = async (req, res) => {
@@ -126,15 +127,15 @@ const updateHousesInfo = async (req, res) => {
         req.body.files.forEach(element => {
             filesArray.push(element);
         });
-        const house = await MultipleFile.findOneAndUpdate({'_id':houseId}, {
+        const house = await MultipleFile.findOneAndUpdate({ '_id': houseId }, {
             housename: req.body.housename,
             description: req.body.description,
             district: req.body.district,
             sefer: req.body.sefer,
             numberofbeds: req.body.numberofbeds,
             feepermonth: req.body.feepermonth,
-            termsandcondition:req.body.termsandcondition,
-            leaseperiod:req.body.leaseperiod,
+            termsandcondition: req.body.termsandcondition,
+            leaseperiod: req.body.leaseperiod,
             size: req.body.size,
             available: req.body.available,
             propertytype: req.body.propertytype,
@@ -172,7 +173,7 @@ const autoCompleteSearch = async (req, res) => {
                 }
             }])
 
-        res.send(searchedHouse.map(data=>data.district))
+        res.send(searchedHouse.map(data => data.district))
 
     } catch (error) {
         res.status(400).send(error.message)
@@ -188,5 +189,6 @@ module.exports = {
     updateHousesInfo,
     deleteHouse,
     autoCompleteSearch,
-    notify
+    notify,
+    getDistrict
 }

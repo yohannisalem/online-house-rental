@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 import React, { useEffect, useState, useRef } from 'react'
-import {Link,useHistory,BrowserRouter as Router} from 'react-router-dom'
+import { Link, useHistory, BrowserRouter as Router } from 'react-router-dom'
 import {
   Button,
   Container, Divider, Form, Grid,
@@ -88,14 +88,14 @@ const Home = () => {
   const [display, setDisplay] = useState(false);
   const [options, setOptions] = useState([]);
   const [search, setSearch] = useState("");
-  
-  const [clicked,setClicked]= useState("")
+
+  const [clicked, setClicked] = useState("")
   const wrapperRef = useRef(null);
   const [multipleFiles, setMultipleFiles] = useState([])
   const history = useHistory()
- const handleSearch =(term)=>{
-  history.push(`/houseDistrict/${term}`)
- }
+  const handleSearch = (term) => {
+    history.push(`/houseDistrict/${term}`)
+  }
   const getHousesIntheSameDistrict = async (houseDistrict) => {
     try {
       const { data } = await axios.get(`http://localhost:5000/api/getFilesByDistrict/${houseDistrict}`);
@@ -128,9 +128,9 @@ const Home = () => {
       const searchedHouse = await axios.get(`http://localhost:5000/api/autoCompleteSearch?term=${text}`)
       searchedHouse.data.map(house => {
         pokemon.push(house)
-        
+
       })
-      
+
       setOptions(pokemon);
     } catch (error) {
 
@@ -195,7 +195,7 @@ const Home = () => {
                     action={{
                       content: 'Search',
                       style: { backgroundColor: "#20c1c9", width: "55px", padding: "7px" },
-                      onClick:()=>handleSearch(clicked)
+                      onClick: () => handleSearch(clicked)
                     }}
                     onChange={(e) => searchHouse(e.target.value)}
                     onClick={() => setDisplay(!display)}
@@ -230,7 +230,7 @@ const Home = () => {
       <Divider horizontal>
         FOR RENTERS
       </Divider>
-      <Segment style={{ padding: '8em 0em',borderWidth:"0px"}} vertical>
+      <Segment style={{ padding: '8em 0em', borderWidth: "0px" }} vertical>
         <Grid container stackable verticalAlign='middle'>
           <Grid.Row>
             <Grid.Column width={8}>
@@ -239,27 +239,27 @@ const Home = () => {
               </Header>
               <p style={{ fontSize: '1.33em' }}>
                 Search thousands of up-to-date property listings on our easy-to-use website. Narrow down your options by choosing what's most important to you, such as number of bedrooms and bathrooms, price range, location, pet policy and more.
-                Parents can also search for rentals that fall within a particular school district.import { useHistory } from 'react-router-dom';
+                Parents can also search for rentals that fall within a particular school district.import {useHistory} from 'react-router-dom';
 
               </p>
-              
-             <Button>Start My Search</Button>
+
+              <Button>Start My Search</Button>
             </Grid.Column>
             <Grid.Column floated='right' width={6}>
               <Image bordered rounded size='large' src='/log2.jpeg' />
             </Grid.Column>
           </Grid.Row>
-          
+
         </Grid>
       </Segment>
       <Divider horizontal>
         FOR LANDLORDS
       </Divider>
-      <Segment style={{ padding: '8em 0em',borderWidth:"0px" }} vertical>
+      <Segment style={{ padding: '8em 0em', borderWidth: "0px" }} vertical>
         <Grid container stackable verticalAlign='middle'>
           <Grid.Row>
             <Grid.Column width={8}>
-             
+
               <Header as='h1' style={{ fontSize: '2em' }}>
                 Simple and streamlined rental management all under a single roof
               </Header>
@@ -275,8 +275,8 @@ const Home = () => {
           <Grid.Row>
             <Grid.Column textAlign='center'>
               <Button>
-              <Link to='/listproperty'>Check Them Out</Link></Button>
-             
+                <Link to='/listproperty'>Check Them Out</Link></Button>
+
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -329,20 +329,24 @@ const Home = () => {
           <Header as='h3' style={{ fontSize: '2em' }}>
             Search By District and Base(Sefer)
           </Header>
-          <Grid columns={2}>
+          <Grid columns="3" style={{ padding: "0px", margin: "0px"}}>
+            
             {multipleFiles.map((element, index) =>
-              <div key={element._id}>
-                <List>
-                
-                  <List.Item
-                    as={Link} to={`/houseDistrict/${element.district}`}
-                  >
-                    {element.district}
-                  </List.Item>
-                 
-                </List>
-              </div>
+                  <Grid.Column>
+                    <List>
+                      <List.Item
+                        as={Link} to={`/houseDistrict/${element.district}`}
+                      >
+                        {element.district}
+                      </List.Item>
+                    </List>
+                  </Grid.Column>
+
+
+
+
             )}
+           
 
           </Grid>
 

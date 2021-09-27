@@ -1,12 +1,13 @@
 import React, { useState, useRef,useEffect } from "react";
 import useSwr from "swr";
 import axios from "axios";
-import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
+import ReactMapGL, { Marker, FlyToInterpolator,Popup} from "react-map-gl";
 import useSupercluster from "use-supercluster";
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 const HousesLocation = () => {
   const [houses,setHouses] = useState([])
+  const [selectedHouse, setSelectedHouse] = useState(null) 
   const getMultipleFiles = async () => {
     try {
       const { data } = await axios.get('http://localhost:5000/api/getMultipleFiles');
@@ -67,7 +68,8 @@ const HousesLocation = () => {
     geometry: {
       type: "Point",
       coordinates: [
-        9.0340534,38.7644412
+        house.location.coordinates[0],
+        house.location.coordinates[1]
        ]
     }
   }));
@@ -149,12 +151,30 @@ const HousesLocation = () => {
               latitude={latitude}
               longitude={longitude}
             >
-              <button className="crime-marker">
-                <img src="/house.svg" alt="crime doesn't pay" />
+              <button className="crime-marker" onClick={(e)=>
+               <Popup latitude={latitude} longitude={longitude}>
+               <div>
+                 house
+               </div>
+             </Popup>
+                
+                 
+              }>
+                <img src="/house.svg" alt="house doesn't render" />
               </button>
             </Marker>
           );
         })}
+        {/* {
+          selectedHouse?
+          (
+            <Popup>
+              <div>
+                house
+              </div>
+            </Popup>
+          ):null
+        } */}
       </ReactMapGL>
     </div>
   )

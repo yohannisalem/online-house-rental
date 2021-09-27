@@ -97,8 +97,8 @@ const HouseDetails = ({ match }) => {
                   open={open}
                   onClose={() => setOpen(false)}
                   onOpen={() => setOpen(true)}
-                  trigger={<Button color="teal">
-                    Request House
+                  trigger={<Button color="twitter">
+                    <Icon name='video'/>
 
                   </Button>}
                   style={{ maxWidth: "680px", textAlign: "center" }}
@@ -216,15 +216,15 @@ const HouseDetails = ({ match }) => {
                       <Item.Description>
                         {element.propertytype},{element.numberofbeds}
                       </Item.Description>
-                      <Item.Extra>Additional Details</Item.Extra>
+                      <Item.Extra>{element.size}</Item.Extra>
                     </Item.Content>
                   </Item>
                   <Item>
                     <Item.Content>
                       <Item.Header as='a'>Description</Item.Header>
-                      <Item.Meta>Description</Item.Meta>
+                      <Item.Meta>{element.termsandcondition}</Item.Meta>
                       <Item.Description>
-                        {element.owneremail}
+                        {element.leaseperiod}
                       </Item.Description>
                       <Item.Extra>Additional Details</Item.Extra>
                     </Item.Content>
@@ -232,32 +232,34 @@ const HouseDetails = ({ match }) => {
                   <Item>
                     <Item.Content>
                       <Item.Header as='a'>Landlord Info</Item.Header>
-                      <Item.Meta>Description</Item.Meta>
+                      <Item.Meta>{element.owneremail}</Item.Meta>
                       
                       <Item.Description>
                       
                       </Item.Description>
-                      <Item.Extra>Additional Details</Item.Extra>
+                      <Item.Extra>{element.ownerusername}</Item.Extra>
                     </Item.Content>
                   </Item>
                   <Item>
                     <Item.Content>
                       <Item.Header as='a'>Features</Item.Header>
-                      <Item.Meta>Description</Item.Meta>
                       <Item.Description>
-                        some description
+                        {element.sefer}
                       </Item.Description>
-                      <Item.Extra>Additional Details</Item.Extra>
+                      <Item.Description>
+                        {element.district}
+                      </Item.Description>
+                      
                     </Item.Content>
                   </Item>
                   <Item>
                     <Item.Content>
                       <Item.Header as='a'>Header</Item.Header>
-                      <Item.Meta>Description</Item.Meta>
+                      <Item.Meta>House Status</Item.Meta>
                       <Item.Description>
-                        some description
+                        {element.available}
                       </Item.Description>
-                      <Item.Extra>Additional Details</Item.Extra>
+                      
                     </Item.Content>
                   </Item>
                 </Item.Group>

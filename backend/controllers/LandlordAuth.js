@@ -123,6 +123,39 @@ exports.landlordResetPassword = async (req,res,next)=>{
     next(err);
   }
 }
+exports.getMyHouses = async (req,res,next)=>{
+  const loggedLandlord = req.body
+  try {
+
+    const files = await MultipleFile.find({'owneremail':loggedLandlord});
+    res.header('Content-Range', '0-20/20')
+    res.status(200).send(files);
+} catch (error) {
+    res.status(400).send(error.message);
+}
+}
+exports.getProfileInfo = async (req,res,next)=>{
+  const landlordid = req.body.id
+  try {
+    const user = await Landlord.findById(landlordid)
+    res.status(200).send(user)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+}
+exports.updateProfile = async (req,res,next)=>{
+  const landlordid = req.params.id
+  try {
+    const profileinfo = await Landlord.findOneAndUpdate({'_id':landlordid},{
+      username:req.body.username,
+      phone :req.body.phone,
+      email: req.body.email
+    })
+    res.send(profileinfo)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+}
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();
     res.status(statusCode).json({ sucess: true, token,id:user._id,username:user.username,phone:user.phone,email:user.email});
