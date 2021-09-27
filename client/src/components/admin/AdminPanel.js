@@ -86,8 +86,8 @@ const AdminPanel = () => {
                             style={{ marginTop: "70px", backgroundColor: "#20c1c9" }}
                         >
                             <SideNav.Toggle />
-                            <SideNav.Nav defaultSelected="dashboard">
-                                <NavItem eventKey="dashboard">
+                            <SideNav.Nav defaultSelected="admin">
+                                <NavItem eventKey="admin">
                                     <NavIcon>
                                         <Icon name='home' />
                                     </NavIcon>
@@ -168,14 +168,14 @@ const AdminPanel = () => {
                         </SideNav>
                         <main>
 
-                            <Route path="/dashboard" component={props => <HouseRequests />} />
+                            <Route path="/admin" component={props => <HouseRequests />} />
                             <Route path="/houses" component={props => <HouseList />} />
                             <Route path="/feedback" component={props => <FeedBacks />} />
                             <Route path="/report" component={props => <Reports />} />
-                            <Route path="/appointment" component={props => <SendAppointment />} />
+                            <Route path="/appointment/:id" component={props => <SendAppointment />} />
                             <Route path="/tenants" component={props => <TenantList />} />
                             <Route path="/landlords" component={props => <LandlordList />} />
-                            <Route path="/sendcontract" component={props => <SendContract />} />
+                            <Route path="/sendcontract/:id" component={props => <SendContract />} />
                             
 
                         </main>

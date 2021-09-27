@@ -42,7 +42,7 @@ class TextPlaceHolder extends Component {
                     }}  
                     >
                         <Header>Please use the mouse to sign!</Header>
-                        <SignaturePanel canvasProps={{width: '100%',height: '100%' }}
+                        <SignaturePanel canvasProps={{width: '100%',height: '100%',name:name}}
                             ref={(ref) => {this.signPad = ref}} />
 
                         <Button onClick={this.trimSignature}>Save</Button>

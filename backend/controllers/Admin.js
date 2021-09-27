@@ -53,7 +53,7 @@ exports.login = async (req,res,next)=>{
 }
 
 exports.contractSigning = async (req, res, next) => {
-  const { tenantEmail } = req.body;
+  const { tenantEmail,landlordemail } = req.body;
   try {
     const user = await HouseRequest.findOne({ tenantEmail });
 
@@ -62,7 +62,7 @@ exports.contractSigning = async (req, res, next) => {
     }
 
     // Create reset url to email to provided email
-    const contractForm = `http://localhost:3000/contract`;
+    const contractForm = `http://localhost:3000/contract/${user._id}`;
 
     // HTML Message
    
@@ -73,7 +73,7 @@ exports.contractSigning = async (req, res, next) => {
     `;
     try {
       await sendEmail({
-        to: user.tenantEmail,
+        to: [user.tenantEmail,user.landlordemail],
         subject: "contract signing form",
         text: message,
       });
@@ -99,7 +99,8 @@ exports.registerContract = async (req, res) => {
       feepermonth: req.body.feepermonth,
       contractduration: req.body.contractduration,
       termsandcondition: req.body.termsandcondition,
-      signature:req.body.signature
+      tenantsignature:req.body.tenantsignature,
+      landlordsignature:req.body.landlordsignature
     })
     await contract.save()
     res.status(200).send("contract signed successfully")
@@ -109,7 +110,7 @@ exports.registerContract = async (req, res) => {
 }
 exports.sendAppointment= async (req,res)=>{
 
-  const { tenantEmail,appointmentletter,date} = req.body;
+  const { tenantEmail,landlordemail,appointmentletter,date} = req.body;
   try {
     const user = await HouseRequest.findOne({ tenantEmail });
     if (!user) {

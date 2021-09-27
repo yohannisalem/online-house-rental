@@ -108,7 +108,7 @@ const HouseRequests = () => {
                     </Table.Cell>
 
                     <Table.Cell>
-                      <Link >
+                      <Link to={`/appointment/${house._id}`}>
                         <Icon name='calendar alternate outline' />
                       </Link>
 

@@ -16,6 +16,7 @@ export default class SignaturePanel extends Component {
       onBegin: PropTypes.func,
       canvasProps: PropTypes.object,
       clearOnResize: PropTypes.bool,
+      name : PropTypes.string,
     }
 
     static defaultProps = {

@@ -44,7 +44,7 @@ const Navigator = () => {
                 <Route path="/feedback"><FeedBack/></Route>
                 <PrivateRoute path="/listproperty"><FileUp/></PrivateRoute>
                 <Route path="/tenantscreen"><SwiperSlider/></Route>
-                <Route path="/contract"><ContractForm/></Route>
+                <Route path="/contract/:id"><ContractForm/></Route>
                 <Route path="/houseDetails/:productId"><HouseDetails/></Route>
                 <Route path="/houseDistrict/:district"><HousesInTheSameDistrict/></Route>
 

@@ -30,6 +30,7 @@ const HouseDetails = ({ match }) => {
   const [tenantEmail, setTenantEmail] = useState("")
   const [landlordemail, setLandlordemail] = useState("")
   const [landlordusername, setLandlordusername] = useState("")
+  const [termsandcondition, settermsandcondition] = useState("")
   const productId = params.productId
   const apiUrl = `http://localhost:5000/api/getFilesById/${productId}`;
 
@@ -45,7 +46,7 @@ const HouseDetails = ({ match }) => {
         history.push('/login')
       }
 
-      const res = await axios.post("http://localhost:5000/api/requestHouses", { tenantId, houseId, tenantPhone, tenantEmail,landlordemail,landlordusername}, config);
+      const res = await axios.post("http://localhost:5000/api/requestHouses", { tenantId, houseId, tenantPhone, tenantEmail,landlordemail,landlordusername,termsandcondition}, config);
    
       console.log(houseId)
       console.log(landlordusername)
@@ -154,6 +155,10 @@ const HouseDetails = ({ match }) => {
                     <select required name="houseId" onChange={e => setHouseId(e.target.value)}>
                     <option>---Select Id</option>
                       <option value={element._id}>id</option>
+                    </select>
+                    <select required name="termsandcondition" onChange={e => settermsandcondition(e.target.value)}>
+                    <option>---Terms</option>
+                      <option value={element.termsandcondition}>id</option>
                     </select>
                     <select required name="houseId" onChange={(e) => setTenantId(e.target.value)}>
                     <option>---Your Id</option>
