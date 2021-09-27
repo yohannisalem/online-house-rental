@@ -1,10 +1,10 @@
 
-import { useEffect, useState, Component } from 'react';
-
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Container, Label, TransitionablePortal, Segment, Header, Image, Divider, Form, Grid } from 'semantic-ui-react'
-import SignaturePanel from '../admin/SignaturePanel'
+import { Component, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Button, Container, Divider, Form, Grid, Header, Image, Label, Segment, TransitionablePortal } from 'semantic-ui-react';
+import SignaturePanel from '../admin/SignaturePanel';
+
 class TextPlaceHolder extends Component {
   constructor(props) {
     super(props);
@@ -81,10 +81,12 @@ const ContractForm = () => {
   const [tenantsignature, setTenantSignature] = useState('')
   const [landlordsignature, setLandlordSignature] = useState('')
   const [termsandcondition, setTermsandcondition] = useState('')
+  const [tenantfirma, setTenantfirma] = useState('')
+  const [landlordfirma, setLandlordfirma] = useState('')
   const [contractduration, setLeaseduration] = useState('')
 
- const tensig = JSON.stringify(tenantsignature.trimmedDataURL)
- const landsig = JSON.stringify(landlordsignature.trimmedDataURL)
+ const tensig = JSON.stringify(tenantfirma.trimmedDataURL)
+ const landsig = JSON.stringify(landlordfirma.trimmedDataURL)
  console.log("tensig",tensig)
  console.log("landsig",landsig)
   const getThatHouse = async () => {
@@ -105,8 +107,9 @@ const ContractForm = () => {
     };
     try {
       const res = await axios.post("http://localhost:5000/admin/savecontract", 
-      {tenantname,tenantemail,landlordname,landlordemail,houseid,termsandcondition,feepermonth,contractduration,tensig,landsig}, config)
+      {tenantname,tenantemail,landlordname,landlordemail,houseid,termsandcondition,feepermonth,contractduration,tenantsignature,landlordsignature}, config)
       console.log(res)
+      alert(tensig)
       alert("contract saved successfully")
     } catch (error) {
       console.log(error)
@@ -157,6 +160,21 @@ console.log(house)
           <Grid textAlign='left'>
             <Grid.Column width="8">
               <Form size='large' style={{ verticalAlign: "center" }}>
+                <Form.Field>
+                <select required name="tenantsignature"  onChange={e => setTenantSignature(e.target.value)}>
+                    <option>---Select User Name</option>
+                      <option value={tensig}>username</option>
+                      
+                    </select>
+                </Form.Field>
+                <Form.Field>
+                <select required name="landlordsignature"  onChange={e => setLandlordSignature(e.target.value)}>
+                    <option>---Select User Name</option>
+                      <option value={landsig}>username</option>
+                      
+                    </select>
+                </Form.Field>
+              
               <Form.Input fluid icon='user' iconPosition='left' type="text"
                 required
                 name="houseid"
@@ -208,7 +226,7 @@ console.log(house)
 
             </Form>
               <Segment>
-                <TextPlaceHolder name="tenantsignature" trimmedDataURL={tenantsignature} onChange={setTenantSignature} />
+                <TextPlaceHolder trimmedDataURL={tenantfirma} onChange={setTenantfirma} />
                 Tenant
               </Segment>
 
@@ -236,7 +254,7 @@ console.log(house)
             </Form>
 
               <Segment>
-                <TextPlaceHolder name="landlordsignature" trimmedDataURL={landlordsignature} onChange={setLandlordSignature} />
+                <TextPlaceHolder trimmedDataURL={landlordfirma} onChange={setLandlordfirma} />
                 Landlord
               </Segment>
               <Divider hidden />

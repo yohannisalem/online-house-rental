@@ -1,6 +1,6 @@
 import React from 'react'
-
 import { Card, Grid } from 'semantic-ui-react'
+
 
 const src = 'https://react.semantic-ui.com/images/avatar/large/daniel.jp'
 const DashBoard = () => {

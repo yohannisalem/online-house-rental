@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { Feed, Grid } from 'semantic-ui-react'
 import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Feed, Grid } from 'semantic-ui-react'
 const date = '3 days ago'
 const summary = 'Laura Faucet created a post'
 const extraText = "Have you seen what's going on in Israel? Can you believe it."

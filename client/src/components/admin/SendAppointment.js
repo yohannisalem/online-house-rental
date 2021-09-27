@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Header, Button, Grid, Form, Input, Segment, TextArea, Divider } from 'semantic-ui-react';
-import Datetime from 'react-datetime'
-import "react-datetime/css/react-datetime.css";
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import Datetime from 'react-datetime';
+import "react-datetime/css/react-datetime.css";
 import { useParams } from 'react-router-dom';
+import { Button, Form, Grid, Input, Segment } from 'semantic-ui-react';
 const SendAppointment = () => {
   let params = useParams()
   const houseid = params.id

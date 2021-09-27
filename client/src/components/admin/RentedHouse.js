@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { createRef, useEffect, useState } from 'react'
-import { Link, BrowserRouter as Router, Route } from 'react-router-dom'
-import { Button, Divider, Form, Grid, Header, Icon, Input, Label, Menu, Modal, Popup, Segment, Table, TextArea, Progress } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Button, Divider, Grid, Header, Icon, Table } from 'semantic-ui-react'
 
 
 const RentedHouse = () => {

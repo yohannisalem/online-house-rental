@@ -1,24 +1,22 @@
-import axios from 'axios'
-import React, { createRef, useEffect, useState } from 'react'
-import { Button, Divider, Form, Grid, Header, Icon, Input, Label, Menu, Modal, Popup, Segment, Table, TextArea, Progress } from 'semantic-ui-react'
-
-import ContractForm from '../screen/ContractForm';
-import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom'
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-
+import SideNav, { NavIcon, NavItem, NavText } from '@trendmicro/react-sidenav';
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import axios from 'axios';
+import React, { createRef, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, useHistory } from 'react-router-dom';
+import { Icon } from 'semantic-ui-react';
 import FeedBacks from './FeedBacks';
-import Home from '../pages/Home';
 import HouseList from './HouseList';
+import HouseRequests from './HouseRequests';
+import LandlordList from './LandlordList';
+import RentedHouse from './RentedHouse';
 import Reports from './Reports';
 import SendAppointment from './SendAppointment';
-import TenantList from './TenantList';
-import LandlordList from './LandlordList';
-
-import HouseRequests from './HouseRequests';
 import SendContract from './SendContract';
-import RentedHouse from './RentedHouse';
+import TenantList from './TenantList';
+
+
+
 const AdminPanel = () => {
     const history = useHistory()
     const contextRef = createRef()

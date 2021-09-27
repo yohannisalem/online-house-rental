@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import { Button, Divider, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 const AdminLogin = () => {
