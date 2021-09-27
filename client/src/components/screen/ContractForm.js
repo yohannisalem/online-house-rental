@@ -83,8 +83,8 @@ const ContractForm = () => {
   const [termsandcondition, setTermsandcondition] = useState('')
   const [contractduration, setLeaseduration] = useState('')
 
- const tensig = JSON.stringify(tenantsignature.trimmedDataURL).toString()
- const landsig = JSON.stringify(landlordsignature.trimmedDataURL).toString()
+ const tensig = JSON.stringify(tenantsignature.trimmedDataURL)
+ const landsig = JSON.stringify(landlordsignature.trimmedDataURL)
  console.log("tensig",tensig)
  console.log("landsig",landsig)
   const getThatHouse = async () => {

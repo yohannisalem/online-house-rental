@@ -1,17 +1,17 @@
 const {model,Schema} = require('mongoose')
 
 const RentedHouseSchema= Schema({
-    tenant:{
+    tenantname:{
         type:String
     },
-    house:{
+    houseid:{
         type:String
     },
     terms:{
         type:String
     },
     period:{
-        type:Date
+        type:String
     }
 })
 

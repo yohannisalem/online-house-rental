@@ -152,11 +152,20 @@ exports.getHouseRequests = async (req,res)=>{
     res.status(400).send(error.message)
   }
 }
+
 exports.getSingleRequestedHouse = async (req,res)=>{
   const id = req.params.id
   try {
       const house = await Request.find({'_id':id})
       res.send(house)
+  } catch (error) {
+      res.status(400).send(error.message)
+  }
+}
+exports.getRentedHouse = async (req,res)=>{
+  try {
+    const contract = await Contract.find({})
+    res.status(200).send(contract)
   } catch (error) {
       res.status(400).send(error.message)
   }
@@ -195,5 +204,6 @@ exports.deleteLandlord = async (req,res)=>{
     res.status(400).send(error.message)
   }
 }
+
 
 

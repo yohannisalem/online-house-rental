@@ -18,6 +18,7 @@ import LandlordList from './LandlordList';
 
 import HouseRequests from './HouseRequests';
 import SendContract from './SendContract';
+import RentedHouse from './RentedHouse';
 const AdminPanel = () => {
     const history = useHistory()
     const contextRef = createRef()
@@ -95,20 +96,13 @@ const AdminPanel = () => {
                                         DashBoard
                                     </NavText>
                                 </NavItem>
-                                <NavItem eventKey="appointment">
-                                    <NavIcon>
-                                        <Icon name='home' />
-                                    </NavIcon>
-                                    <NavText>
-                                        Appointment
-                                    </NavText>
-                                </NavItem>
+                                
                                 <NavItem eventKey="rent">
                                     <NavIcon>
                                         <Icon name='home' />
                                     </NavIcon>
                                     <NavText>
-                                        Home
+                                        Rented Houses
                                     </NavText>
                                 </NavItem>
                                 <NavItem eventKey="report">
@@ -116,7 +110,7 @@ const AdminPanel = () => {
                                         <Icon name='alert' />
                                     </NavIcon>
                                     <NavText>
-                                        Home
+                                        Report
                                     </NavText>
                                 </NavItem>
                                 <NavItem eventKey="feedback">
@@ -124,7 +118,7 @@ const AdminPanel = () => {
                                         <Icon name='home' />
                                     </NavIcon>
                                     <NavText>
-                                        feedback
+                                        Feedback
                                     </NavText>
 
                                 </NavItem>
@@ -155,15 +149,7 @@ const AdminPanel = () => {
                                     </NavText>
 
                                 </NavItem>
-                                <NavItem eventKey="contract">
-                                    <NavIcon>
-                                        <Icon name='home' />
-                                    </NavIcon>
-                                    <NavText>
-                                        Contract
-                                    </NavText>
-
-                                </NavItem>
+                              
                             </SideNav.Nav>
                         </SideNav>
                         <main>
@@ -176,6 +162,7 @@ const AdminPanel = () => {
                             <Route path="/tenants" component={props => <TenantList />} />
                             <Route path="/landlords" component={props => <LandlordList />} />
                             <Route path="/sendcontract/:id" component={props => <SendContract />} />
+                            <Route path="/rent" component={props => <RentedHouse />} />
                             
 
                         </main>
