@@ -12,6 +12,7 @@ const AdminRoute = ({ component: Component, ...rest }) => {
         )
       }
     />
+    
   );
 };
 

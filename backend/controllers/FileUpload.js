@@ -122,7 +122,10 @@ const updateHousesInfo = async (req, res) => {
 
     try {
         const houseId = req.params.id;
-       
+        let filesArray = [];
+        req.body.files.forEach(element => {
+            filesArray.push(element);
+        });
         const house = await MultipleFile.findOneAndUpdate({'_id':houseId}, {
             housename: req.body.housename,
             description: req.body.description,
@@ -135,7 +138,8 @@ const updateHousesInfo = async (req, res) => {
             size: req.body.size,
             available: req.body.available,
             propertytype: req.body.propertytype,
-            video:req.body.video
+            video: req.body.video,
+            files: filesArray,
         })
         res.send(house)
 

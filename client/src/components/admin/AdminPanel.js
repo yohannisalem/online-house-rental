@@ -64,7 +64,13 @@ const AdminPanel = () => {
             console.log(error);
         }
     }
+  
+
+      
     useEffect(() => {
+        if (!localStorage.getItem("adminToken")) {
+            history.push("/adminLogin")
+          }
         getMultipleFilesList()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

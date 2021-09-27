@@ -36,7 +36,7 @@ const AdminLogin = () => {
       }
     };
     return (
-        <div style={{ minHeight: "99vh", backgroundImage:"url(/admin.jpeg)"}}>
+        <div style={{ minHeight: "99vh", backgroundImage:"url(/admin.jpeg)",backgroundSize: "cover",backgroundRepeat:"no-repeat"}}>
       <Grid textAlign="center" verticalAlign='middle' style={{ paddingTop: "70px" }}>
         <Grid.Column width={4} style={{ padding: "0px" }}>
           <Segment
@@ -56,7 +56,7 @@ const AdminLogin = () => {
           >
 
             <Header as='h2' color='teal' textAlign='center'>
-              Tenant Log-in
+             Admin Login
             </Header>
             {error && <span className="error-message">{error}</span>}
             <Form size='large' style={{verticalAlign:"center"}}>

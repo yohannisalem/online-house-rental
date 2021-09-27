@@ -22,7 +22,8 @@ const EditHouse = ({ house }) => {
     const [imageUrls, setImageUrls] = useState([]);
     const [videourl, setVideoUrls] = useState([]);
     const [video, setVideos] = useState('')
-    const [files, setFiles] = useState([]);
+    const [files,setFile] = useState([])
+    const [file, setFiles] = useState([]);
 
     const [multipleFiles, setMultipleFiles] = useState([]);
     const [progress, setProgress] = useState(0);
@@ -36,6 +37,17 @@ const EditHouse = ({ house }) => {
             setFiles((prevState) => [...prevState, newImage]);
         }
     };
+    const handleImageChanges = (e)=>{
+            var options = e.target.options;
+            var value = [];
+            for (var i = 0, l = options.length; i < l; i++) {
+              if (options[i].selected) {
+                value.push(options[i].value);
+              }
+            }
+            setFile({files: value});
+            alert(imageUrls)
+    }
     const handleVideoChange = (e) => {
         e.preventDefault()
         setVideo(e.target.files[0])
@@ -86,7 +98,7 @@ const EditHouse = ({ house }) => {
             alert(video)
             const res = await axios.put(`http://localhost:5000/api/updateHouse/${houseId}`, {
                 housename,description,district,sefer,termsandcondition,leaseperiod,numberofbeds,
-                size,feepermonth,available,propertytype,video
+                size,feepermonth,available,propertytype,video,files
             }, config);
             console.log(res)
             
@@ -142,7 +154,7 @@ const EditHouse = ({ house }) => {
 
         )
 
-        files.map((image) => {
+        file.map((image) => {
             const uploadTask = storage.ref(`images/${image.name}`).put(image);
             promises.push(uploadTask);
             uploadTask.on(
@@ -298,12 +310,22 @@ const EditHouse = ({ house }) => {
                             required
                             control={Input}
                             type="file"
-                            name="files"
+                            
                             multiple
                             label='Photos of the House'
                             icon='upload'
                             onChange={handleChange}
                         />
+                        <label>select image url</label>
+                        <select name="files" id="files" multiple onChange={handleImageChanges}>
+                            {
+                                imageUrls.map((images,index)=>
+                                <option value={images} index={index}>video</option>
+                                )
+                            }
+                            
+                            
+                        </select>
                         <Form.Field
                             required
                             id='form-input-control-last-name'
