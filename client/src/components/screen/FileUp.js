@@ -48,7 +48,7 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 const FileUp = () => {
-
+  
   let history = useHistory()
   const [error, setError] = useState("");
 

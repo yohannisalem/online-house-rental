@@ -11,30 +11,23 @@ import HousesByLandlord from './HousesByLandlord';
 
 const LandlordProfile = () => {
   const [error, setError] = useState("")
+  const [logged, setlogged] = useState("")
   const history = useHistory()
+ 
+ 
+
+  let token;
   useEffect(() => {
-    if (!localStorage.getItem("landlordToken")) {
-      history.push("/landlordLogin")
-    }
-   /*  const fetchPrivateDate = async () => {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("landlordToken")}`,
-        },
-      };
-
-      try {
-        const { data } = await axios.get("http://localhost:5000/api/private", config);
-
-      } catch (error) {
+    setTimeout(() => {
+       token = localStorage.getItem("landlordToken");
+       if (!token) {
+        history.push("/landlordLogin")
         
-        setError("You are not authorized please login");
       }
-    };
-
-    fetchPrivateDate();  */
-  }, []);
+    }, 2000);
+  
+  
+  }, [token]);
   return (
     <div >
 

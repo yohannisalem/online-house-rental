@@ -1,6 +1,7 @@
 
 const Report = require('../models/ReportedIssue')
 const FeedBack = require('../models/FeedBack')
+const Contract = require('../models/Contract')
 const reportIssue = async (req,res)=>{
    try {
        const issueReported = Report({
@@ -44,9 +45,19 @@ const getReport = async (req,res)=>{
         res.status(400).send(error.message);
     }
 }
+const getContract = async (req,res)=>{
+    const loggedTenant = req.params.email
+  try {
+    const files = await Contract.find({'tenantemail':loggedTenant});
+    res.status(200).send(files);
+} catch (error) {
+    res.status(400).send(error.message);
+}
+}
 module.exports={
     reportIssue,
     writeFeedBack,
     getFeedBack,
-    getReport
+    getReport,
+    getContract
 }

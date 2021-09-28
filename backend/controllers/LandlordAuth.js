@@ -137,7 +137,7 @@ exports.getMyHouses = async (req,res,next)=>{
 }
 }
 exports.getProfileInfo = async (req,res,next)=>{
-  const landlordid = req.body.id
+  const landlordid = req.params.id
   try {
     const user = await Landlord.findById(landlordid)
     res.status(200).send(user)

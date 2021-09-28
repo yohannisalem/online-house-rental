@@ -17,7 +17,6 @@ const LandlordLogin = () => {
 
     const loginHandler = async (e) => {
         e.preventDefault();
-
         const config = {
             header: {
                 "Content-Type": "application/json",
@@ -36,6 +35,7 @@ const LandlordLogin = () => {
             localStorage.setItem("username", data.username)
             localStorage.setItem("userid", data.id)
             localStorage.setItem("email", data.email)
+            
             history.goBack()
         } catch (error) {
             setError(error.response.data)

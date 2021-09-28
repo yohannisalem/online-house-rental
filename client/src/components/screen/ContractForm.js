@@ -215,14 +215,13 @@ console.log(house)
                 tabIndex={1}
                 onChange={e => setLandlordemail(e.target.value)}
               />
-               {/* <Form.Input fluid icon='user' iconPosition='left' type="text"
+               <Form.Input fluid icon='user' iconPosition='left' type="text"
                 required
-
                 name="houseid"
                 placeholder="houseid"
                 tabIndex={1}
                 onChange={e => setHouseid(e.target.value)}
-              /> */}
+              />
               <Form.Input fluid icon='money' iconPosition='left' type="text"
                 required
                 label='Fee on Which You both agreed'

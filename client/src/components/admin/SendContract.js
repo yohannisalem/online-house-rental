@@ -76,7 +76,7 @@ const SendContract = () => {
                       control={Input}
                       name='appointmentletter'
                       type='text'
-                      label='appointmentletter'
+                      label='Contract signing message'
                      
                     />
           

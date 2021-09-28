@@ -7,6 +7,7 @@ const Tenant = require("../models/User")
 const Request = require('../models/RequestedHouses')
 const ErrorResponse = require("../utils/errorResponse");
 const sendEmail = require('../utils/sendEmail')
+const MultipleFile = require('../models/Houses')
 
 const Admin = require('../models/Admin')
 const publicVapidKey = 'BMffGk0gRxLPOSi-eOlXoR1ahY9Ce7uBY3010C06TeMoRYS_6n1A4ItVeOeNYutDlhPK27WW5UMrdyjBEj_-Pxo';
@@ -29,7 +30,7 @@ exports.register = async(req,res,next)=>{
     sendToken(user, 201, res);
     
   } catch (err) {
-   next(err)
+   next(err.message)
   }
 }
 exports.login = async (req,res,next)=>{
@@ -48,7 +49,7 @@ exports.login = async (req,res,next)=>{
         }
         sendToken(user, 200, res);
     } catch (error) {
-        next(error)
+        next(error.message)
     }
 }
 
@@ -85,27 +86,31 @@ exports.contractSigning = async (req, res, next) => {
       return next(new ErrorResponse("Email could not be sent", 500));
     }
   } catch (err) {
-    next(err);
+    next(err.message);
   }
 }
 exports.registerContract = async (req, res) => {
+  const houseid = req.body.houseid;
   try {
     const contract = new Contract({
       tenantname: req.body.tenantname,
       tenantemail:req.body.tenantemail,
       landlordname: req.body.landlordname,
       landlordemail: req.body.landlordemail,
-      houseid: req.body.houseid,
+      houseid,
       feepermonth: req.body.feepermonth,
       contractduration: req.body.contractduration,
       termsandcondition: req.body.termsandcondition,
       tenantsignature:req.body.tenantsignature,
       landlordsignature:req.body.landlordsignature
     })
+    await MultipleFile.findOneAndUpdate({'_id':houseid},{
+      available:false
+    })
     await contract.save()
     res.status(200).send("contract signed successfully")
   } catch (error) {
-    res.status(400).send(error.message);
+    next(error.message)
   }
 }
 exports.sendAppointment= async (req,res)=>{

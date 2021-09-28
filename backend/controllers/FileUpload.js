@@ -68,7 +68,7 @@ const getallMultipleFiles = async (req, res, next) => {
     
     try {
 
-        const files = await MultipleFile.find()
+        const files = await MultipleFile.find({'available':true})
         res.header('Content-Range', '0-20/20')
         res.status(200).send(files);
     } catch (error) {

@@ -17,7 +17,7 @@ exports.register = async(req,res,next)=>{
     sendToken(user, 201, res);
     
   } catch (err) {
-   next(err)
+   next(err.message)
   }
 }
 exports.login = async (req,res,next)=>{
@@ -42,7 +42,7 @@ exports.login = async (req,res,next)=>{
         sendToken(user, 200, res);
 
     } catch (error) {
-        next(error)
+        next(error.message)
     }
 }
 
@@ -135,7 +135,7 @@ exports.resetPassword = async (req,res,next)=>{
       token: user.getSignedJwtToken(),
     });
   } catch (err) {
-    next(err);
+    next(err.message);
   }
 }
 const sendToken = (user, statusCode, res) => {

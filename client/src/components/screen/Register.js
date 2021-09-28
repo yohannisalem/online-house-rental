@@ -5,6 +5,8 @@ import { Button,Form,Grid,Segment} from 'semantic-ui-react'
 
 const Register = () => {
   let history = useHistory()
+  const [firstname, setFirstname] = useState("")
+  const [lastname, setLastname] = useState("")
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,14 +32,14 @@ const Register = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/register", { username, email, password,},
+        "http://localhost:5000/api/auth/register", {firstname,lastname,username, email, password,},
         config
       );
       localStorage.setItem("authToken",data.token)
       history.push("/")
       
     } catch (error) {
-      setError(error.response.data.error);
+      setError(error.response.data);
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -57,8 +59,32 @@ const Register = () => {
     Ooops <Link to="/landlordRegister">I'm Landlord</Link>
     </span>
       <Form>
-        <Form.Field>
+      <Form.Group widths={2}>
+      <Form.Field>
           <label>First Name</label>
+          <input
+            type="text"
+            required
+            id="name"
+            placeholder="Enter FirstName"
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Last Name</label>
+          <input
+            type="text"
+            required
+            id="name"
+            placeholder="Enter LastName"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+          />
+        </Form.Field>
+    </Form.Group>
+        <Form.Field>
+          <label>User Name</label>
           <input
             type="text"
             required

@@ -13,6 +13,7 @@ const NavBar = (props) => {
     setActiveItem(name)
   }
   const logoutHandler = () => {
+    window.location.reload(true);
     localStorage.removeItem("landlordToken")
     history.push("/landlordLogin")
   }
@@ -35,15 +36,7 @@ const NavBar = (props) => {
           >
             KirayBet.com
           </Menu.Item>
-          <Menu.Item
-            color='red'
-            active={activeItem === 'tenantscreen'}
-            onClick={handleItemClick}
-            as={Link}
-            to={'/tenantscreen'}
-          >
-            Tenant Screen
-          </Menu.Item>
+         
           <Menu.Item
             active={activeItem === 'listproperty'}
             onClick={handleItemClick}
@@ -164,11 +157,6 @@ const NavBar = (props) => {
                   >Tenants SignUp</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-
-
-            </Menu.Item>
-            <Menu.Item>
-              profile
             </Menu.Item>
           </Menu.Menu>
         </Menu>
