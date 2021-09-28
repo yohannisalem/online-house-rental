@@ -3,8 +3,8 @@ import { TextArea, Progress, Form, Container, Input, Segment } from 'semantic-ui
 import storage from '../../firebase'
 import axios from 'axios'
 import { useParams, useHistory } from 'react-router-dom';
-const EditHouse = ({ house }) => {
-    const history = useHistory()
+const EditHouse = () => {
+    
     let params = useParams()
     const [disable, setDisable] = useState(true);
     const [housename, setHousename] = useState('')
@@ -27,27 +27,6 @@ const EditHouse = ({ house }) => {
 
     const [multipleFiles, setMultipleFiles] = useState([]);
     const [progress, setProgress] = useState(0);
-
-    const handleChange = (e) => {
-        e.preventDefault()
-        console.log(e.target.name)
-        for (let i = 0; i < e.target.files.length; i++) {
-            const newImage = e.target.files[i];
-            newImage["id"] = Math.random();
-            setFiles((prevState) => [...prevState, newImage]);
-        }
-    };
-    const handleImageChanges = (e)=>{
-            var options = e.target.options;
-            var value = [];
-            for (var i = 0, l = options.length; i < l; i++) {
-              if (options[i].selected) {
-                value.push(options[i].value);
-              }
-            }
-            setFile({files: value});
-            alert(imageUrls)
-    }
     const handleVideoChange = (e) => {
         e.preventDefault()
         setVideo(e.target.files[0])
@@ -98,7 +77,7 @@ const EditHouse = ({ house }) => {
             alert(video)
             const res = await axios.put(`http://localhost:5000/api/updateHouse/${houseId}`, {
                 housename,description,district,sefer,termsandcondition,leaseperiod,numberofbeds,
-                size,feepermonth,available,propertytype,video,files
+                size,feepermonth,available,propertytype,video
             }, config);
             console.log(res)
             
@@ -108,28 +87,6 @@ const EditHouse = ({ house }) => {
             alert("failed to update")
         }
     };
-   /*  const handleMultipleFileSubmit = async () => {
-        const formData = new FormData();
-        formData.set('housename', housename);
-        formData.set('description', description);
-        formData.set('district', district);
-        formData.set('sefer', sefer);
-        formData.set('termsandcondition', termsandcondition)
-        formData.set('leaseperiod', leaseperiod)
-        formData.set('numberofbeds', numberofbeds);
-        formData.set('size', size);
-        formData.set('feepermonth', feepermonth);
-        formData.set('available', available);
-        formData.set('propertytype', propertytype);
-        formData.set('video', video);
-        for (let i = 0; i < imageUrls.length; i++) {
-            formData.set('files', imageUrls[i]);
-        }
-        await updateHouse(formData);
-        console.log(formData)
-        history.push('/managelisting')
-
-    } */
     const handleUpload = () => {
         const promises = [];
         const uploadTaskTwo = storage.ref(`images/${vid.name}`).put(vid)
@@ -188,9 +145,8 @@ const EditHouse = ({ house }) => {
 
     };
 
-
     return (
-        <div>
+        <div style={{backgroundColor:"lightGray"}}>
             <Container>
 
                 Build your listing to find the perfect renter — listings with a lot of detail and photos tend to attract the most leads, so don’t be shy! Not sure what to include? Check out our tips and tricks here.
@@ -306,26 +262,7 @@ const EditHouse = ({ house }) => {
 
                             onChange={handleBedChange}
                         />
-                        <Form.Field
-                            required
-                            control={Input}
-                            type="file"
-                            
-                            multiple
-                            label='Photos of the House'
-                            icon='upload'
-                            onChange={handleChange}
-                        />
-                        <label>select image url</label>
-                        <select name="files" id="files" multiple onChange={handleImageChanges}>
-                            {
-                                imageUrls.map((images,index)=>
-                                <option value={images} index={index}>video</option>
-                                )
-                            }
-                            
-                            
-                        </select>
+                      
                         <Form.Field
                             required
                             id='form-input-control-last-name'

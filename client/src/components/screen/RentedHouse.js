@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button, Divider, Grid, Header, Icon, Table } from 'semantic-ui-react'
 import { useParams } from 'react-router'
 
-const HousesByLandlord = () => {
+const RentedHouse = () => {
     const contextRef = createRef()
     const [multipleFiles, setMultipleFiles] = useState([]);
     
@@ -130,4 +130,4 @@ const HousesByLandlord = () => {
     )
 }
 
-export default HousesByLandlord
+export default RentedHouse

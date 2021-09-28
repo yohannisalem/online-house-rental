@@ -54,10 +54,20 @@ const getContract = async (req,res)=>{
     res.status(400).send(error.message);
 }
 }
+const terminateContract = async (req,res)=>{
+    const loggedTenant = req.params.email
+    try {
+      const files = await Contract.findOneAndRemove({'tenantemail':loggedTenant});
+      res.status(200).send(files);
+  } catch (error) {
+      res.status(400).send(error.message);
+  }
+}
 module.exports={
     reportIssue,
     writeFeedBack,
     getFeedBack,
     getReport,
-    getContract
+    getContract,
+    terminateContract
 }
