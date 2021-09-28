@@ -100,15 +100,6 @@ const NavBar = (props) => {
             Tenant Screen
           </Menu.Item>
           <Menu.Item
-
-            active={activeItem === 'landlordscreen'}
-            onClick={handleItemClick}
-            as={Link}
-            to={'/admin'}
-          >
-            * Fake Admin
-          </Menu.Item>
-          <Menu.Item
             active={activeItem === 'listproperty'}
             onClick={handleItemClick}
             as={Link}

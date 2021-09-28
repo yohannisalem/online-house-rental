@@ -4,10 +4,12 @@ const ErrorResponse = require("../utils/errorResponse");
 const sendEmail = require('../utils/sendEmail')
 
 exports.register = async(req,res,next)=>{
-  const { username, email, password } = req.body;
+  const { username, email, password,firstname,lastname } = req.body;
 
   try {
     const user = await User.create({
+      firstname,
+      lastname,
       username,
       email,
       password,
@@ -51,7 +53,7 @@ exports.forgotPassword= async (req,res,next)=>{
     const user = await User.findOne({ email });
 
     if (!user) {
-      return next(new ErrorResponse("No email could not be sent", 404));
+      return next(new ErrorResponse("No email could be sent", 404));
     }
 
     // Reset Token Gen and add to database hashed (private) version of token
@@ -89,6 +91,20 @@ exports.forgotPassword= async (req,res,next)=>{
     }
   } catch (err) {
     next(err);
+  }
+}
+exports.updateTenantProfile = async (req,res,next)=>{
+  const tenantid = req.params.id
+  try {
+    const profileinfo = await User.findOneAndUpdate({'_id':tenantid},{
+      firstname:req.body.firstname,
+      lastname:req.body.lastname,
+      username:req.body.username,
+      email: req.body.email
+    })
+    res.send(profileinfo)
+  } catch (error) {
+    res.status(400).send(error.message)
   }
 }
 exports.resetPassword = async (req,res,next)=>{

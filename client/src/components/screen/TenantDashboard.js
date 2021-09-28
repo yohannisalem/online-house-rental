@@ -7,6 +7,7 @@ import FeedBack from './FeedBack';
 import LandlordAccountReview from './LandlordAccountReview';
 import ReportIssue from './ReportIssue';
 import RequestedHouse from './RequestedHouse';
+import TenantProfile from './TenantProfile';
 const TenantDashboard = () => {
     const [error, setError] = useState("")
     const history = useHistory()
@@ -34,7 +35,7 @@ const TenantDashboard = () => {
       fetchPrivateDate();  */
     }, []);
     return (
-        <div>
+        <div style={{minHeight:"100vh"}}>
             <Router>
         <Route render={({ location, history }) => (
           <React.Fragment>
@@ -63,7 +64,7 @@ const TenantDashboard = () => {
                     Requested House
                   </NavText>
                 </NavItem>
-                <NavItem eventKey="profile">
+                <NavItem eventKey="tenantprofile">
                  
                   <NavText>
                     Account Profile
@@ -92,9 +93,9 @@ const TenantDashboard = () => {
               </SideNav.Nav>
             </SideNav>
             <main>
-              <Route path="/managelisting" component={props => <HouseList />} />
+              
               <Route path="/requestedhouse" component={props => <RequestedHouse />} />
-              <Route path="/profile" component={props => <LandlordAccountReview />} />
+              <Route path="/tenantprofile" component={props => <TenantProfile />} />
               <Route path="/reviewcontract" component={props => <ContractForm />} />
               <Route path="/feedback" component={props => <FeedBack />} />
               <Route path="/report" component={props => <ReportIssue />} />

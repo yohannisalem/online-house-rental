@@ -7,6 +7,7 @@ import LandlordAccountReview from './LandlordAccountReview';
 import ContractForm from './ContractForm';
 import FeedBack from './FeedBack';
 import ReportIssue from './ReportIssue';
+import HousesByLandlord from './HousesByLandlord';
 
 const LandlordProfile = () => {
   const [error, setError] = useState("")
@@ -88,7 +89,7 @@ const LandlordProfile = () => {
               </SideNav.Nav>
             </SideNav>
             <main>
-              <Route path="/managelisting" component={props => <HouseList />} />
+              <Route path="/managelisting" component={props => <HousesByLandlord />} />
               <Route path="/profile" component={props => <LandlordAccountReview />} />
               <Route path="/reviewcontract" component={props => <ContractForm />} />
               <Route path="/feedback" component={props => <FeedBack />} />

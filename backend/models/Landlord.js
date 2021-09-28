@@ -3,6 +3,14 @@ const {model,Schema} = require("mongoose");
 const bcrypt = require('bcryptjs')
 const jwt = require("jsonwebtoken");
 const LandlordSchema = Schema({
+    firstname:{
+        type: String,
+        required: [true, "Please provide firstname"],
+    },
+    lastname:{
+        type: String,
+        required: [true, "Please provide lastname"],
+    },
     username: {
         type: String,
         required: [true, "Please provide username"],

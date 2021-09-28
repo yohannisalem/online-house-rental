@@ -205,7 +205,7 @@ const HouseDetails = ({ match }) => {
                       <Item.Description>
                         {element.description}
                       </Item.Description>
-                      <Item.Extra>Additional Details</Item.Extra>
+                      
                     </Item.Content>
                   </Item>
 
@@ -221,7 +221,7 @@ const HouseDetails = ({ match }) => {
                   </Item>
                   <Item>
                     <Item.Content>
-                      <Item.Header as='a'>Description</Item.Header>
+                      <Item.Header as='a'>Terms</Item.Header>
                       <Item.Meta>{element.termsandcondition}</Item.Meta>
                       <Item.Description>
                         {element.leaseperiod}
@@ -254,7 +254,7 @@ const HouseDetails = ({ match }) => {
                   </Item>
                   <Item>
                     <Item.Content>
-                      <Item.Header as='a'>Header</Item.Header>
+                      <Item.Header as='a'>Status</Item.Header>
                       <Item.Meta>House Status</Item.Meta>
                       <Item.Description>
                         {element.available}

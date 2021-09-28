@@ -2,12 +2,14 @@ const crypto = require('crypto')
 const Landlord = require("../models/Landlord");
 const ErrorResponse = require("../utils/errorResponse");
 const sendEmail = require('../utils/sendEmail')
-
+const MultipleFile = require('../models/Houses')
 exports.landlordRegister = async(req,res,next)=>{
-  const { username, email,phone , password } = req.body;
+  const { firstname,lastname,username, email,phone , password } = req.body;
 
   try {
     const user = await Landlord.create({
+      firstname,
+      lastname,
       username,
       phone,
       email,
@@ -124,7 +126,7 @@ exports.landlordResetPassword = async (req,res,next)=>{
   }
 }
 exports.getMyHouses = async (req,res,next)=>{
-  const loggedLandlord = req.body
+  const loggedLandlord = req.params.email
   try {
 
     const files = await MultipleFile.find({'owneremail':loggedLandlord});
@@ -147,6 +149,8 @@ exports.updateProfile = async (req,res,next)=>{
   const landlordid = req.params.id
   try {
     const profileinfo = await Landlord.findOneAndUpdate({'_id':landlordid},{
+      firstname:req.body.firstname,
+      lastname:req.body.lastname,
       username:req.body.username,
       phone :req.body.phone,
       email: req.body.email

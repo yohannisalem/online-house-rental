@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { Component, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Container, Divider, Form, Grid, Header, Image, Label, Segment, TransitionablePortal } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Grid, Header, Image, Label, Segment, TransitionablePortal ,Icon} from 'semantic-ui-react';
 import SignaturePanel from '../admin/SignaturePanel';
 
 class TextPlaceHolder extends Component {
@@ -140,89 +140,51 @@ console.log(house)
   }, [])
   return (
     <div style={{ minHeight: "100vh" }}>
+      <Container style={{marginBottom:"100px"}}>
 
       <Grid style={{ marginTop: "5px" }} >
 
         <Grid.Column width={16}>
-          <Segment
-            textAlign='bottom'
-            style={{
-              backgroundImage: "url(/des2.jpg)",
-              height: "20vh"
-            }}
-          >
-            <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular />
-          </Segment>
           <Divider hidden />
-          <Divider hidden />
-          <Header as='h2' >Terms And Conditions</Header>
+          <Header as='h2' icon textAlign='center'>
+      <Icon name='handshake' circular />
+      <Header.Content>Agreement</Header.Content>
+    </Header>
+   
           <Divider />
-          <Grid textAlign='left'>
+          <Grid textAlign='center' style={{backgroundColor:"lightGray"}}>
             <Grid.Column width="8">
               <Form size='large' style={{ verticalAlign: "center" }}>
-                <Form.Field>
-                <select required name="tenantsignature"  onChange={e => setTenantSignature(e.target.value)}>
-                    <option>---Select User Name</option>
-                      <option value={tensig}>username</option>
-                      
-                    </select>
-                </Form.Field>
-                <Form.Field>
-                <select required name="landlordsignature"  onChange={e => setLandlordSignature(e.target.value)}>
-                    <option>---Select User Name</option>
-                      <option value={landsig}>username</option>
-                      
-                    </select>
-                </Form.Field>
+               
+                
               
-              <Form.Input fluid icon='user' iconPosition='left' type="text"
-                required
-                name="houseid"
-                placeholder="houseid"
-                tabIndex={1}
-                onChange={e => setHouseid(e.target.value)}
-              />
-              <Form.Input fluid icon='user' iconPosition='left' type="text"
-                required
-                name="feepermonth"
-                placeholder="feepermonth"
-                tabIndex={1}
-                onChange={e => setFeepermonth(e.target.value)}
-              />
-              <Form.Input fluid icon='user' iconPosition='left' type="text"
-                required
-                name="termsandcondition"
-                placeholder="termsandcondition"
-                tabIndex={1}
-                onChange={e => setTermsandcondition(e.target.value)}
-              />
-              <Form.Input fluid icon='user' iconPosition='left' type="text"
-                required
-                name="contractduration"
-                placeholder="leaseduration"
-                tabIndex={1}
-                onChange={e => setLeaseduration(e.target.value)}
-              />
+             
               <Header> Tenant Contract Fill Form</Header>
 
               <Form.Input fluid icon='user' iconPosition='left' type="text"
                 required
+                label='Your Name'
                 name="tenantname"
                 placeholder="your username"
                 tabIndex={1}
                 onChange={e => setTenantusername(e.target.value)}
               />
-              <Form.Input fluid icon='email' iconPosition='left' type="email"
+              <Form.Input fluid icon='mail' iconPosition='left' type="email"
                 required
+                label='Email Address'
                 id="email"
                 name="tenantemail"
                 placeholder="your email address"
                 tabIndex={1}
                 onChange={e => setTenantemail(e.target.value)}
               />
-
-
-
+               <Form.Field>
+                <select required name="tenantsignature"  onChange={e => setTenantSignature(e.target.value)}>
+                    <option>--Confirm Action--</option>
+                      <option value={tensig}>Confirm</option>
+                      
+                    </select>
+                </Form.Field>
 
             </Form>
               <Segment>
@@ -238,19 +200,60 @@ console.log(house)
               <Header> Landlord Contract Fill Form</Header>
               <Form.Input fluid icon='user' iconPosition='left' type="text"
                 required
+                 label='Your Name'
                 name="landlordname"
                 placeholder="your username"
                 tabIndex={1}
                 onChange={e => setLandlordusername(e.target.value)}
               />
-              <Form.Input fluid icon='email' iconPosition='left' type="email"
+              <Form.Input fluid icon='mail' iconPosition='left' type="email"
                 required
+                label='Email Address'
                 id="email"
                 name="landlordemail"
                 placeholder="your email address"
                 tabIndex={1}
                 onChange={e => setLandlordemail(e.target.value)}
               />
+               {/* <Form.Input fluid icon='user' iconPosition='left' type="text"
+                required
+
+                name="houseid"
+                placeholder="houseid"
+                tabIndex={1}
+                onChange={e => setHouseid(e.target.value)}
+              /> */}
+              <Form.Input fluid icon='money' iconPosition='left' type="text"
+                required
+                label='Fee on Which You both agreed'
+                name="feepermonth"
+                placeholder="feepermonth"
+                tabIndex={1}
+                onChange={e => setFeepermonth(e.target.value)}
+              />
+              <Form.Input fluid icon='handshake' iconPosition='left' type="text"
+                required
+                label='terms you agreed with tenant'
+                name="termsandcondition"
+                placeholder="termsandcondition"
+                tabIndex={1}
+                onChange={e => setTermsandcondition(e.target.value)}
+              />
+              <Form.Input fluid icon='clock' iconPosition='left' type="text"
+                required
+                label='what is the duration of a lease'
+                name="contractduration"
+                placeholder="leaseduration"
+                tabIndex={1}
+                onChange={e => setLeaseduration(e.target.value)}
+              />
+              <Form.Field>
+                <select required name="landlordsignature"  onChange={e => setLandlordSignature(e.target.value)}>
+                    <option>--Confirm Action--</option>
+                      <option value={landsig}>Confirm</option>
+                      
+                    </select>
+                </Form.Field>
             </Form>
 
               <Segment>
@@ -259,17 +262,15 @@ console.log(house)
               </Segment>
               <Divider hidden />
 
-              <Button onClick={SignContract}>I agree to terms and condition</Button>
+              
               <Divider/>
-{
-  tensig
-}
+
             </Grid.Column>
 
+            <Button onClick={SignContract} color='twitter'>We agreed on full terms</Button>
 
 
-
-
+<Divider hidden/>
 
           </Grid>
         </Grid.Column>
@@ -279,6 +280,7 @@ console.log(house)
 
 
       </Grid>
+      </Container>
 
     </div>
 

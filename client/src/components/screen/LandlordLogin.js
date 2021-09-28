@@ -36,12 +36,10 @@ const LandlordLogin = () => {
             localStorage.setItem("username", data.username)
             localStorage.setItem("userid", data.id)
             localStorage.setItem("email", data.email)
-            history.push("/listproperty");
+            history.goBack()
         } catch (error) {
-
-            setTimeout(() => {
-                setError("");
-            }, 5000);
+            setError(error.response.data)
+            
         }
     };
     return (
@@ -80,7 +78,7 @@ const LandlordLogin = () => {
                             />
                             <label htmlFor="password">
                                 Password:{" "}
-                                <Link to="/forgotpassword" className="login-screen__forgotpassword">
+                                <Link to="/landlordforgotpassword" className="login-screen__forgotpassword">
                                     Forgot Password?
                                 </Link>
                             </label>

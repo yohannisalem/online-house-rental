@@ -52,6 +52,7 @@ const Register = () => {
           <span >
           Already have an account? <Link to="/login">Login</Link>
     </span>
+    <br/>
     <span>
     Ooops <Link to="/landlordRegister">I'm Landlord</Link>
     </span>

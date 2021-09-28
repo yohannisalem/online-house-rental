@@ -4,6 +4,8 @@ import { Button,Form,Grid,Segment,Header, Container} from 'semantic-ui-react'
 import axios from 'axios';
 const LandlordRegister = () => {
     let history = useHistory()
+  const [firstname, setFirstname] = useState("")
+  const [lastname, setLastname] = useState("")
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -32,6 +34,8 @@ const LandlordRegister = () => {
       const { data } = await axios.post(
         "http://localhost:5000/api/auth/landlordRegister",
         {
+          firstname,
+          lastname,
           username,
           phone,
           email,
@@ -64,7 +68,7 @@ const LandlordRegister = () => {
       >
         <Header
           as='h1'
-          content='Need a house near your workplace'
+          content='List A house Easily'
           style={{
             fontSize: '4em',
             fontFamily: "NunitoSans, Helvetica, sans-serif",
@@ -77,12 +81,35 @@ const LandlordRegister = () => {
       </Segment>
     </Grid.Column>
     <Grid.Column width={9}>
-      <Header content='Create account'/>
+      <Header content='Register Landlord'/>
     {error && <span className="error-message">{error}</span>}
+    <span>
+    Ooops <Link to="/register">I'm Tenant</Link>
+    </span>
       <Form>
       <Form.Group widths={2}>
-      <Form.Input label='First name' placeholder='First name' />
-      <Form.Input label='Last name' placeholder='Last name' />
+      <Form.Field>
+          <label>First Name</label>
+          <input
+            type="text"
+            required
+            id="name"
+            placeholder="Enter FirstName"
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Last Name</label>
+          <input
+            type="text"
+            required
+            id="name"
+            placeholder="Enter LastName"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+          />
+        </Form.Field>
     </Form.Group>
         <Form.Field>
           <label>User name</label>
@@ -140,7 +167,7 @@ const LandlordRegister = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Form.Field>
-        <Button onClick={registerHandler}>Submit</Button>
+        <Button onClick={registerHandler} color='linkedin'>SignUp</Button>
     </Form>
     <span className="register-screen__subtext">
           Already have an account? <Link to="/landlordLogin">Login</Link>

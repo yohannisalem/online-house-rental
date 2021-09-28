@@ -23,6 +23,8 @@ import FeedBack from './screen/FeedBack';
 import TenantDashboard from './screen/TenantDashboard';
 import AdminRoute from './routing/AdminRoute';
 import AdminLogin from './admin/AdminLogin';
+import ForgotPassword from './screen/ForgotPassword';
+import LandlordForgotPassword from './screen/LandlordForgotPassword';
 
 
 const Navigator = () => {
@@ -32,14 +34,15 @@ const Navigator = () => {
                 <NavBar/>
                 
                 <Route exact path="/"><Home/></Route>
-                <Route path="/about"><About/></Route>
-                <Route path="/help"><Help/></Route>
+                <Route path="/forgotpassword"><ForgotPassword/></Route>
+                <Route path="/landlordforgotpassword"><LandlordForgotPassword/></Route>
                 <Route path="/login"><Login/></Route>
                 <Route path="/register"><Register/></Route>
                 <Route path="/landlordLogin"><LandlordLogin/></Route>
                 <Route path="/adminLogin"><AdminLogin/></Route>
                 <Route path="/landlordRegister"><LandlordRegister/></Route>
                 <Route path="/profile"><LandlordAccountReview/></Route>
+                <Route path="/tenantdashboard"><TenantDashboard/></Route>
                 <PrivateRoute path="/managelisting"><LandlordProfile/></PrivateRoute>
                 <AdminRoute path="/admin"><AdminPanel/></AdminRoute>
                 <Route path="/edithouse/:houseId"><EditHouse/></Route>

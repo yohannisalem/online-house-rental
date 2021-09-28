@@ -3,18 +3,23 @@ import { Grid, Icon, Segment, Image, Form, Input, Divider, Label, Button, Contai
 import axios  from 'axios';
 import { useParams } from 'react-router';
 const LandlordAccountReview = () => {
+  const [firstname, setFirstname] = useState("")
+  const [lastname, setLastname] = useState('')
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [account, setAccount] = useState({})
-  const params = useParams()
-  const landlordid = params.id
+
+  const landlordid = localStorage.getItem('userid')
   const updateAccount = async ()=>{
     try {
-      const account = await axios.put(`http://localhost:5000/api/auth/updateaccount/${landlordid}`)
+      const account = await axios.put(`http://localhost:5000/api/auth/updateaccount/${landlordid}`,{
+        firstname,lastname,username,email,phone
+      })
+      alert("updated successfuly")
 
     } catch (error) {
-      
+      console.log(error)
+      alert("error while updating a data")
     }
   }
 
@@ -36,39 +41,81 @@ const LandlordAccountReview = () => {
           <Divider hidden />
           <Divider hidden />
           <Grid textAlign='center'>
-            <Grid.Column floated='left' width={13}>
-              <Label size='big'>
-                My Account
-              </Label>
-            </Grid.Column>
+           
             <Grid.Column floated='right' width={3}>
-              <Button>
-                <Icon name='save' />
-                Save
+              <Button onClick={updateAccount} color='twitter'>
+                <Icon  name='save' />
+                Update Account
               </Button>
             </Grid.Column>
           </Grid>
           <Divider />
           <Grid textAlign='left'>
 
-
+<Segment style={{backgroundColor:"lightGray"}}>
             <Form>
-              <Form.Field inline>
-                <label>User Name</label>
-                <Input placeholder='First name' />
-              </Form.Field>
-              <Form.Field inline>
-                <label>Email</label>
-                <Input placeholder='First name' />
-              </Form.Field>
-              <Form.Field inline>
-                <label>Phone</label>
-                <Input placeholder='First name' />
-              </Form.Field>
+              <Form.Group >
+
+            <Form.Field
+                            required
+                            id='form-input-control-last-name'
+                            control={Input}
+                            name='firstname'
+                            type='text'
+                            label='First Name'
+                            placeholder='first name'
+
+                            onChange={e=>setFirstname(e.target.value)}
+                        />
+            <Form.Field
+                            required
+                            id='form-input-control-last-name'
+                            control={Input}
+                            name='lastname'
+                            type='text'
+                            label='Last Name'
+                            placeholder='last name'
+
+                            onChange={e=>setLastname(e.target.value)}
+                        />
+              </Form.Group>
+            <Form.Field
+                            required
+                            id='form-input-control-last-name'
+                            control={Input}
+                            name='username'
+                            type='text'
+                            label='User Name'
+                            placeholder='user name'
+
+                            onChange={e=>setUsername(e.target.value)}
+                        />
+               <Form.Field
+                            required
+                            id='form-input-control-last-name'
+                            control={Input}
+                            name='email'
+                            type='email'
+                            label='Email Address'
+                            placeholder='email address'
+
+                            onChange={e=>setEmail(e.target.value)}
+                        />
+               <Form.Field
+                            required
+                            id='form-input-control-last-name'
+                            control={Input}
+                            name='phone'
+                            type='text'
+                            label='Phone Number'
+                            placeholder='phone number'
+
+                            onChange={e=>setPhone(e.target.value)}
+                        />
               
               
             </Form>
-
+</Segment>
           </Grid>
 
         </Grid.Column>

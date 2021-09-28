@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Container, Form, Input, Progress, Segment, TextArea } from "semantic-ui-react";
+import { Container, Form, Input, Progress, Segment, TextArea,Icon,Header,Image, Divider } from "semantic-ui-react";
 import storage from "../../firebase";
 import useGeoLocation from "../maps/useGeoLocation";
 
@@ -244,37 +244,19 @@ const FileUp = () => {
     /* fetchPrivateDate(); */
   }, [history]);
 
-  /* handling notification ======================================================================*/
-  /* if ('serviceWorker' in navigator) {
-    send().catch(err => console.error(err));
-  }
-
-  async function send() {
-    //register service worker
-    const register = await navigator.serviceWorker.register('/sw.js');
-
-    //register push
-    console.log('Registering push...')
-    const subscription = await register.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-    });
-
-    //Send push notification
-    await fetch("/subscribe", {
-      method: "POST",
-      body: JSON.stringify(subscription),
-      headers: {
-        "content-type": "application/json"
-      }
-    });
-  } */
+  
   /* handling notification ======================================================================*/
   return (
-    <div>
+    <div style={{backgroundColor:"lightGray"}}>
       <Container>
+      <Header as='h2' icon textAlign='center'>
+      <Icon name='home' circular />
+      <Header.Content>House</Header.Content>
+    </Header>
+  
 
         Build your listing to find the perfect renter — listings with a lot of detail and photos tend to attract the most leads, so don’t be shy! Not sure what to include? Check out our tips and tricks here.
+        <Divider hidden/>
         <Form>
           <Segment raised >
             <Progress percent={progress} success progress />
@@ -406,18 +388,17 @@ const FileUp = () => {
 
           </Segment>
         </Form>
+        <Divider hidden/>
         {/*           {location.loaded ? JSON.stringify(location) : "not loaded correctly"}
  */}
       </Container>
+      
     </div>
   );
 }
 
 export default FileUp
 
-/*
 
-
-*/
 
 
