@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@artsy/fresnel": "^1.9.0",
+    "@hookform/resolvers": "^2.8.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -19,6 +20,7 @@
     "react-datetime": "^3.1.1",
     "react-datetime-picker": "^3.4.0",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.16.1",
     "react-map-gl": "^6.1.16",
     "react-player": "^2.9.0",
     "react-router-dom": "^5.2.0",
@@ -31,7 +33,8 @@
     "swr": "^0.5.6",
     "trim-canvas": "^0.1.2",
     "use-supercluster": "^0.3.0",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",

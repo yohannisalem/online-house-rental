@@ -114,7 +114,7 @@ const MobileContainer = ({ children }) => {
               as={Link}
               to={'/admin'}
             >
-              * Fake Admin
+              Admin
             </Menu.Item>
             <Menu.Item
               active={activeItem === 'listproperty'}

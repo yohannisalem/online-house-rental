@@ -2,10 +2,13 @@ const crypto = require('crypto')
 const Landlord = require("../models/Landlord");
 const ErrorResponse = require("../utils/errorResponse");
 const sendEmail = require('../utils/sendEmail')
-const MultipleFile = require('../models/Houses')
+const MultipleFile = require('../models/Houses');
+const Contract = require('../models/Contract');
 exports.landlordRegister = async(req,res,next)=>{
   const { firstname,lastname,username, email,phone , password } = req.body;
-
+if(!username || !email || !password || !firstname || !lastname){
+  res.status(400).send("please provide data to the fields")
+}
   try {
     const user = await Landlord.create({
       firstname,
@@ -24,20 +27,20 @@ exports.landlordRegister = async(req,res,next)=>{
 exports.landlordLogin = async (req,res,next)=>{
     const { email, password } = req.body;
     if (!email || !password) {
-        return next(new ErrorResponse("Please provide an email and password", 400));
-    }
+      res.status(400).send("please provide email and password")
+  }
 
     try {
         
         const user = await Landlord.findOne({ email }).select("+password");
         if (!user) {
-            return next(new ErrorResponse("Invalid credentials", 404));
+          res.status(404).send("user is not found")
            
         }
         const isMatch = await user.matchPassword(password);
 
         if (!isMatch) {
-            return next(new ErrorResponse("Invalid credentials", 404));
+          res.status(400).send("password didn't match")
 
         }
         sendToken(user, 200, res);
@@ -130,6 +133,17 @@ exports.getMyHouses = async (req,res,next)=>{
   try {
 
     const files = await MultipleFile.find({'owneremail':loggedLandlord});
+    res.header('Content-Range', '0-20/20')
+    res.status(200).send(files);
+} catch (error) {
+    res.status(400).send(error.message);
+}
+}
+exports.contractList = async (req,res,next)=>{
+  const loggedLandlord = req.params.email
+  try {
+
+    const files = await Contract.find({'landlordemail':loggedLandlord});
     res.header('Content-Range', '0-20/20')
     res.status(200).send(files);
 } catch (error) {

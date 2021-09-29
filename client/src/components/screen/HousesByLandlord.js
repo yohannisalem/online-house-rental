@@ -54,22 +54,25 @@ const HousesByLandlord = () => {
             
             </Grid.Column>
             <Grid.Column floated='right' width={3}>
-              <Button>
+              <Link to='/listproperty'>
                 <Icon name='plus' />
                 Add Listing
-              </Button>
+                </Link> 
             </Grid.Column>
           </Grid>
           <Divider />
           <Table striped collapsing padded>
             <Table.Header>
               <Table.Row>
+              <Table.HeaderCell>House Id</Table.HeaderCell>
                 <Table.HeaderCell>House Name</Table.HeaderCell>
-                <Table.HeaderCell>House </Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
+                <Table.HeaderCell>House Description </Table.HeaderCell>
+                
+                <Table.HeaderCell>House District</Table.HeaderCell>
+                <Table.HeaderCell>Lease Fee</Table.HeaderCell>
+                <Table.HeaderCell>Terms and Condition</Table.HeaderCell>
+                <Table.HeaderCell>Edit House</Table.HeaderCell>
+                <Table.HeaderCell>Remove House</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -77,6 +80,13 @@ const HousesByLandlord = () => {
                 multipleFiles.map((house, index) =>
 
                   <Table.Row>
+                     <Table.Cell>
+                      <Header as='h4' image>
+                        <Header.Content>
+                          {house._id}
+                        </Header.Content>
+                      </Header>
+                    </Table.Cell>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
@@ -94,17 +104,25 @@ const HousesByLandlord = () => {
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house.sefer}
+                          {house.district}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house._id}
+                          {house.feepermonth}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
+                    <Table.Cell>
+                      <Header as='h4' image>
+                        <Header.Content>
+                          {house.termsandcondition}
+                        </Header.Content>
+                      </Header>
+                    </Table.Cell>
+                   
 
                     <Table.Cell textAlign='center'>
                       <Link to={`/edithouse/${house._id}`}>

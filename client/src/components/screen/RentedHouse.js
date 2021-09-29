@@ -8,12 +8,12 @@ const RentedHouse = () => {
     const contextRef = createRef()
     const [multipleFiles, setMultipleFiles] = useState([]);
     
-    const email = localStorage.getItem("email")
+    const email = localStorage.getItem("tenantEmail")
   
-    function hideConfirm(houseId) {
+    function terminate() {
       try {
-        axios.delete(`http://localhost:5000/api/deleteHouse/${houseId}`);
-        console.log(`house with ${houseId} is deleted`)
+        axios.delete(`http://localhost:5000/api/auth/terminatecontract/${email}`);
+        alert(`you have terminated your contract and no longer a valid tenant`)
       } catch (error) {
         throw error;
       }
@@ -23,7 +23,7 @@ const RentedHouse = () => {
   
     const getMultipleFiles = async () => {
       try {
-          const { data } = await axios.get(`http://localhost:5000/api/returnownershouse/${email}`);
+          const { data } = await axios.get(`http://localhost:5000/api/auth/getcontract/${email}`);
           return data;
       } catch (error) {
           throw error;
@@ -64,58 +64,67 @@ const RentedHouse = () => {
           <Table striped collapsing padded>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>House Name</Table.HeaderCell>
-                <Table.HeaderCell>House </Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
+                <Table.HeaderCell>House Id</Table.HeaderCell>
+                <Table.HeaderCell>Tenant Name</Table.HeaderCell>
+                <Table.HeaderCell>Landlord Name</Table.HeaderCell>
+                <Table.HeaderCell>Contract Duratiion </Table.HeaderCell>
+                <Table.HeaderCell>Fee Per Month</Table.HeaderCell>
+                <Table.HeaderCell>Terms</Table.HeaderCell>
+                <Table.HeaderCell>Action</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
               {
-                multipleFiles.map((house, index) =>
+                multipleFiles.map((contract, index) =>
 
                   <Table.Row>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house.housename}
+                          {contract._id}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house.description}
+                          {contract.tenantname}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house.sefer}
+                          {contract.landlordname}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house._id}
+                          {contract.contractduration}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
 
+                    <Table.Cell >
+                      
+                    <Header as='h4' image>
+                        <Header.Content>
+                          {contract.feepermonth}
+                        </Header.Content>
+                      </Header>
+                    </Table.Cell>
+                    <Table.Cell >
+                      
+                    <Header as='h4' image>
+                        <Header.Content>
+                          {contract.termsandcondition}
+                        </Header.Content>
+                      </Header>
+                    </Table.Cell>
                     <Table.Cell textAlign='center'>
-                      <Link to={`/edithouse/${house._id}`}>
-                        <Icon name='edit' />
-                      </Link>
-
-                    </Table.Cell>
-                    <Table.Cell textAlign='center'>
-                      <Button onClick={() => hideConfirm(house._id)}><Icon name='trash' /></Button>
-
-
+                      <Button onClick={terminate}>Terminate Contract</Button>
                     </Table.Cell>
                   </Table.Row>
 

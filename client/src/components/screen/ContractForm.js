@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { Component, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Container, Divider, Form, Grid, Header, Image, Label, Segment, TransitionablePortal ,Icon} from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Grid, Header, Image, Label, Segment, TransitionablePortal ,Icon,Checkbox} from 'semantic-ui-react';
 import SignaturePanel from '../admin/SignaturePanel';
 
 class TextPlaceHolder extends Component {
@@ -70,13 +70,12 @@ class TextPlaceHolder extends Component {
 
 const ContractForm = () => {
   let params = useParams()
-  const houseId = params.id
+  const houseid = params.id
   const [house, setHouse] = useState([])
-  const [tenantemail, setTenantemail] = useState('')
-  const [houseid, setHouseid] = useState('')
+  
   const [feepermonth, setFeepermonth] = useState(0)
   const [tenantname, setTenantusername] = useState('')
-  const [landlordemail, setLandlordemail] = useState('')
+ 
   const [landlordname, setLandlordusername] = useState('')
   const [tenantsignature, setTenantSignature] = useState('')
   const [landlordsignature, setLandlordSignature] = useState('')
@@ -84,14 +83,17 @@ const ContractForm = () => {
   const [tenantfirma, setTenantfirma] = useState('')
   const [landlordfirma, setLandlordfirma] = useState('')
   const [contractduration, setLeaseduration] = useState('')
-
+  const [checked, setChecked] = useState(false)
+  const handleClick = () => setChecked(!checked)
  const tensig = JSON.stringify(tenantfirma.trimmedDataURL)
  const landsig = JSON.stringify(landlordfirma.trimmedDataURL)
+ const tenantemail = localStorage.getItem("tenantEmail")
+ const landlordemail = localStorage.getItem("email")
  console.log("tensig",tensig)
  console.log("landsig",landsig)
   const getThatHouse = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/admin/gethouserequestbyid/${houseId}`)
+      const { data } = await axios.get(`http://localhost:5000/admin/gethouserequestbyid/${houseid}`)
       setHouse(data)
       console.log(data)
     } catch (error) {
@@ -169,30 +171,23 @@ console.log(house)
                 tabIndex={1}
                 onChange={e => setTenantusername(e.target.value)}
               />
-              <Form.Input fluid icon='mail' iconPosition='left' type="email"
-                required
-                label='Email Address'
-                id="email"
-                name="tenantemail"
-                placeholder="your email address"
-                tabIndex={1}
-                onChange={e => setTenantemail(e.target.value)}
-              />
                <Form.Field>
+               <Segment>
+                <TextPlaceHolder trimmedDataURL={tenantfirma} onChange={setTenantfirma} />
+                Tenant
+              </Segment>
+
+              <Divider hidden />
+               {/* <Checkbox label='agree to rent this house' name="enantsignature" checked={checked} onClick={handleClick} value={tensig} onChange={e => setTenantSignature(e.target.value)}/> */}
                 <select required name="tenantsignature"  onChange={e => setTenantSignature(e.target.value)}>
-                    <option>--Confirm Action--</option>
+                    <option>--agree to rent this house--</option>
                       <option value={tensig}>Confirm</option>
                       
                     </select>
                 </Form.Field>
 
             </Form>
-              <Segment>
-                <TextPlaceHolder trimmedDataURL={tenantfirma} onChange={setTenantfirma} />
-                Tenant
-              </Segment>
-
-              <Divider hidden />
+              
             </Grid.Column>
 
             <Grid.Column width="8"><Form size='large' style={{ verticalAlign: "center" }}>
@@ -205,22 +200,6 @@ console.log(house)
                 placeholder="your username"
                 tabIndex={1}
                 onChange={e => setLandlordusername(e.target.value)}
-              />
-              <Form.Input fluid icon='mail' iconPosition='left' type="email"
-                required
-                label='Email Address'
-                id="email"
-                name="landlordemail"
-                placeholder="your email address"
-                tabIndex={1}
-                onChange={e => setLandlordemail(e.target.value)}
-              />
-               <Form.Input fluid icon='user' iconPosition='left' type="text"
-                required
-                name="houseid"
-                placeholder="houseid"
-                tabIndex={1}
-                onChange={e => setHouseid(e.target.value)}
               />
               <Form.Input fluid icon='money' iconPosition='left' type="text"
                 required
@@ -247,14 +226,6 @@ console.log(house)
                 onChange={e => setLeaseduration(e.target.value)}
               />
               <Form.Field>
-                <select required name="landlordsignature"  onChange={e => setLandlordSignature(e.target.value)}>
-                    <option>--Confirm Action--</option>
-                      <option value={landsig}>Confirm</option>
-                      
-                    </select>
-                </Form.Field>
-            </Form>
-
               <Segment>
                 <TextPlaceHolder trimmedDataURL={landlordfirma} onChange={setLandlordfirma} />
                 Landlord
@@ -263,6 +234,17 @@ console.log(house)
 
               
               <Divider/>
+              {/* <Checkbox label='agree to rent this house' name="landlordsignature" checked={checked} onClick={handleClick} value={landsig} onChange={e => setLandlordSignature(e.target.value)}/> */}
+
+                <select required name="landlordsignature"  onChange={e => setLandlordSignature(e.target.value)}>
+                    <option>--agree to rent this house--</option>
+                      <option value={landsig}>Confirm</option>
+                      
+                    </select>
+                </Form.Field>
+            </Form>
+
+             
 
             </Grid.Column>
 

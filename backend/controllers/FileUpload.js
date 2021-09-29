@@ -32,6 +32,10 @@ const notify = async (req, res) => {
 }
 
 const multipleFileUpload = async (req, res, next) => {
+    const {hosuename,description,district,sefer,feepermonth,numberofbeds,termsandcondition,leaseperiod,size,available,propertytype,video,files,owneremail,ownerusername} = req.body
+    if(!hosuename || !description || !district || !sefer || !feepermonth ||!numberofbeds ||!termsandcondition||!leaseperiod||!size){
+        res.status(400).send("please provide data to the fields")
+      }
     try {
         let filesArray = [];
         req.body.files.forEach(element => {
@@ -56,11 +60,12 @@ const multipleFileUpload = async (req, res, next) => {
             owneremail: req.body.owneremail,
             ownerusername: req.body.ownerusername
         });
+        
         await multipleFiles.save();
         res.status(201).send('Files Uploaded Successfully');
 
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).send("failed to upload data");
     }
 }
 

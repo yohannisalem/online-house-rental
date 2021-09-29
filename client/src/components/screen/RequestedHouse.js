@@ -8,12 +8,11 @@ const RequestedHouse = () => {
     const contextRef = createRef()
     const [multipleFiles, setMultipleFiles] = useState([]);
     
-    /* this a state declaration for a file update */
-  
-    function hideConfirm(houseId) {
+    const email = localStorage.getItem("tenantEmail")
+    function calcelRequest() {
       try {
-        axios.delete(`http://localhost:5000/api/deleteHouse/${houseId}`);
-        console.log(`house with ${houseId} is deleted`)
+        axios.delete(`http://localhost:5000/api/cancelhouserequest/${email}`);
+        alert("you have canceled your request for a house")
       } catch (error) {
         throw error;
       }
@@ -23,10 +22,11 @@ const RequestedHouse = () => {
   
     const getMultipleFiles = async () => {
       try {
-          const { data } = await axios.get('http://localhost:5000/api/getrequestedHouse/1234');
+          const { data } = await axios.get(`http://localhost:5000/api/getrequestedHouse/${email}`);
           return data;
       } catch (error) {
           throw error;
+
       }
   }
   const getMultipleFilesList = async () => {
@@ -50,24 +50,22 @@ const RequestedHouse = () => {
             <Grid.Column width='13' textAlign='right'>
           
           <Grid style={{ marginTop: "20px" }} verticalAlign='middle'>
-            <Grid.Column floated='left' width={13}>
-              My Listing
-            </Grid.Column>
             <Grid.Column floated='right' width={3}>
-              <Button>
-                <Icon name='plus' />
-                Add Listing
-              </Button>
+              <Link to='/tenantscreen'>
+              request house
+              </Link>
             </Grid.Column>
           </Grid>
           <Divider />
           <Table basic='very' celled collapsing>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Employee</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
+                <Table.HeaderCell>House Id</Table.HeaderCell>
+                <Table.HeaderCell>Tenant Email</Table.HeaderCell>
+                <Table.HeaderCell>Tenant Phone</Table.HeaderCell>
+                <Table.HeaderCell>Landlord UserName</Table.HeaderCell>
+                <Table.HeaderCell>Terms and Condition</Table.HeaderCell>
+                <Table.HeaderCell>Action</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -78,14 +76,14 @@ const RequestedHouse = () => {
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house.username}
+                          {house._id}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house.email}
+                          {house.tenantEmail}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
@@ -93,19 +91,26 @@ const RequestedHouse = () => {
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house._id}
+                          {house.tenantPhone}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
-
                     <Table.Cell>
-                      <Link to={`/edithouse/${house._id}`}>
-                        <Icon name='edit' />
-                      </Link>
-
+                      <Header as='h4' image>
+                        <Header.Content>
+                          {house.landlordusername}
+                        </Header.Content>
+                      </Header>
                     </Table.Cell>
                     <Table.Cell>
-                      <Button onClick={() => hideConfirm(house._id)}><Icon name='trash' /></Button>
+                      <Header as='h4' image>
+                        <Header.Content>
+                          {house.termsandcondition}
+                        </Header.Content>
+                      </Header>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Button onClick={calcelRequest}>Cancel Request</Button>
 
 
                     </Table.Cell>

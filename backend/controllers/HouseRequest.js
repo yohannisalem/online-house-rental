@@ -19,12 +19,21 @@ exports.RequestHousesForRent = async (req,res)=>{
     }
 }
 exports.getRequestedHouse = async (req,res)=>{
-    const userId = req.params.id
+    const tenantemail = req.params.email
     try {
-        const house = await Request.find({ 'tenantId': userId })
+        const house = await Request.find({ 'tenantEmail': tenantemail })
         res.send(house)
 
     } catch (error) {
         res.status(400).send(error.message)
     }
+}
+exports.cancelHouseRequest = async (req,res)=>{
+    const loggedTenant = req.params.email
+    try {
+      const files = await Request.findOneAndRemove({'tenantEmail':loggedTenant});
+      res.status(200).send(files);
+  } catch (error) {
+      res.status(400).send(error.message);
+  }
 }

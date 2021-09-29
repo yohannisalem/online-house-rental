@@ -8,6 +8,7 @@ import LandlordAccountReview from './LandlordAccountReview';
 import ReportIssue from './ReportIssue';
 import RequestedHouse from './RequestedHouse';
 import TenantProfile from './TenantProfile';
+import RentedHouse from './RentedHouse';
 const TenantDashboard = () => {
     const [error, setError] = useState("")
     const history = useHistory()
@@ -51,20 +52,14 @@ const TenantDashboard = () => {
               style={{ marginTop: "70px", backgroundColor: "gray" }}
             >
               <SideNav.Toggle />
-              <SideNav.Nav defaultSelected="managelisting">
-                <NavItem eventKey="managelisting">
-                 
-                  <NavText>
-                    Rented House
-                  </NavText>
-                </NavItem>
+              <SideNav.Nav defaultSelected="tenantdashboard">
                 <NavItem eventKey="requestedhouse">
                  
                   <NavText>
                     Requested House
                   </NavText>
                 </NavItem>
-                <NavItem eventKey="tenantprofile">
+                <NavItem eventKey="tenantdashboard">
                  
                   <NavText>
                     Account Profile
@@ -95,8 +90,8 @@ const TenantDashboard = () => {
             <main>
               
               <Route path="/requestedhouse" component={props => <RequestedHouse />} />
-              <Route path="/tenantprofile" component={props => <TenantProfile />} />
-              <Route path="/reviewcontract" component={props => <ContractForm />} />
+              <Route path="/tenantdashboard" component={props => <TenantProfile />} />
+              <Route path="/reviewcontract" component={props => <RentedHouse />} />
               <Route path="/feedback" component={props => <FeedBack />} />
               <Route path="/report" component={props => <ReportIssue />} />
 

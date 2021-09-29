@@ -4,7 +4,7 @@ import storage from '../../firebase'
 import axios from 'axios'
 import { useParams, useHistory } from 'react-router-dom';
 const EditHouse = () => {
-    
+    let history  = useHistory()
     let params = useParams()
     const [disable, setDisable] = useState(true);
     const [housename, setHousename] = useState('')
@@ -80,8 +80,8 @@ const EditHouse = () => {
                 size,feepermonth,available,propertytype,video
             }, config);
             console.log(res)
-            
             alert("updated successfully")
+            history.push('/managelisting')
         } catch (err) {
             console.log(err)
             alert("failed to update")
@@ -144,7 +144,13 @@ const EditHouse = () => {
             .catch((err) => console.log(err));
 
     };
-
+    useEffect(() => {
+        if (!localStorage.getItem("landlordToken")) {
+          history.push("/landlordLogin")
+        }
+     
+      }, [history]);
+    
     return (
         <div style={{backgroundColor:"lightGray"}}>
             <Container>

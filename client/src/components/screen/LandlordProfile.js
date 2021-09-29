@@ -2,12 +2,12 @@ import React,{useState,useEffect} from 'react'
 import { Icon } from 'semantic-ui-react'
 import { BrowserRouter as Router,Route,useHistory} from 'react-router-dom'
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import HouseList from '../admin/HouseList';
 import LandlordAccountReview from './LandlordAccountReview';
-import ContractForm from './ContractForm';
+
 import FeedBack from './FeedBack';
 import ReportIssue from './ReportIssue';
 import HousesByLandlord from './HousesByLandlord';
+import HousesRentedByLandlord from './HousesRentedByLandlord';
 
 const LandlordProfile = () => {
   const [error, setError] = useState("")
@@ -84,7 +84,7 @@ const LandlordProfile = () => {
             <main>
               <Route path="/managelisting" component={props => <HousesByLandlord />} />
               <Route path="/profile" component={props => <LandlordAccountReview />} />
-              <Route path="/reviewcontract" component={props => <ContractForm />} />
+              <Route path="/reviewcontract" component={props => <HousesRentedByLandlord />} />
               <Route path="/feedback" component={props => <FeedBack />} />
               <Route path="/report" component={props => <ReportIssue />} />
 

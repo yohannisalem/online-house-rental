@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import { Button, Divider, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
-
+import Validation from "../utils/Validation";
 const Login = () => {
   let history = useHistory()
   const [email, setEmail] = useState("");
@@ -37,7 +37,8 @@ const Login = () => {
       localStorage.setItem("tenantEmail", data.email);
       history.goBack();
     } catch (error) {
-
+      console.log(error.response)
+setError(error.response.data)
       setTimeout(() => {
         setError("");
       }, 5000);

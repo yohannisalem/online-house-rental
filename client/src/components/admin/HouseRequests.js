@@ -65,12 +65,13 @@ const HouseRequests = () => {
           <Table basic='very' celled collapsing>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Employee</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
+                <Table.HeaderCell>Tenant Id</Table.HeaderCell>
+                <Table.HeaderCell>Tenant Phone</Table.HeaderCell>
+                <Table.HeaderCell>Tenant Email</Table.HeaderCell>
+                <Table.HeaderCell>Landlord Email</Table.HeaderCell>
+                <Table.HeaderCell>Terms and Condtion</Table.HeaderCell>
                 <Table.HeaderCell>Send Appointment</Table.HeaderCell>
-                <Table.HeaderCell>Send Contract Form</Table.HeaderCell>
+                <Table.HeaderCell>Send Contract</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>

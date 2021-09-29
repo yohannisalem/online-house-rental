@@ -2,28 +2,17 @@ import axios from 'axios'
 import React, { createRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Divider, Grid, Header, Icon, Table } from 'semantic-ui-react'
+import { useParams } from 'react-router'
 
-
-const HouseList = () => {
+const HousesRentedByLandlord = () => {
     const contextRef = createRef()
     const [multipleFiles, setMultipleFiles] = useState([]);
     
-    /* this a state declaration for a file update */
-  
-    function hideConfirm(houseId) {
-      try {
-        axios.delete(`http://localhost:5000/api/deleteHouse/${houseId}`);
-        console.log(`house with ${houseId} is deleted`)
-      } catch (error) {
-        throw error;
-      }
-  
-  
-    }
+    const email = localStorage.getItem("email")
   
     const getMultipleFiles = async () => {
       try {
-          const { data } = await axios.get('http://localhost:5000/api/getMultipleFiles');
+          const { data } = await axios.get(`http://localhost:5000/api/auth/landlordgetcontract/${email}`);
           return data;
       } catch (error) {
           throw error;
@@ -48,64 +37,75 @@ const HouseList = () => {
 
 </Grid.Column>
             <Grid.Column width='13' textAlign='right'>
-         
+          
+          <Grid style={{ marginTop: "20px" }} verticalAlign='middle'>
+            
+           
+          </Grid>
           <Divider />
           <Table striped collapsing padded>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Employee</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
-                <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
+                <Table.HeaderCell>House Id</Table.HeaderCell>
+                <Table.HeaderCell>Tenant Name</Table.HeaderCell>
+                <Table.HeaderCell>Landlord Name</Table.HeaderCell>
+                <Table.HeaderCell>Contract Duratiion </Table.HeaderCell>
+                <Table.HeaderCell>Fee Per Month</Table.HeaderCell>
+                <Table.HeaderCell>Terms</Table.HeaderCell>
+                
               </Table.Row>
             </Table.Header>
             <Table.Body>
               {
-                multipleFiles.map((house, index) =>
+                multipleFiles.map((contract, index) =>
 
                   <Table.Row>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house.housename}
+                          {contract._id}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house.description}
+                          {contract.tenantname}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house.sefer}
+                          {contract.landlordname}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>
                       <Header as='h4' image>
                         <Header.Content>
-                          {house._id}
+                          {contract.contractduration}
                         </Header.Content>
                       </Header>
                     </Table.Cell>
 
-                    <Table.Cell textAlign='center'>
-                      <Link to={`/edithouse/${house._id}`}>
-                        <Icon name='edit' />
-                      </Link>
-
+                    <Table.Cell >
+                      
+                    <Header as='h4' image>
+                        <Header.Content>
+                          {contract.feepermonth}
+                        </Header.Content>
+                      </Header>
                     </Table.Cell>
-                    <Table.Cell textAlign='center'>
-                      <Button onClick={() => hideConfirm(house._id)}><Icon name='trash' /></Button>
-
-
+                    <Table.Cell >
+                      
+                    <Header as='h4' image>
+                        <Header.Content>
+                          {contract.termsandcondition}
+                        </Header.Content>
+                      </Header>
                     </Table.Cell>
+                    
                   </Table.Row>
 
 
@@ -119,4 +119,4 @@ const HouseList = () => {
     )
 }
 
-export default HouseList
+export default HousesRentedByLandlord

@@ -116,6 +116,9 @@ exports.registerContract = async (req, res) => {
 exports.sendAppointment= async (req,res)=>{
 
   const { tenantEmail,landlordemail,appointmentletter,date} = req.body;
+  if(!tenantEmail || !landlordemail || !appointmentletter || !date){
+    res.status(400).send("email or date or appointment is not provided")
+  }
   try {
     const user = await HouseRequest.findOne({ tenantEmail });
     if (!user) {

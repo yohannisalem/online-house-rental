@@ -199,7 +199,7 @@ const Home = () => {
                     }}
                     onChange={(e) => searchHouse(e.target.value)}
                     onClick={() => setDisplay(!display)}
-                    value={clicked}
+                    
 
                   />
                 </Form>

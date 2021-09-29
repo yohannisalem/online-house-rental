@@ -69,18 +69,7 @@ const SendContract = () => {
                   <option value={element.landlordemail}>Email</option>
 
                 </select>
-              </Form.Field>
-              <Form.Field
-                      required
-                      id='form-input-control-last-name'
-                      control={Input}
-                      name='appointmentletter'
-                      type='text'
-                      label='Contract signing message'
-                     
-                    />
-          
-             
+              </Form.Field> 
               <Button onClick={sendEmail}>Submit</Button>
             </Form>
                         

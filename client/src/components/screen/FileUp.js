@@ -131,9 +131,10 @@ const FileUp = () => {
     try {
       const res = await axios.post("http://localhost:5000/api/multipleFiles", housedata, config);
       send()
+      
       console.log(res)
     } catch (err) {
-      console.log(err)
+      setError("please provide the correct data")
     }
   };
   const handleMultipleFileSubmit = async () => {
@@ -212,12 +213,13 @@ const FileUp = () => {
     Promise.all(promises)
       .then(
         () =>{
-         alert("All images uploaded")
+         alert("All images and videos are uploaded to firebase storage- please proceed to upload file to database")
          setDisable(false)
         }
           
       ).then()
       .catch((err) => console.log(err));
+      
 
   };
   useEffect(() => {
@@ -237,7 +239,7 @@ const FileUp = () => {
 
       } catch (error) {
         /* localStorage.removeItem("landlordToken"); */
-        setError("You are not authorized please login");
+        
       }
     };
 
@@ -258,6 +260,7 @@ const FileUp = () => {
         Build your listing to find the perfect renter — listings with a lot of detail and photos tend to attract the most leads, so don’t be shy! Not sure what to include? Check out our tips and tricks here.
         <Divider hidden/>
         <Form>
+          {error && <span className="error-message">error-{error}</span>}
           <Segment raised >
             <Progress percent={progress} success progress />
             <Form.Field
@@ -279,16 +282,20 @@ const FileUp = () => {
               placeholder='property type'
               onChange={handleTypeChange}
             />
-
-            <Form.Field
-              required
-              id='district'
-              control={Input}
-              label='District'
-              name='district'
-              placeholder='District or Sub City'
-              onChange={handleDestrictChange}
-            />
+             <label>Select District *</label>
+             <select required name="district" id="district" onChange={handleDestrictChange}>
+              <option value="Arada">Arada</option>
+              <option value="Bole">Bole</option>
+              <option value="Addis Ketema">Addis Ketema</option>
+              <option value="Akaki Kaliti">Akaki Kaliti</option>
+              <option value="Gullele">Gullele</option>
+              <option value="Kirkos">Kirkos</option>
+              <option value="Kolfe Keriano">Kolfe Keriano</option>
+              <option value="Lideta">Lideta</option>
+              <option value="Nifas Silk-Lafto">Nifas Silk-Lafto</option>
+              <option value="Yeka">Yeka</option>
+              <option value="Lemi Kura">Lemi Kura</option>
+            </select>
             <Form.Field
               required
               id='form-input-control-last-name'
@@ -384,7 +391,7 @@ const FileUp = () => {
               <option value="true">Yes</option>
             </select>
             <button onClick={handleUpload}>create upload</button>
-            <button onClick={handleMultipleFileSubmit} disabled={disable}>final Upload</button>
+            <button onClick={handleMultipleFileSubmit} disabled={disable}>Upload</button>
 
           </Segment>
         </Form>

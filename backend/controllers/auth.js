@@ -5,7 +5,9 @@ const sendEmail = require('../utils/sendEmail')
 
 exports.register = async(req,res,next)=>{
   const { username, email, password,firstname,lastname } = req.body;
-
+if(!username || !email || !password || !firstname || !lastname){
+  res.status(400).send("please provide data to the fields")
+}
   try {
     const user = await User.create({
       firstname,
@@ -17,26 +19,26 @@ exports.register = async(req,res,next)=>{
     sendToken(user, 201, res);
     
   } catch (err) {
-   next(err.message)
+    res.status(400).send("something bad happened,please review your action")
   }
 }
 exports.login = async (req,res,next)=>{
     const { email, password } = req.body;
     if (!email || !password) {
-        return next(new ErrorResponse("Please provide an email and password", 400));
+        res.status(400).send("please provide email and password")
     }
 
     try {
         
         const user = await User.findOne({ email }).select("+password");
         if (!user) {
-            return next(new ErrorResponse("Invalid credentials", 404));
+          res.status(400).send("Authentication failed,user with this email is not found")
            
         }
         const isMatch = await user.matchPassword(password);
 
         if (!isMatch) {
-            return next(new ErrorResponse("Invalid credentials", 404));
+          res.status(400).send("password didn't match")
 
         }
         sendToken(user, 200, res);

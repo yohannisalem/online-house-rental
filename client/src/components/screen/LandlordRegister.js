@@ -47,10 +47,10 @@ const LandlordRegister = () => {
       history.push("/listproperty")
       
     } catch (error) {
-      setError(error.response.data.error);
+      setError(error.response.data);
       setTimeout(() => {
         setError("");
-      }, 5000);
+      }, 3000);
     }
   };
     return (

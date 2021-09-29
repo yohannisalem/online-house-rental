@@ -24,15 +24,16 @@ const HouseDetails = ({ match }) => {
 
   const contextRef = createRef()
   const [multipleFiles, setMultipleFiles] = useState([])
-  const [tenantId, setTenantId] = useState("")
-  const [houseId, setHouseId] = useState("")
   const [tenantPhone, setTenantPhone] = useState("")
-  const [tenantEmail, setTenantEmail] = useState("")
   const [landlordemail, setLandlordemail] = useState("")
   const [landlordusername, setLandlordusername] = useState("")
   const [termsandcondition, settermsandcondition] = useState("")
   const productId = params.productId
   const apiUrl = `http://localhost:5000/api/getFilesById/${productId}`;
+
+  const tenantId =localStorage.getItem("tenantId")
+  const tenantEmail = localStorage.getItem('tenantEmail')
+  const houseId = params.productId
 
   const requestHouse = async (e) => {
 
@@ -52,9 +53,9 @@ const HouseDetails = ({ match }) => {
       console.log(landlordusername)
       console.log(landlordemail)
       console.log(tenantPhone)
-      setTenantId("")
       setTenantPhone("")
-      setTenantEmail("")
+    
+      alert("you have request this house successfully")
     } catch (err) {
       console.log(err)
     }
@@ -142,27 +143,19 @@ const HouseDetails = ({ match }) => {
                     </Header>
                     <Divider hidden />
                     <select required name="houseId" onChange={e => setLandlordemail(e.target.value)}>
-                      <option>---Select Email</option>
+                      <option>--Select Landlord's Email--</option>
                       
                       <option value={element.owneremail}>Email</option>
                   
                     </select>
                     <select required name="houseId" onChange={e => setLandlordusername(e.target.value)}>
-                    <option>---Select User Name</option>
+                    <option>--Select Landlord's Name--</option>
                       <option value={element.ownerusername}>username</option>
                       
                     </select>
-                    <select required name="houseId" onChange={e => setHouseId(e.target.value)}>
-                    <option>---Select Id</option>
-                      <option value={element._id}>id</option>
-                    </select>
                     <select required name="termsandcondition" onChange={e => settermsandcondition(e.target.value)}>
-                    <option>---Terms</option>
+                    <option>--Terms--</option>
                       <option value={element.termsandcondition}>id</option>
-                    </select>
-                    <select required name="houseId" onChange={(e) => setTenantId(e.target.value)}>
-                    <option>---Your Id</option>
-                      <option value={localStorage.getItem("tenantId")}>id</option>
                     </select>
                    
                     <Form.Field
@@ -175,17 +168,7 @@ const HouseDetails = ({ match }) => {
                       value={tenantPhone}
                       onChange={(e) => setTenantPhone(e.target.value)}
                     />
-                    <Form.Field
-                      required
-                      id='form-input-control-last-name'
-                      control={Input}
-                      name='tenantEmail'
-                      type='text'
-                      label='Tenant Email'
-                      placeholder='email'
-                      value={tenantEmail}
-                      onChange={(e) => setTenantEmail(e.target.value)}
-                    />
+                   
                     <Divider hidden />
                     <Button color="twitter" onClick={requestHouse}>Request House</Button>
                     <Divider hidden />
